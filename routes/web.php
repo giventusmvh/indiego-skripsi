@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KonselingController;
 use App\Http\Controllers\UserController;
 use App\Models\Konseling;
@@ -24,7 +25,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [ArtikelController::class, 'getAllArtikels'])->name('welcome');
-
+Route::get('/login', [AuthController::class, 'indexlogin'])->name('login');
+Route::get('/register', [AuthController::class, 'indexregister'])->name('register');
 // Route::prefix('admin')->group(function () {
 //     Route::get('/login', 'UserController@loginForm')->name('admin.login');
 //     Route::post('/login', 'UserController@login')->name('admin.login.submit');
