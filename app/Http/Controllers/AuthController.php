@@ -14,4 +14,13 @@ class AuthController extends Controller
     {
         return view("register");
     }
+
+    public function indexloginKonselor()
+    {
+        return view("loginKonselor");
+    }
+    public function indexregisterKonselor()
+    {
+        return view("registerKonselor");
+    }
 }

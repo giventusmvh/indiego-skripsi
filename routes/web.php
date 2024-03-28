@@ -27,6 +27,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [ArtikelController::class, 'getAllArtikels'])->name('welcome');
 Route::get('/login', [AuthController::class, 'indexlogin'])->name('login');
 Route::get('/register', [AuthController::class, 'indexregister'])->name('register');
+Route::get('/loginKonselor', [AuthController::class, 'indexloginKonselor'])->name('loginKonselor');
+Route::get('/registerKonselor', [AuthController::class, 'indexregisterKonselor'])->name('registerKonselor');
 // Route::prefix('admin')->group(function () {
 //     Route::get('/login', 'UserController@loginForm')->name('admin.login');
 //     Route::post('/login', 'UserController@login')->name('admin.login.submit');

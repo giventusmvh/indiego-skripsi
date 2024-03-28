@@ -19,7 +19,7 @@
             </div>
 
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center">Sign in to your account</h1>
+              <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center">Sign in to your account as Counselor</h1>
               <form class="space-y-4 md:space-y-6" action="#">
                 <div>
                   <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
@@ -52,8 +52,8 @@
                 >
                   Sign in
                 </button>
-                <p class="text-sm font-light text-gray-500 dark:text-gray-400">Don’t have an account yet? <a href="{{route('register')}}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a></p>
-                <p class="text-sm font-light text-gray-500 dark:text-gray-400">Are you a <a href="{{route('loginKonselor')}}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Counselor?</a></p>
+                <p class="text-sm font-light text-gray-500 dark:text-gray-400">Don’t have a Counselor account yet? <a href="{{route('registerKonselor')}}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a></p>
+                <p class="text-sm font-light text-gray-500 dark:text-gray-400">Are you a <a href="{{route('login')}}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Member?</a></p>
               </form>
             </div>
           </div>
