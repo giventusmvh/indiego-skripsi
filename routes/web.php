@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\KonselingController;
+use App\Http\Controllers\KonselorController;
 use App\Http\Controllers\UserController;
 use App\Models\Konseling;
 use Illuminate\Support\Facades\Route;
@@ -23,12 +23,18 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome', [ArtikelController::class, 'index']);
 // });
-
-Route::get('/', [ArtikelController::class, 'getAllArtikels'])->name('welcome');
-Route::get('/login', [AuthController::class, 'indexlogin'])->name('login');
-Route::get('/register', [AuthController::class, 'indexregister'])->name('register');
-Route::get('/loginKonselor', [AuthController::class, 'indexloginKonselor'])->name('loginKonselor');
-Route::get('/registerKonselor', [AuthController::class, 'indexregisterKonselor'])->name('registerKonselor');
+Route::middleware(['guest'])->group(function(){
+    Route::get('/', [ArtikelController::class, 'getAllArtikels'])->name('welcome');
+    Route::get('/login', [AuthController::class, 'indexlogin'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('actionLoginUser');
+    Route::get('/register', [AuthController::class, 'indexregister'])->name('register');
+    Route::post('/register', [AuthController::class, 'actionRegisterUser'])->name('actionRegisterUser');
+    Route::get('/loginKonselor', [AuthController::class, 'indexloginKonselor'])->name('loginKonselor');
+    Route::post('/loginKonselor', [AuthController::class, 'loginKonselor'])->name('actionLoginKonselor');
+    Route::get('/registerKonselor', [AuthController::class, 'indexregisterKonselor'])->name('registerKonselor');
+    Route::post("/registerKonselor",[AuthController::class,'actionRegisterKonselor'])->name('actionRegisterKonselor');
+});
+   
 // Route::prefix('admin')->group(function () {
 //     Route::get('/login', 'UserController@loginForm')->name('admin.login');
 //     Route::post('/login', 'UserController@login')->name('admin.login.submit');
@@ -60,3 +66,23 @@ Route::get('/artikel/show/{artikel}', [ArtikelController::class, 'show'])->name(
 //     Route::put('/admin/artikel/edit/{artikel}',[ArtikelController::class, 'update'])->name('artikel.update');
 //     Route::delete('/admin/artikel/{artikel}',[ArtikelController::class, 'destroy'])->name('artikel.destroy');
 // });
+
+
+Route::middleware(['auth:web'])->group(function(){ 
+   
+    Route::get('/home',[UserController::class,'indexHomeUser'])->name('homeUser');
+    Route::get('/home/profileUser',[UserController::class,'profileUser'])->name('profileUser');
+   
+    Route::post("/logoutUser",[AuthController::class,'logoutUser'])->name('logoutUser');
+});
+
+
+Route::middleware(['auth:konselor'])->group(function(){
+    
+    Route::get('/konselor',[KonselorController::class,'indexHomeKonselor'])->name('homeKonselor');    
+    Route::get('/konselor/profileKonselor',[KonselorController::class,'profileKonselor'])->name('profileKonselor');
+    Route::post("/logoutKonselor",[AuthController::class,'logoutKonselor'])->name('logoutKonselor');
+});
+
+// Route::post("/logoutUser",[AuthController::class,'logoutUser'])->name('logoutUser');
+// Route::post("/logoutKonselor",[AuthController::class,'logoutKonselor'])->name('logoutKonselor');

@@ -11,21 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('konselors', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
+            $table->string('namaKonselor');
             $table->string('email')->unique();
             // $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             // $table->enum('role',['konselor','user'])->default('konselor');
-            $table->string('jkUser');
-            $table->date('tgllahir');
-            $table->string('telp');
-          
-            $table->string('scanFoto');
-          
-            $table->decimal('latitudeUser', 10, 8)->nullable();
-            $table->decimal('longitudeUser', 11, 8)->nullable();
+            $table->string('jkKonselor');
+            $table->date('tgllahirKonselor');
+            $table->string('telpKonselor');
+            $table->string('scanKTPKonselor');
+            $table->string('scanSertifKonselor');
+            $table->string('scanFotoKonselor');
+            $table->boolean('statusAktivasi')->default(0);
+            $table->decimal('latitudeKonselor', 10, 8)->nullable();
+            $table->decimal('longitudeKonselor', 11, 8)->nullable();
             // $table->string('verify_key');
             $table->rememberToken();
             $table->timestamps();
@@ -37,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('konselors');
     }
 };

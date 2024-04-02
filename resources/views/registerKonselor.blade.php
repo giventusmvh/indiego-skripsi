@@ -20,7 +20,17 @@
   
               <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center">Create your new counselor account</h1>
-                <form class="  mx-auto flex flex-col justify-center items-center" action="#">
+                <form action="{{ route('actionRegisterKonselor') }}" method="POST" enctype="multipart/form-data" class="  mx-auto flex flex-col justify-center items-center" ">
+                  @csrf
+                  @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $item)
+                                    <li>{{ $item }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                   <div class="md:flex md:flex-row md:gap-[40px] w-full mb-[20px] flex flex-col gap-[20px]">
                     <div class="flex flex-col w-full gap-[20px]">
                     <div>
@@ -35,10 +45,10 @@
                       />
                     </div>
                     <div>
-                      <label for="emailKonselor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+                      <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
                       <input
                         type="email"
-                        name="emailKonselor"
+                        name="email"
                         id="emailKonselor"
                         class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="name@company.com"
@@ -46,10 +56,10 @@
                       />
                     </div>
                     <div>
-                      <label for="passwordKonselor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                      <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                       <input
                         type="password"
-                        name="passwordKonselor"
+                        name="password"
                         id="passwordKonselor"
                         placeholder="••••••••"
                         class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -59,15 +69,13 @@
                   </div>
                   <div class="flex flex-col w-full gap-[20px]">
                     <div>
-                      <label for="confirm-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
-                      <input
-                        type="confirm-password"
-                        name="confirm-password"
-                        id="confirm-password"
-                        placeholder="••••••••"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        required=""
-                      />
+                      <label for="jkKonselor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Kelamin</label>
+                      <select id="jkKonselor" name="jkKonselor" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option selected>Masukan Jenis Kelamin</option>
+                        <option value="Pria">Pria</option>
+                        <option value="Wanita">Wanita</option>
+                       
+                      </select>
                     </div>
                 
                 
@@ -97,15 +105,15 @@
                   <div class="flex flex-col w-full gap-[20px]">
                     <div>    
                       <label class="block mb-2 text-sm font-medium text-gray-900 " for="scanKTPKonselor">Upload KTP</label>
-                      <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none " id="scanKTPKonselor" type="file">
+                      <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none " name="scanKTPKonselor" id="scanKTPKonselor" type="file">
                     </div>
                     <div>    
                       <label class="block mb-2 text-sm font-medium text-gray-900 " for="scanSertifKonselor">Upload Sertifikasi</label>
-                      <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none " id="scanSertifKonselor" type="file">
+                      <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none " name="scanSertifKonselor" id="scanSertifKonselor" type="file">
                     </div>
                     <div>    
                       <label class="block mb-2 text-sm font-medium text-gray-900 " for="scanFotoKonselor">Upload Foto</label>
-                      <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none " id="scanFotoKonselor" type="file">
+                      <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none " name="scanFotoKonselor" id="scanFotoKonselor" type="file">
                     </div>
                   </div>
                 </div>
