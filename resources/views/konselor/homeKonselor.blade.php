@@ -66,10 +66,10 @@
           </li>
           <li>
             <div class="flex">
-                <form action="POST" action="{{route('logoutKonselor')}}">
-                    @csrf
-                </form>
+              <form method="POST" action="{{route('logoutKonselor')}}">
+                @csrf
                 <button type="submit" class="text-black text-center  bg-white rounded-[30px] px-[20px] py-[12px] font-[600] w-full">Logout<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[3px] bg-white"></span></button>
+            </form>
             </div>
           </li>
         </ul>
