@@ -129,7 +129,7 @@ class AuthController extends Controller
         $nama_sertif="sertif".date('ymdhis').".".$sertif_ekstensi;
         $sertif_file->move(public_path('picture/sertifKonselor'),$nama_sertif);
 
-        //simpan scan KTP
+        //simpan scan Foto
         $fotoKonselor_file = $request->file('scanFotoKonselor');
         $fotoKonselor_ekstensi=$fotoKonselor_file->extension();
         $nama_fotoKonselor="fotoKonselor".date('ymdhis').".".$fotoKonselor_ekstensi;

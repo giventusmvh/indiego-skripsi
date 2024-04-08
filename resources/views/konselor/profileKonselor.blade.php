@@ -66,9 +66,9 @@
                 <a href="{{route('profileKonselor')}}" class="text-black text-center  bg-white rounded-[30px] px-[20px] py-[12px] font-[600] w-full">Profile<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[3px] bg-white"></span></a>
             </div>
           </li>
-          <li>
-            <div class="flex">
-                <form method="POST" action="{{route('logoutKonselor')}}">
+          <li class="md:mb-0 mb-[10px]"">
+            <div class="flex w-full" >
+                <form class="w-full" method="POST" action="{{route('logoutKonselor')}}">
                     @csrf
                     <button type="submit" class="text-black text-center  bg-white rounded-[30px] px-[20px] py-[12px] font-[600] w-full">Logout<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[3px] bg-white"></span></button>
                 </form>
@@ -83,11 +83,18 @@
   <!-- NavBar End -->
 
   <section class="md:max-w-[1200px] mx-auto w-[90%] mt-[120px] mb-[100px] flex flex-col justify-center items-center">
-    <div class="w-full flex md:flex-row flex-row gap-[20px]">
+    <div class="w-full flex md:flex-row flex-col gap-[20px]">
         <div class="flex flex-col md:w-[30%] items-center justify-center gap-[20px]">
-            <img src="{{ asset("picture/fotoKonselor/{$user->scanFotoKonselor}") }}" alt="">
+          <a href="">
+            <img src="{{ asset("picture/fotoKonselor/{$user->scanFotoKonselor}") }}" alt="" >
+          </a>
+            
             <p class="text-[25px] font-bold">{{ $user->namaKonselor }}</p>
             <a href="/konselor/editprofileKonselor/{{ $user->id }}" class="w-full flex justify-center items-center bg-slate-900 text-white rounded-[16px] p-[12px]">Edit Profile</a>
+            <div class="flex flex-row w-full gap-[10px]">
+              <a href="/konselor/editprofileKonselor/{{ $user->id }}" class="w-full flex justify-center items-center bg-slate-900 text-white rounded-[16px] p-[12px]">Edit Picture</a>
+              <a href="/konselor/editprofileKonselor/{{ $user->id }}" class="w-full flex justify-center items-center bg-slate-900 text-white rounded-[16px] p-[12px]">Change Password</a>
+            </div>
         </div>
         <div class="flex flex-col md:w-[70%] gap-[20px]">
             <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  " value="{{ $user->telpKonselor }}" readonly>

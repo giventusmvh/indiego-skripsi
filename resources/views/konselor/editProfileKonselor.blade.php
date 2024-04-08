@@ -120,10 +120,10 @@
                 <label for="alamatKonselor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat Konselor</label>
                 <input type="text" id="alamatKonselor" name="alamatKonselor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " value="{{ $konselor->alamatKonselor }}" required />
             </div>
-            {{-- <div class="mb-5">    
+            <div class="mb-5">    
               <label class="block mb-2 text-sm font-medium text-gray-900 " for="scanFotoKonselor">Upload Foto</label>
-              <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none " name="scanFotoKonselor" id="scanFotoKonselor" type="file" >
-            </div> --}}
+              <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none " name="scanFotoKonselor" id="scanFotoKonselor" type="file" value="{{ $konselor->scanFotoKonselor }}">
+            </div>
             <div class="mb-5">
                 <label for="latitudeKonselor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Latitude Konselor</label>
                 <input type="text" id="latitudeKonselor" name="latitudeKonselor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " value="{{ $konselor->latitudeKonselor }}"  required />

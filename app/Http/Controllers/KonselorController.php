@@ -7,6 +7,7 @@ use App\Http\Requests\StoreKonselorRequest;
 use App\Http\Requests\UpdateKonselorRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class KonselorController extends Controller
 {
@@ -30,6 +31,7 @@ class KonselorController extends Controller
             'namaKonselor'=>'required|min:5',
             'telpKonselor'=>'required|min:9',  
             'alamatKonselor'=>'required',
+            'scanFotoKonselor'=>'image|file',
             'latitudeKonselor'=>'required',
             'longitudeKonselor'=>'required',
         ],[
@@ -43,13 +45,38 @@ class KonselorController extends Controller
         ]);
 
         $konselor = Konselor::findOrFail($id);
-        $konselor->namaKonselor = $request->input('namaKonselor');
-        $konselor->telpKonselor = $request->input('telpKonselor');
-        $konselor->alamatKonselor = $request->input('alamatKonselor');
-        $konselor->latitudeKonselor = $request->input('latitudeKonselor');
-        $konselor->longitudeKonselor = $request->input('longitudeKonselor');
-        $konselor->save();
 
-        return redirect()->route('profileKonselor')->with('success','Silahkan login sebagai Konselor');
+        if ($request->file('scanFotoKonselor')) {
+           
+               
+                $file =public_path('picture/fotoKonselor/' .$konselor->scanFotoKonselor);
+                unlink($file);
+                Storage::delete($file);
+                $fotoKonselor_file = $request->file('scanFotoKonselor');
+                $fotoKonselor_ekstensi=$fotoKonselor_file->extension();
+                $nama_fotoKonselor="fotoKonselor".date('ymdhis').".".$fotoKonselor_ekstensi;
+                $fotoKonselor_file->move(public_path('picture/fotoKonselor'),$nama_fotoKonselor);
+
+                $konselor->scanFotoKonselor = $nama_fotoKonselor;
+                $konselor->namaKonselor = $request->input('namaKonselor');
+                $konselor->telpKonselor = $request->input('telpKonselor');
+                $konselor->alamatKonselor = $request->input('alamatKonselor');
+                $konselor->latitudeKonselor = $request->input('latitudeKonselor');
+                $konselor->longitudeKonselor = $request->input('longitudeKonselor');
+                $konselor->save();
+
+                return redirect()->route('profileKonselor')->with('success','Silahkan login sebagai Konselor');
+            
+        }else{
+            $konselor->namaKonselor = $request->input('namaKonselor');
+            $konselor->telpKonselor = $request->input('telpKonselor');
+            $konselor->alamatKonselor = $request->input('alamatKonselor');
+            $konselor->latitudeKonselor = $request->input('latitudeKonselor');
+            $konselor->longitudeKonselor = $request->input('longitudeKonselor');
+            $konselor->save();
+    
+            return redirect()->route('profileKonselor')->with('success','Silahkan login sebagai Konselor');
+        }
+       
     }
 }
