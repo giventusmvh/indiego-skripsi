@@ -17,4 +17,9 @@ class KonselorController extends Controller
         $user = Auth::guard('konselor')->user();
         return view("konselor.profileKonselor",['user' => $user]);
     }
+
+    public function indexEditProfileKonselor($id){
+        $konselor = Konselor::findOrFail($id);
+        return view("konselor.editProfileKonselor", compact('konselor'));
+    }
 }
