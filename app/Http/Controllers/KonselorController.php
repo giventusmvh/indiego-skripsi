@@ -29,11 +29,13 @@ class KonselorController extends Controller
         $request->validate([
             'namaKonselor'=>'required|min:5',
             'telpKonselor'=>'required|min:9',  
+            'alamatKonselor'=>'required',
             'latitudeKonselor'=>'required',
             'longitudeKonselor'=>'required',
         ],[
             'namaKonselor.required'=>'Full Name wajib diisi',
             'namaKonselor.min'=>'Full Name minimal 5 karakter',
+            'alamatKonselor.required'=>'Alamat wajib diisi',
             'telpKonselor.required'=>'Nomor telepon wajib diisi',
             'telpKonselor.min'=>'Nomor telepon minimal 9 angka',
             'latitudeKonselor.required'=>'Latitude wajib diisi',
@@ -43,6 +45,7 @@ class KonselorController extends Controller
         $konselor = Konselor::findOrFail($id);
         $konselor->namaKonselor = $request->input('namaKonselor');
         $konselor->telpKonselor = $request->input('telpKonselor');
+        $konselor->alamatKonselor = $request->input('alamatKonselor');
         $konselor->latitudeKonselor = $request->input('latitudeKonselor');
         $konselor->longitudeKonselor = $request->input('longitudeKonselor');
         $konselor->save();

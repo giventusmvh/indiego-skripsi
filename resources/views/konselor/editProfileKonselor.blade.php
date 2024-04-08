@@ -70,10 +70,11 @@
           </li>
           <li>
             <div class="flex">
-                <form action="POST" action="{{route('logoutKonselor')}}">
+                <form method="POST" action="{{route('logoutKonselor')}}">
                     @csrf
+                    <button type="submit" class="text-black text-center  bg-white rounded-[30px] px-[20px] py-[12px] font-[600] w-full">Logout<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[3px] bg-white"></span></button>
                 </form>
-                <button type="submit" class="text-black text-center  bg-white rounded-[30px] px-[20px] py-[12px] font-[600] w-full">Logout<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[3px] bg-white"></span></button>
+               
             </div>
           </li>
         </ul>
@@ -115,6 +116,10 @@
                 <label for="telpKonselor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Telepon Konselor</label>
                 <input type="number" id="telpKonselor" name="telpKonselor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " value="{{ $konselor->telpKonselor }}"   required />
             </div>
+             <div class="mb-5">
+                <label for="alamatKonselor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat Konselor</label>
+                <input type="text" id="alamatKonselor" name="alamatKonselor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " value="{{ $konselor->alamatKonselor }}" required />
+            </div>
             {{-- <div class="mb-5">    
               <label class="block mb-2 text-sm font-medium text-gray-900 " for="scanFotoKonselor">Upload Foto</label>
               <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none " name="scanFotoKonselor" id="scanFotoKonselor" type="file" >
@@ -127,7 +132,7 @@
                 <label for="longitudeKonselor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Longitude Konselor</label>
                 <input type="text" id="longitudeKonselor" name="longitudeKonselor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " value="{{ $konselor->longitudeKonselor }}"  required />
             </div>
-            <div id="map" style="width: 100%; height: 400px;" class="mb-[30px]"></div>
+            <div id="map" style="width: 100%; height: 400px;" class="mb-[30px] z-0"></div>
             <button type="submit" class="w-full min-w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
         </form>
        

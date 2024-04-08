@@ -16,6 +16,7 @@ class Konselor extends Authenticatable
         'email',
         'password',
         'jkKonselor',
+        'alamatKonselor',
         'tgllahirKonselor',
         'telpKonselor',
         'scanKTPKonselor',
