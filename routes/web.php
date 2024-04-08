@@ -83,6 +83,8 @@ Route::middleware(['auth:konselor'])->group(function(){
     Route::get('/konselor/profileKonselor',[KonselorController::class,'profileKonselor'])->name('profileKonselor');
     Route::get('/konselor/editprofileKonselor/{id}',[KonselorController::class,'IndexEditProfileKonselor'])->name('IndexEditProfileKonselor');
     Route::post("/konselor/updateprofileKonselor/{id}",[KonselorController::class,'updateProfileKonselor'])->name('updateProfileKonselor');
+    Route::get('/konselor/editpasswordKonselor/{id}',[KonselorController::class,'IndexEditPasswordKonselor'])->name('IndexEditPasswordKonselor');
+    Route::post("/konselor/updatepasswordKonselor/{id}",[KonselorController::class,'updatePasswordKonselor'])->name('updatePasswordKonselor');
     Route::post("/logoutKonselor",[AuthController::class,'logoutKonselor'])->name('logoutKonselor');
 });
 

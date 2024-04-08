@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateKonselorRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 class KonselorController extends Controller
 {
@@ -23,6 +24,11 @@ class KonselorController extends Controller
     public function indexEditProfileKonselor($id){
         $konselor = Konselor::findOrFail($id);
         return view("konselor.editProfileKonselor", compact('konselor'));
+    }
+
+    public function indexEditPasswordKonselor($id){
+        $konselor = Konselor::findOrFail($id);
+        return view("konselor.editPasswordKonselor", compact('konselor'));
     }
 
     public function updateProfileKonselor(Request $request, $id)
@@ -76,6 +82,31 @@ class KonselorController extends Controller
             $konselor->save();
     
             return redirect()->route('profileKonselor')->with('success','Silahkan login sebagai Konselor');
+        }
+       
+    }
+
+    public function updatePasswordKonselor(Request $request, $id)
+    {
+        $request->validate([
+            'passwordLama'=>'required',
+            'passwordBaru'=>'required',  
+            
+        ],[
+            'passwordLama.required'=>'Password lama wajib diisi',
+            'passwordBaru.required'=>'Password baru wajib diisi',
+        ]);
+
+        $konselor = Konselor::findOrFail($id);
+
+        if (Hash::check($request->input('passwordLama'), $konselor->password)) {
+            // Old password matches, update the password
+            $konselor->password = Hash::make($request->input('passwordBaru'));
+            $konselor->save();
+    
+            return redirect()->route('profileKonselor')->with('success','Berhasil ganti password');
+        }else{
+            return redirect()->route('profileKonselor')->with('error','Gagal ganti password');
         }
        
     }
