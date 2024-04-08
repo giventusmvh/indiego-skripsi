@@ -88,24 +88,37 @@
 
     
         <p>Edit Profile Konselor</p>
-        <form class="md:w-[80%] w-[90%] mx-auto ">
+        <form action="/konselor/updateprofileKonselor/{{ $konselor->id }}" method="POST" enctype="multipart/form-data"  class="md:w-[80%] w-[90%] mx-auto ">
           @csrf
+                  @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $item)
+                                    <li>{{ $item }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
             <div class="mb-5">
-                <label for="text" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Konselor</label>
-                <input type="text" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " value="{{ $konselor->namaKonselor }}" required />
+                <label for="namaKonselor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Konselor</label>
+                <input type="text" id="namaKonselor" name="namaKonselor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " value="{{ $konselor->namaKonselor }}" required />
             </div>
-            <div class="mb-5">
+            {{-- <div class="mb-5">
                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email Konselor</label>
                 <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " value="{{ $konselor->email }}" required />
-            </div>
+            </div> --}}
             {{-- <div class="mb-5">
                 <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password Konselor</label>
                 <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " value="{{ $konselor->password }}"  required />
             </div> --}}
             <div class="mb-5">
                 <label for="telpKonselor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Telepon Konselor</label>
-                <input type="number" id="telpKonselor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " value="{{ $konselor->telpKonselor }}"   required />
+                <input type="number" id="telpKonselor" name="telpKonselor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " value="{{ $konselor->telpKonselor }}"   required />
             </div>
+            {{-- <div class="mb-5">    
+              <label class="block mb-2 text-sm font-medium text-gray-900 " for="scanFotoKonselor">Upload Foto</label>
+              <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none " name="scanFotoKonselor" id="scanFotoKonselor" type="file" >
+            </div> --}}
             <div class="mb-5">
                 <label for="latitudeKonselor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Latitude Konselor</label>
                 <input type="text" id="latitudeKonselor" name="latitudeKonselor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " value="{{ $konselor->latitudeKonselor }}"  required />
