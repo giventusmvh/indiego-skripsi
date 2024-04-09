@@ -90,6 +90,9 @@ Route::middleware(['auth:konselor'])->group(function(){
 
     Route::get('/konselor/addJadwalKonseling',[JadwalKonselingController::class,'indexAddJK'])->name('indexAddJK');  
     Route::post('/konselor/addJadwalKonseling',[JadwalKonselingController::class,'actionAddJK'])->name('actionAddJK');  
+    Route::get('/konselor/editJadwalKonseling/{id}',[JadwalKonselingController::class,'IndexEditJK'])->name('IndexEditJK');
+    Route::post('/konselor/editJadwalKonseling/{id}',[JadwalKonselingController::class,'actionEditJK'])->name('actionEditJK'); 
+    Route::post('/konselor/deleteJadwalKonseling/{id}',[JadwalKonselingController::class,'deleteJK'])->name('actionDeleteJK');   
 
     Route::post("/logoutKonselor",[AuthController::class,'logoutKonselor'])->name('logoutKonselor');
 });

@@ -83,34 +83,33 @@
   <section class="md:max-w-[1200px] mx-auto w-[90%] mt-[120px] mb-[100px] flex flex-col justify-center items-center">
     
         <p>Tambah Jadwal Konseling</p>
-        <form action="{{ route('actionAddJK') }}" method="POST" class="md:w-[80%] w-[90%] mx-auto ">
+        <form action="/konselor/editJadwalKonseling/{{ $jk->id }}" method="POST" class="md:w-[80%] w-[90%] mx-auto ">
           @csrf
             <div class="mb-5">
                 <label for="tgl_konseling" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Konseling</label>
-                <input type="date" id="tgl_konseling" name="tgl_konseling" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder="Masukkan Tanggal Konseling" required />
+                <input type="date" id="tgl_konseling" name="tgl_konseling" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " value="{{ $jk->tgl_konseling }}" placeholder="Masukkan Tanggal Konseling" required />
             </div>
             <div class="mb-5">
               <label for="jam_konseling" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jam Konseling</label>
-              <input type="time" id="jam_konseling" name="jam_konseling" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder="Masukkan Jam Konseling" required />
+              <input type="time" id="jam_konseling" name="jam_konseling" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " value="{{ $jk->jam_konseling }}" placeholder="Masukkan Jam Konseling" required />
           </div>
             <div class="mb-5">
               <label for="topik_konseling" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Topik Konseling</label>
-              <select id="topik_konseling" name="topik_konseling" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  ">
-                <option selected>Masukan Topik Konseling</option>
-                <option value="Konseling Mental Health">Konseling Mental Health</option>
-                <option value="Konseling HRD">Konseling HRD</option>
-                <option value="Konseling Tumbuh Kembang Anak">Konseling Tumbuh Kembang Anak</option>
-                <option value="Konseling Property">Konseling Property</option>
-               
-              </select>
+              <select id="topik_konseling" name="topik_konseling" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+                <option disabled>Masukan Topik Konseling</option>
+                <option value="Konseling Mental Health" {{ $jk->topik_konseling == 'Konseling Mental Health' ? 'selected' : '' }}>Konseling Mental Health</option>
+                <option value="Konseling HRD" {{ $jk->topik_konseling == 'Konseling HRD' ? 'selected' : '' }}>Konseling HRD</option>
+                <option value="Konseling Tumbuh Kembang Anak" {{ $jk->topik_konseling == 'Konseling Tumbuh Kembang Anak' ? 'selected' : '' }}>Konseling Tumbuh Kembang Anak</option>
+                <option value="Konseling Property" {{ $jk->topik_konseling == 'Konseling Property' ? 'selected' : '' }}>Konseling Property</option>
+            </select>
             </div>
             <div class="mb-5">
               <label for="tipe_konseling" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipe Konseling</label>
-              <select id="tipe_konseling" name="tipe_konseling" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  ">
-                <option selected>Masukan Tipe Konseling</option>
-                <option value="Online">Online</option>
-                <option value="Offline">Offline</option>
-              </select>
+              <select id="tipe_konseling" name="tipe_konseling" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+                <option disabled>Masukan Tipe Konseling</option>
+                <option value="Online" {{ $jk->tipe_konseling == 'Online' ? 'selected' : '' }}>Online</option>
+                <option value="Offline" {{ $jk->tipe_konseling == 'Offline' ? 'selected' : '' }}>Offline</option>
+            </select>
             </div>
             
             <button type="submit" class="w-full min-w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>

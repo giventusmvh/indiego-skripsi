@@ -81,15 +81,15 @@
 
   <section class="md:max-w-[1200px] mx-auto w-[90%] mt-[120px] mb-[100px]">
     @if (session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
-@if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="flex md:flex-row md:gap-[50px]">
         <div class="flex flex-col gap-[20px] bg-[#242424] p-[20px]  h-max">
             <a href="{{ route('indexAddJK') }}" class="bg-white  w-full h-[60px] flex items-center justify-center p-[30px] shadow-md border-slate-400 border-[1px]">
@@ -110,62 +110,29 @@
             </a>
         </div>
         <div class="flex flex-col w-full gap-[30px]">
-            <div class="flex flex-col md:flex-row gap-[30px]">
-                <div class=" bg-slate-300 w-full  flex  p-[30px] shadow-md border-slate-400 border-[1px] flex-col">
-                    <p>Tanggal :</p>
-                    <p>Jam :</p>
-                    <p>Topik Konseling :</p>
-                    <p>Tipe Konseling :</p>
-                    <p>Status :</p>
+          @foreach ($jadwalKonselings as $jk)
+          <div class=" bg-slate-300 w-full  flex  p-[30px] shadow-md border-slate-400 border-[1px] flex-col">
+            <p>Tanggal : {{ $jk->tgl_konseling }}</p>
+            <p>Jam : {{ $jk->jam_konseling }}</p>
+            <p>Topik Konseling : {{ $jk->topik_konseling }}</p>
+            <p>Tipe Konseling : {{ $jk->tipe_konseling }}</p>
+            @if ($jk->status)
+            <p>Status : Sedang Dibooking</p>
+            @else
+            <p>Status : Tidak Dibooking</p>
+            @endif
+            
 
-                    <div class="mt-[30px] flex items-end justify-end">
-                        <button type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Green</button>
-                        <button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Red</button>
-                    </div>
-                </div>
-
-                <div class="bg-slate-300 w-full  flex  p-[30px] shadow-md border-slate-400 border-[1px] flex-col">
-                    <p>Tanggal :</p>
-                    <p>Jam :</p>
-                    <p>Topik Konseling :</p>
-                    <p>Tipe Konseling :</p>
-                    <p>Status :</p>
-
-                    <div class="mt-[30px] flex items-end justify-end">
-                        <button type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Green</button>
-                        <button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Red</button>
-                    </div>
-                </div>
+            <div class="mt-[30px] flex items-end justify-end">
+                <a href="/konselor/editJadwalKonseling/{{ $jk->id }}"  class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Edit</a>
+                <form id="deleteForm{{ $jk->id }}" action="{{ route('actionDeleteJK', $jk->id) }}" method="POST" onsubmit="return confirmDelete({{ $jk->id }})">
+                  @csrf
+                  <button type="submit" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
+              </form>
             </div>
+        </div>
+          @endforeach
 
-
-            <div class="flex flex-col md:flex-row gap-[30px]">
-                <div class=" bg-slate-300 w-full  flex  p-[30px] shadow-md border-slate-400 border-[1px] flex-col">
-                    <p>Tanggal :</p>
-                    <p>Jam :</p>
-                    <p>Topik Konseling :</p>
-                    <p>Tipe Konseling :</p>
-                    <p>Status :</p>
-
-                    <div class="mt-[30px] flex items-end justify-end">
-                        <button type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Green</button>
-                        <button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Red</button>
-                    </div>
-                </div>
-
-                <div class="bg-slate-300 w-full  flex  p-[30px] shadow-md border-slate-400 border-[1px] flex-col">
-                    <p>Tanggal :</p>
-                    <p>Jam :</p>
-                    <p>Topik Konseling :</p>
-                    <p>Tipe Konseling :</p>
-                    <p>Status :</p>
-
-                    <div class="mt-[30px] flex items-end justify-end">
-                        <button type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Green</button>
-                        <button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Red</button>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
   </section>
@@ -209,7 +176,11 @@
  <!-- Swiper JS -->
  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
  
-
+ <script>
+  function confirmDelete(id) {
+      return confirm('Apakah Anda yakin ingin menghapus data ini?');
+  }
+</script>
  {{-- <script>
     document.addEventListener("DOMContentLoaded", function () {
         var navbar = document.querySelector("nav");

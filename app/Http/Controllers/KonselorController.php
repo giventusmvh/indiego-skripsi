@@ -9,11 +9,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
+use App\Models\JadwalKonseling;
 
 class KonselorController extends Controller
 {
     public function indexHomeKonselor(){
-        return view("konselor.homeKonselor");
+        $konselor = Auth::guard('konselor')->user();
+        $id_konselor = $konselor->id;
+        $jadwalKonselings = JadwalKonseling::where('id_konselor', $id_konselor)->get();
+        return view('konselor.homeKonselor',compact('jadwalKonselings'));
     }
 
     public function profileKonselor(){
