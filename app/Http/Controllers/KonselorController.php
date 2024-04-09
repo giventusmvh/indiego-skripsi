@@ -71,7 +71,7 @@ class KonselorController extends Controller
                 $konselor->longitudeKonselor = $request->input('longitudeKonselor');
                 $konselor->save();
 
-                return redirect()->route('profileKonselor')->with('success','Silahkan login sebagai Konselor');
+                return redirect()->route('profileKonselor')->with('success','Berhasil update profile');
             
         }else{
             $konselor->namaKonselor = $request->input('namaKonselor');
@@ -81,7 +81,7 @@ class KonselorController extends Controller
             $konselor->longitudeKonselor = $request->input('longitudeKonselor');
             $konselor->save();
     
-            return redirect()->route('profileKonselor')->with('success','Silahkan login sebagai Konselor');
+            return redirect()->route('profileKonselor')->with('success','Berhasil update profile');
         }
        
     }

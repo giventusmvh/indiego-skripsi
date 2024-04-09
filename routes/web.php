@@ -4,6 +4,8 @@ use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KonselorController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\JadwalKonselingController;
+use App\Models\JadwalKonseling;
 use App\Models\Konseling;
 use Illuminate\Support\Facades\Route;
 
@@ -85,6 +87,10 @@ Route::middleware(['auth:konselor'])->group(function(){
     Route::post("/konselor/updateprofileKonselor/{id}",[KonselorController::class,'updateProfileKonselor'])->name('updateProfileKonselor');
     Route::get('/konselor/editpasswordKonselor/{id}',[KonselorController::class,'IndexEditPasswordKonselor'])->name('IndexEditPasswordKonselor');
     Route::post("/konselor/updatepasswordKonselor/{id}",[KonselorController::class,'updatePasswordKonselor'])->name('updatePasswordKonselor');
+
+    Route::get('/konselor/addJadwalKonseling',[JadwalKonselingController::class,'indexAddJK'])->name('indexAddJK');  
+    Route::post('/konselor/addJadwalKonseling',[JadwalKonselingController::class,'actionAddJK'])->name('actionAddJK');  
+
     Route::post("/logoutKonselor",[AuthController::class,'logoutKonselor'])->name('logoutKonselor');
 });
 

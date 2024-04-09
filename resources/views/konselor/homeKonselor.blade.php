@@ -18,7 +18,7 @@
 <nav id="navbar" class=" border-gray-200 fixed w-full z-50 top-0 left-0 h-max bg-[#242424]">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 md:max-w-[1200px]">
       <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-          <img src="assets/logowhite.png" class="h-8 md:h-[60px]" alt="Flowbite Logo" />
+          <img src="{{ asset('assets/logowhite.png') }}" class="h-8 md:h-[60px]" alt="Flowbite Logo" />
          
       </a>
       <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 " aria-controls="navbar-default" aria-expanded="false">
@@ -80,22 +80,32 @@
   <!-- NavBar End -->
 
   <section class="md:max-w-[1200px] mx-auto w-[90%] mt-[120px] mb-[100px]">
+    @if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
     <div class="flex md:flex-row md:gap-[50px]">
-        <div class="flex flex-col gap-[20px]">
-            <a href="" class="bg-slate-300 w-full h-[60px] flex items-center justify-center p-[30px] shadow-md border-slate-400 border-[1px]">
+        <div class="flex flex-col gap-[20px] bg-[#242424] p-[20px]  h-max">
+            <a href="{{ route('indexAddJK') }}" class="bg-white  w-full h-[60px] flex items-center justify-center p-[30px] shadow-md border-slate-400 border-[1px]">
                 <p>Add Schedule</p>
             </a>
             <hr>
-            <a href="" class="bg-slate-300 w-full h-[60px] flex items-center justify-center p-[30px] shadow-md border-slate-400 border-[1px]">
+            <a href="" class="bg-white  w-full h-[60px] flex items-center justify-center p-[30px] shadow-md border-slate-400 border-[1px]">
                 <p>All</p>
             </a>
-            <a href="" class="bg-slate-300 w-full h-[60px] flex items-center justify-center p-[30px] shadow-md border-slate-400 border-[1px]">
+            <a href="" class="bg-white  w-full h-[60px] flex items-center justify-center p-[30px] shadow-md border-slate-400 border-[1px]">
                 <p>Booked</p>
             </a>
-            <a href="" class="bg-slate-300 w-full h-[60px] flex items-center justify-center text-center p-[30px] shadow-md border-slate-400 border-[1px]" >
+            <a href="" class="bg-white  w-full h-[60px] flex items-center justify-center text-center p-[30px] shadow-md border-slate-400 border-[1px]" >
                 <p>Pending Confirmation</p>
             </a>
-            <a href="" class="bg-slate-300 w-full h-[60px] flex items-center justify-center text-center p-[30px] shadow-md border-slate-400 border-[1px]">
+            <a href="" class="bg-white  w-full h-[60px] flex items-center justify-center text-center p-[30px] shadow-md border-slate-400 border-[1px]">
                 <p>Reschedule Confirmation</p>
             </a>
         </div>
