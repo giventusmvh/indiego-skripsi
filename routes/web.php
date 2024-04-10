@@ -74,6 +74,10 @@ Route::middleware(['auth:web'])->group(function(){
    
     Route::get('/home',[UserController::class,'indexHomeUser'])->name('homeUser');
     Route::get('/home/profileUser',[UserController::class,'profileUser'])->name('profileUser');
+    Route::get('/home/editprofileUser/{id}',[UserController::class,'IndexEditProfileUser'])->name('IndexEditProfileUser');
+    Route::post("/home/updateprofileUser/{id}",[UserController::class,'updateProfileUser'])->name('updateProfileUser');
+    Route::get('/home/editpasswordUser/{id}',[UserController::class,'IndexEditPasswordUser'])->name('IndexEditPasswordUser');
+    Route::post("/home/updatepasswordUser/{id}",[UserController::class,'updatePasswordUser'])->name('updatePasswordUser');
    
     Route::post("/logoutUser",[AuthController::class,'logoutUser'])->name('logoutUser');
 });

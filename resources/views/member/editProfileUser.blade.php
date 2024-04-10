@@ -4,12 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   @vite('resources/css/app.css')
+  @vite('node_modules/leaflet/dist/leaflet.css')
+  {{-- <link rel="stylesheet" href="{{ asset('css/leaflet.css') }}"> --}}
+  <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+  <script src="{{ asset('js/app.js') }}" defer></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-      <link rel="stylesheet" href="{{ asset("style.css") }}">
-    <link rel="stylesheet" href="{{ asset("mobile.css") }}">
-    <link rel="stylesheet" href="{{ mix('css/leaflet.css') }}">
-<script src="{{ mix('js/leaflet.js') }}"></script>
+  <link rel="stylesheet" href="{{ asset("style.css") }}">
+  <link rel="stylesheet" href="{{ asset("mobile.css") }}">
+   
 </head>
 <body>
  
@@ -21,7 +24,6 @@
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 md:max-w-[1200px]">
       <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
           <img src="{{ asset('assets/logowhite.png') }}" class="h-8 md:h-[60px]" alt="Flowbite Logo" />
-         
       </a>
       <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 " aria-controls="navbar-default" aria-expanded="false">
           <span class="sr-only">Open main menu</span>
@@ -63,12 +65,12 @@
           </li>
           <li class="md:mb-0 mb-[10px]">
             <div class="flex">
-                <a href="{{route('profileKonselor')}}" class="text-black text-center  bg-white rounded-[30px] px-[20px] py-[12px] font-[600] w-full">Profile<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[3px] bg-white"></span></a>
+                <a href="{{route('profileUser')}}" class="text-black text-center  bg-white rounded-[30px] px-[20px] py-[12px] font-[600] w-full">Profile<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[3px] bg-white"></span></a>
             </div>
           </li>
-          <li class="md:mb-0 mb-[10px]"">
-            <div class="flex w-full" >
-                <form class="w-full" method="POST" action="{{route('logoutKonselor')}}">
+          <li>
+            <div class="flex">
+                <form method="POST" action="{{route('logoutUser')}}">
                     @csrf
                     <button type="submit" class="text-black text-center  bg-white rounded-[30px] px-[20px] py-[12px] font-[600] w-full">Logout<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[3px] bg-white"></span></button>
                 </form>
@@ -83,52 +85,66 @@
   <!-- NavBar End -->
 
   <section class="md:max-w-[1200px] mx-auto w-[90%] mt-[120px] mb-[100px] flex flex-col justify-center items-center">
-    @if (session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
-@if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
-    <div class="w-full flex md:flex-row flex-col gap-[20px]">
-        <div class="flex flex-col md:w-[30%] items-center justify-center gap-[20px]">
-          <a href="">
-            <img src="{{ asset("picture/fotoUser/{$user->scanFoto}") }}" alt="" >
-          </a>
-            
-            <p class="text-[25px] font-bold">{{ $user->nama }}</p>
-            <a href="/home/editprofileUser/{{ $user->id }}" class="w-full flex justify-center items-center bg-slate-900 text-white rounded-[16px] p-[12px]">Edit Profile</a>
-            <div class="flex flex-row w-full gap-[10px]">
-              <a href="/home/editpasswordUser/{{ $user->id }}" class="w-full flex justify-center items-center bg-slate-900 text-white rounded-[16px] p-[12px]">Change Password</a>
-            </div>
-        </div>
-        <div class="flex flex-col md:w-[70%] gap-[20px]">
-            <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  " value="{{ $user->telp }}" readonly>
-            <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  " value="{{ $user->tgllahir }}" readonly >
-            <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  " value="{{ $user->jkUser }}" readonly>
-            <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  " value="{{ $user->alamat }}" readonly>
-            <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  " value="{{ $user->latitudeUser }} | {{ $user->longitudeUser }}" readonly>
-           
-            
-           
-        </div>
-    </div>
+   
+
     
-    <hr class="w-full h-px my-8 bg-gray-600 border-[1px]">
-    <form method="POST" action="{{ route('logoutKonselor') }}">
-        @csrf
-        <button type="submit">Logout</button>
-    </form>
-        
+        <p>Edit Profile User</p>
+        <form action="/home/updateprofileUser/{{ $user->id }}" method="POST" enctype="multipart/form-data"  class="md:w-[80%] w-[90%] mx-auto ">
+          @csrf
+                  @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $item)
+                                    <li>{{ $item }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+            <div class="mb-5">
+                <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama User</label>
+                <input type="text" id="nama" name="nama" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " value="{{ $user->nama }}" required />
+            </div>
+            {{-- <div class="mb-5">
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email User</label>
+                <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " value="{{ $user->email }}" required />
+            </div> --}}
+            {{-- <div class="mb-5">
+                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password User</label>
+                <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " value="{{ $user->password }}"  required />
+            </div> --}}
+            <div class="mb-5">
+                <label for="telp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Telepon User</label>
+                <input type="number" id="telp" name="telp" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " value="{{ $user->telp }}"   required />
+            </div>
+             <div class="mb-5">
+                <label for="alamat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat User</label>
+                <input type="text" id="alamat" name="alamat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " value="{{ $user->alamat }}" required />
+            </div>
+            <div class="mb-5">    
+              <label class="block mb-2 text-sm font-medium text-gray-900 " for="scanFotoUser">Upload Foto</label>
+              <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none " name="scanFoto" id="scanFoto" type="file" value="{{ $user->scanFoto }}">
+            </div>
+            <div class="mb-5">
+                <label for="latitudeUser" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Latitude User</label>
+                <input type="text" id="latitudeUser" name="latitudeUser" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " value="{{ $user->latitudeUser }}"  required />
+            </div>
+            <div class="mb-5">
+                <label for="longitudeUser" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Longitude User</label>
+                <input type="text" id="longitudeUser" name="longitudeUser" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " value="{{ $user->longitudeUser }}"  required />
+            </div>
+            <div id="map" style="width: 100%; height: 400px;" class="mb-[30px] z-0"></div>
+            <button type="submit" class="w-full min-w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+        </form>
+       
+           
+       
+       
   </section>
-
+<div class="flex justify-center items-center max-w-[500px] max-h-[300px]">
   
-
+</div>
   {{-- Footer Section Start  --}}
-  <Section id="footer">
+  <section id="footer">
     <div class=" bg-[#242424]">
       <div class="w-[90%] md:w-full md:max-w-[1200px] flex flex-col md:flex-row md:justify-between mx-auto p-[30px] justify-center items-center md:items-start">
 
@@ -136,7 +152,7 @@
       <div class="flex flex-col text-white text-center md:text-justify">
         <p class="text-white font-[600] text-[20px]">Indiego.id</p>
         <p class="text-gray-400 font-[600] text-[20px] mb-[20px] md:mt-[20px]">Alamat Perusahaan</p>
-        <img src="{{ asset('assets/logowhite.png') }}" alt="" class="w-[80%] h-auto mx-auto">
+        <img src="assets/logowhite.png" alt="" class="w-[80%] h-auto mx-auto">
       </div>
       <div class="flex flex-col text-white text-center mb-[30px] md:mb-0 md:text-justify"">
         <p class="text-white font-[600] text-[20px]">Whatsapp Business</p>
@@ -151,11 +167,26 @@
       </div>
     </div>
     </div>
-  </Section>
+  </section>
   {{-- Footer Section End --}}
-
+  <script src="{{ asset('js/leaflet.js') }}"></script>
+  <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
   
-</body>
+ 
+   <script>
+      var map = L.map('map').setView([{{ $user->latitudeUser }}, {{ $user->longitudeUser }}], 13);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+    
+      var marker = L.marker([{{ $user->latitudeUser }}, {{ $user->longitudeUser }}], { draggable: true }).addTo(map);
+    
+      marker.on('dragend', function(event) {
+        var position = marker.getLatLng();
+        document.getElementById('latitudeUser').value = position.lat.toFixed(6);
+        document.getElementById('longitudeUser').value = position.lng.toFixed(6);
+      });
+    </script>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script src="./app.js" type="module"></script>
@@ -163,6 +194,9 @@
 <script src="./node_modules/flowbite/dist/flowbite.min.js"></script>
  <!-- Swiper JS -->
  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  
+</body>
+
  
 
  {{-- <script>

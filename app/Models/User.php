@@ -23,6 +23,7 @@ class User extends Authenticatable
         'password',
         'jkUser',
         'tgllahir',
+        'alamat',
         'telp',
         'scanFoto',
         'latitudeUser',
