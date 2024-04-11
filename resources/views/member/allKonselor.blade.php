@@ -33,7 +33,7 @@
         <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border bg-black/70 md:bg-transparent  rounded-lg  md:flex-row md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0  ">
           <li>
             <div class="flex">
-                <a href="#hero" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">Beranda<span class="block max-w-0 group-hover:max-w-full transition-all ease-in-out duration-500 h-[3px] bg-white"></span></a>
+                <a href="#hero" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">Home<span class="block max-w-0 group-hover:max-w-full transition-all ease-in-out duration-500 h-[3px] bg-white"></span></a>
             </div>
           </li>
           <li>
@@ -43,24 +43,10 @@
           </li>
           <li>
             <div class="flex">
-                <a href="#testimoni" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">Testimoni<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[3px] bg-white"></span></a>
+                <a href="{{route('indexAllJK')}}" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">Counselor<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[3px] bg-white"></span></a>
             </div>
           </li>
-          <li>
-            <div class="flex">
-                <a href="#galeri" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">Galeri<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[3px] bg-white"></span></a>
-            </div>
-          </li>
-          <li>
-            <div class="flex">
-                <a href="#paket" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">Paket<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[3px] bg-white"></span></a>
-            </div>
-          </li>
-          <li>
-            <div class="flex">
-                <a href="#footer" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">Hubungi Kami<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[3px] bg-white"></span></a>
-            </div>
-          </li>
+         
           <li class="md:mb-0 mb-[10px]">
             <div class="flex">
                 <a href="{{route('profileUser')}}" class="text-black text-center  bg-white rounded-[30px] px-[20px] py-[12px] font-[600] w-full">Profile<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[3px] bg-white"></span></a>
@@ -93,7 +79,7 @@
             {{ session('success') }}
         </div>
     @endif
-        <div class="hidden md:flex flex-col gap-[20px] border border-slate-300 p-[20px] h-max shadow-lg md:w-[40%]">
+        <div class="hidden md:flex flex-col gap-[20px] border border-slate-300 p-[20px] h-max shadow-lg md:w-[20%]">
             <a href="" class="bg-white  w-full h-[60px] flex items-center justify-center p-[30px] shadow-md border-slate-300 border-[1px]">
                 <p>Open Map</p>
             </a>
@@ -134,7 +120,7 @@
         <div class="flex flex-col  w-full gap-[15px]  ">
             @foreach ($jadwal_konseling as $jk)
             <div class="flex flex-col  gap-[10px]  border border-slate-400 p-[20px] shadow-lg">
-                <div class="flex flex-col  md:flex-row gap-[20px]  w-[250px]">
+                <div class="flex flex-col  md:flex-row gap-[20px] w-full">
                     <div class="w-auto">
                         <img src="{{ asset("picture/fotoKonselor/{$jk->scanFotoKonselor}") }}" alt="">
                     </div>
