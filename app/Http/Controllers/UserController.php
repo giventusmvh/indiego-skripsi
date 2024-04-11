@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Artikel;
 use App\Models\Konselor;
+use App\Models\JadwalKonseling;
 
 class UserController extends Controller
 {
@@ -23,6 +24,13 @@ class UserController extends Controller
         $konselor = Konselor::all();
         $user = Auth::user();
         return view('member.allKonselorMap', compact('konselor','user'));
+    }
+
+    public function indexDetailKonselorByMap($id){
+        $konselor = Konselor::findOrFail($id);
+        $id_konselor = $konselor->id;
+        $jadwalKonselings = JadwalKonseling::where('id_konselor', $id_konselor)->get();
+        return view('konselor.homeKonselor',compact('jadwalKonselings'));
     }
 
     public function profileUser(){
