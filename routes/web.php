@@ -80,6 +80,7 @@ Route::middleware(['auth:web'])->group(function(){
     Route::post("/home/updatepasswordUser/{id}",[UserController::class,'updatePasswordUser'])->name('updatePasswordUser');
 
     Route::get('/home/JadwalKonseling',[JadwalKonselingController::class,'indexAllJK'])->name('indexAllJK');
+    Route::get('/home/AllKonselorMap',[UserController::class,'indexAllMap'])->name('indexAllMap');
    
     Route::post("/logoutUser",[AuthController::class,'logoutUser'])->name('logoutUser');
 });

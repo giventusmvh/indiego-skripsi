@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Artikel;
+use App\Models\Konselor;
 
 class UserController extends Controller
 {
@@ -15,6 +16,13 @@ class UserController extends Controller
         $artikels=Artikel::all();
 
         return view("member.homeUser",compact('artikels'));
+    }
+
+    public function indexAllMap()
+    {
+        $konselor = Konselor::all();
+        $user = Auth::user();
+        return view('member.allKonselorMap', compact('konselor','user'));
     }
 
     public function profileUser(){
