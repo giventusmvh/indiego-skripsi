@@ -80,7 +80,7 @@
         </div>
     @endif
         <div class="hidden md:flex flex-col gap-[20px] border border-slate-300 p-[20px] h-max shadow-lg md:w-[20%]">
-            <a href="" class="bg-white  w-full h-[60px] flex items-center justify-center p-[30px] shadow-md border-slate-300 border-[1px]">
+            <a href="{{route('indexAllMap')}}" class="bg-white  w-full h-[60px] flex items-center justify-center p-[30px] shadow-md border-slate-300 border-[1px]">
                 <p>Open Map</p>
             </a>
             <hr>

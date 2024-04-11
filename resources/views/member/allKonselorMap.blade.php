@@ -113,8 +113,12 @@
   <script>
     var map = L.map('map').setView([{{ $user->latitudeUser }}, {{ $user->longitudeUser }}], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-    var marker = L.marker([{{ $user->latitudeUser }}, {{ $user->longitudeUser  }}]).addTo(map);
-    marker._icon.classList.add("huechange");
+    var markerUser = L.marker([{{ $user->latitudeUser }}, {{ $user->longitudeUser  }}]).addTo(map);
+    markerUser._icon.classList.add("huechange");
+    markerUser.bindPopup(`
+            Halo {{ $user->nama }}, lokasi anda disini sekarang!
+                       
+        `);
 
     @foreach($konselor as $k)
         var marker = L.marker([{{ $k->latitudeKonselor }}, {{ $k->longitudeKonselor }}]).addTo(map);
