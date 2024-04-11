@@ -7,11 +7,14 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Artikel;
 
 class UserController extends Controller
 {
     public function indexHomeUser(){
-        return view("member.homeUser");
+        $artikels=Artikel::all();
+
+        return view("member.homeUser",compact('artikels'));
     }
 
     public function profileUser(){

@@ -5,10 +5,27 @@ namespace App\Http\Controllers;
 use App\Models\JadwalKonseling;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 class JadwalKonselingController extends Controller
 {
+
+
+    public function indexAllJK(){
+        $jadwal_konseling = DB::table('jadwal_konselings')
+        ->join('konselors', 'jadwal_konselings.id_konselor', '=', 'konselors.id')
+        ->select('konselors.namaKonselor', 
+                'konselors.scanFotoKonselor', 
+                'jadwal_konselings.topik_konseling',
+                'jadwal_konselings.tgl_konseling', 
+                'jadwal_konselings.tipe_konseling',
+                'jadwal_konselings.jam_konseling')
+        ->get();
+
+        return view('member.allKonselor', compact('jadwal_konseling'));
+    }
+
    public function indexAddJK(){
     return view('konselor.addSchedule');
    }

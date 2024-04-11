@@ -78,6 +78,8 @@ Route::middleware(['auth:web'])->group(function(){
     Route::post("/home/updateprofileUser/{id}",[UserController::class,'updateProfileUser'])->name('updateProfileUser');
     Route::get('/home/editpasswordUser/{id}',[UserController::class,'IndexEditPasswordUser'])->name('IndexEditPasswordUser');
     Route::post("/home/updatepasswordUser/{id}",[UserController::class,'updatePasswordUser'])->name('updatePasswordUser');
+
+    Route::get('/home/JadwalKonseling',[JadwalKonselingController::class,'indexAllJK'])->name('indexAllJK');
    
     Route::post("/logoutUser",[AuthController::class,'logoutUser'])->name('logoutUser');
 });

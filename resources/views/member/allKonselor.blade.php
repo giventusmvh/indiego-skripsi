@@ -82,46 +82,96 @@
   
   <!-- NavBar End -->
 
-  <section class="md:max-w-[1200px] mx-auto w-[90%] mt-[120px] mb-[100px] flex flex-col justify-center items-center">
+  <section class="md:max-w-[1200px] mx-auto w-[90%] mt-[120px] mb-[100px] flex flex-col md:flex-row  gap-[20px]">
     @if (session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
-@if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
-    <div class="w-full flex md:flex-row flex-col gap-[20px]">
-        <div class="flex flex-col md:w-[30%] items-center justify-center gap-[20px]">
-          <a href="">
-            <img src="{{ asset("picture/fotoUser/{$user->scanFoto}") }}" alt="" >
-          </a>
-            
-            <p class="text-[25px] font-bold">{{ $user->nama }}</p>
-            <a href="/home/editprofileUser/{{ $user->id }}" class="w-full flex justify-center items-center bg-slate-900 text-white rounded-[16px] p-[12px]">Edit Profile</a>
-            <div class="flex flex-row w-full gap-[10px]">
-              <a href="/home/editpasswordUser/{{ $user->id }}" class="w-full flex justify-center items-center bg-slate-900 text-white rounded-[16px] p-[12px]">Change Password</a>
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+        <div class="hidden md:flex flex-col gap-[20px] border border-slate-300 p-[20px] h-max shadow-lg md:w-[40%]">
+            <a href="" class="bg-white  w-full h-[60px] flex items-center justify-center p-[30px] shadow-md border-slate-300 border-[1px]">
+                <p>Open Map</p>
+            </a>
+            <hr>
+           <form class="flex flex-col gap-[10px]">
+            <input type="search" id="default-search" class=" w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 " placeholder="Cari Disini" required />
+            <p class="text-[20px]">Topic</p>
+            <div class="flex items-center mb-4 gap-[10px]">
+                <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Mental Health</label>
             </div>
+            <div class="flex items-center mb-4 gap-[10px]">
+                <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Parenting</label>
+            </div>
+            <div class="flex items-center mb-4 gap-[10px]">
+                <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">HRD</label>
+            </div>
+            <div class="flex items-center mb-4 gap-[10px]">
+                <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Property</label>
+            </div>
+
+            <p class="text-[20px]">Tipe</p>
+            <div class="flex items-center mb-4 gap-[10px]">
+                <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Online</label>
+            </div>
+            <div class="flex items-center mb-4 gap-[10px]">
+                <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Offline</label>
+            </div>
+            <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Search</button>
+           </form>
         </div>
-        <div class="flex flex-col md:w-[70%] gap-[20px]">
-            <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  " value="{{ $user->telp }}" readonly>
-            <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  " value="{{ $user->tgllahir }}" readonly >
-            <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  " value="{{ $user->jkUser }}" readonly>
-            <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  " value="{{ $user->alamat }}" readonly>
-            <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  " value="{{ $user->latitudeUser }} | {{ $user->longitudeUser }}" readonly>
+
+        <div class="flex flex-col  w-full gap-[15px]  ">
+            @foreach ($jadwal_konseling as $jk)
+            <div class="flex flex-col  gap-[10px]  border border-slate-400 p-[20px] shadow-lg">
+                <div class="flex flex-col  md:flex-row gap-[20px]  w-[250px]">
+                    <div class="w-auto">
+                        <img src="{{ asset("picture/fotoKonselor/{$jk->scanFotoKonselor}") }}" alt="">
+                    </div>
+                    
+                    
+                    <div>
+                        <p>{{ $jk->namaKonselor }}</p>
+                        <p>{{ $jk->tgl_konseling }}, {{ $jk->jam_konseling }} WIB</p>
+                        <p>{{ $jk->topik_konseling }} | {{ $jk->tipe_konseling }} | Rp.200.000</p>
+                        <p class="mt-[20px]">Deskripsi Singkat :</p>
+                        <p class="flex text-justify">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem consequuntur veniam ipsum? Dolor possimus sit asperiores, eum natus minus recusandae facere. Itaque eum vel deserunt asperiores officia ea nam doloremque. Quasi tenetur quidem ex quo eum quaerat, obcaecati in debitis earum asperiores praesentium reprehenderit voluptatibus ipsa, fugiat perspiciatis, vel vero.</p>
+                    </div>
+                </div>              
+                <div class="flex flex-col w-full items-center justify-center">  
+                    <button type="button" class="w-full text-white py-[12px] bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg ">Booking</button>
+                </div> 
+            </div>
+            @endforeach
            
             
            
         </div>
-    </div>
+            
+  
+         
+    {{-- @foreach ($jadwal_konseling as $jk)
+    <img src="{{ asset("picture/fotoKonselor/{$jk->scanFotoKonselor}") }}" alt="" >
+    <p>{{ $jk->namaKonselor }}</p>
+    <p>{{ $jk->tgl_konseling }}</p>
+    <p>{{ $jk->jam_konseling }}</p>
+    <p>{{ $jk->tipe_konseling }}</p>
     
-    <hr class="w-full h-px my-8 bg-gray-600 border-[1px]">
-    <form method="POST" action="{{ route('logoutKonselor') }}">
-        @csrf
-        <button type="submit">Logout</button>
-    </form>
+   
+        
+    @endforeach --}}
+    
+   
         
   </section>
 
