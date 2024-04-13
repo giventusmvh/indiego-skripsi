@@ -30,7 +30,7 @@ class UserController extends Controller
         $konselor = Konselor::findOrFail($id);
         $id_konselor = $konselor->id;
         $jadwalKonselings = JadwalKonseling::where('id_konselor', $id_konselor)->get();
-        return view('konselor.homeKonselor',compact('jadwalKonselings'));
+        return view('member.detailKonselor',compact('jadwalKonselings','konselor'));
     }
 
     public function profileUser(){

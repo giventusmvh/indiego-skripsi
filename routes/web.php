@@ -81,6 +81,8 @@ Route::middleware(['auth:web'])->group(function(){
 
     Route::get('/home/JadwalKonseling',[JadwalKonselingController::class,'indexAllJK'])->name('indexAllJK');
     Route::get('/home/AllKonselorMap',[UserController::class,'indexAllMap'])->name('indexAllMap');
+
+    Route::get('/home/DetailKonselor/{id}',[UserController::class,'indexDetailKonselorByMap'])->name('indexDetailKonselorByMap');
    
     Route::post("/logoutUser",[AuthController::class,'logoutUser'])->name('logoutUser');
 });

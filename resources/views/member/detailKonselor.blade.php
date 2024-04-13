@@ -4,19 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   @vite('resources/css/app.css')
-  @vite('node_modules/leaflet/dist/leaflet.css')
-  {{-- <link rel="stylesheet" href="{{ asset('css/leaflet.css') }}"> --}}
-  <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-  <script src="{{ asset('js/app.js') }}" defer></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="{{ asset("style.css") }}">
-  <link rel="stylesheet" href="{{ asset("mobile.css") }}">
-
-  <style>
-    img.huechange { filter: hue-rotate(120deg); }
-    </style>
-   
+      <link rel="stylesheet" href="{{ asset("style.css") }}">
+    <link rel="stylesheet" href="{{ asset("mobile.css") }}">
+    <link rel="stylesheet" href="{{ mix('css/leaflet.css') }}">
+<script src="{{ mix('js/leaflet.js') }}"></script>
 </head>
 <body>
  
@@ -75,13 +68,70 @@
 
 <!-- NavBar End -->
 
-  <section class="md:max-w-[1200px] mx-auto w-[90%] mt-[120px] mb-[100px] flex flex-col justify-center items-center">
-    <div id="map" style="width: 100%; height: 400px;" class="mb-[30px] z-0"></div>
+<section class="md:max-w-[1200px] mx-auto w-[90%] mt-[120px] mb-[100px] flex flex-col justify-center items-center">
+    <div class="w-full flex md:flex-row flex-col gap-[20px]">
+        <div class="flex flex-col md:w-[30%] items-center justify-center gap-[20px]">
+          <a href="">
+            <img src="{{ asset("picture/fotoKonselor/{$konselor->scanFotoKonselor}") }}" alt="" >
+          </a>
+            
+            <p class="text-[25px] font-bold">{{ $konselor->namaKonselor }}</p>
+            
+            
+        </div>
+        <div class="flex flex-col md:w-[70%] gap-[20px]">
+            <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  " value="{{ $konselor->telpKonselor }}" readonly>
+            <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  " value="{{ $konselor->tgllahirKonselor }}" readonly >
+            <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  " value="{{ $konselor->jkKonselor }}" readonly>
+            <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  " value="{{ $konselor->alamatKonselor }}" readonly>
+            <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  " value="{{ $konselor->latitudeKonselor }} | {{ $konselor->longitudeKonselor }}" readonly>
+            @if ($konselor->statusAktivasi == 0)
+            <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  " value="Tidak Aktif" readonly>
+            @else
+            <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  " value="Aktif" readonly>
+            @endif
+            
+           
+        </div>
+    </div>
+    
+    <hr class="w-full h-px my-8 bg-gray-600 border-[1px]">
+
+    <div class="flex flex-col  w-full gap-[15px]  ">
+        @foreach ($jadwalKonselings as $jk)
+        <div class="flex flex-col  gap-[10px]  border border-slate-400 p-[20px] shadow-lg">
+            <div class="flex flex-col  md:flex-row gap-[20px] w-full">
+                {{-- <div class="w-auto">
+                    <img src="{{ asset("picture/fotoKonselor/{$jk->scanFotoKonselor}") }}" alt="">
+                </div> --}}
+                
+                
+                <div>
+                    <p>{{ $jk->namaKonselor }}</p>
+                    <p>{{ $jk->tgl_konseling }}, {{ $jk->jam_konseling }} WIB</p>
+                    <p>{{ $jk->topik_konseling }} | {{ $jk->tipe_konseling }} | Rp.200.000</p>
+                    <p class="mt-[20px]">Deskripsi Singkat :</p>
+                    <p class="flex text-justify">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem consequuntur veniam ipsum? Dolor possimus sit asperiores, eum natus minus recusandae facere. Itaque eum vel deserunt asperiores officia ea nam doloremque. Quasi tenetur quidem ex quo eum quaerat, obcaecati in debitis earum asperiores praesentium reprehenderit voluptatibus ipsa, fugiat perspiciatis, vel vero.</p>
+                </div>
+            </div>              
+            <div class="flex flex-col w-full items-center justify-center">  
+                <button type="button" class="w-full text-white py-[12px] bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg ">Booking</button>
+            </div> 
+        </div>
+        @endforeach
        
+        
+       
+    </div>
+   
+        
   </section>
 
+
+  
+
   {{-- Footer Section Start  --}}
-  <section id="footer">
+  <Section id="footer">
     <div class=" bg-[#242424]">
       <div class="w-[90%] md:w-full md:max-w-[1200px] flex flex-col md:flex-row md:justify-between mx-auto p-[30px] justify-center items-center md:items-start">
 
@@ -89,7 +139,7 @@
       <div class="flex flex-col text-white text-center md:text-justify">
         <p class="text-white font-[600] text-[20px]">Indiego.id</p>
         <p class="text-gray-400 font-[600] text-[20px] mb-[20px] md:mt-[20px]">Alamat Perusahaan</p>
-        <img src="assets/logowhite.png" alt="" class="w-[80%] h-auto mx-auto">
+        <img src="{{ asset('assets/logowhite.png') }}" alt="" class="w-[80%] h-auto mx-auto">
       </div>
       <div class="flex flex-col text-white text-center mb-[30px] md:mb-0 md:text-justify"">
         <p class="text-white font-[600] text-[20px]">Whatsapp Business</p>
@@ -104,40 +154,11 @@
       </div>
     </div>
     </div>
-  </section>
+  </Section>
   {{-- Footer Section End --}}
-  <script src="{{ asset('js/leaflet.js') }}"></script>
-  <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
+
   
- 
-  <script>
-    var map = L.map('map').setView([{{ $user->latitudeUser }}, {{ $user->longitudeUser }}], 13);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-    var markerUser = L.marker([{{ $user->latitudeUser }}, {{ $user->longitudeUser  }}]).addTo(map);
-    markerUser._icon.classList.add("huechange");
-    markerUser.bindPopup(`
-            Halo {{ $user->nama }}, lokasi anda disini sekarang!
-                       
-        `);
-
-    @foreach($konselor as $k)
-        var marker = L.marker([{{ $k->latitudeKonselor }}, {{ $k->longitudeKonselor }}]).addTo(map);
-        marker.bindPopup(`
-            Nama Konselor: {{ $k->namaKonselor }}<br>
-            Alamat Konselor: {{ $k->alamatKonselor }}<br>
-            Latitude: {{ $k->latitudeKonselor }}<br>
-            Longitude: {{ $k->longitudeKonselor }}<br>
-            <a href="/home/DetailKonselor/{{ $k->id }}" class="btn btn-sm btn-primary">Cek Jadwal Konselor</a>
-                       
-        `);
-
-        
-    @endforeach
-
-    
-</script>
-
-
+</body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script src="./app.js" type="module"></script>
@@ -145,9 +166,6 @@
 <script src="./node_modules/flowbite/dist/flowbite.min.js"></script>
  <!-- Swiper JS -->
  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  
-</body>
-
  
 
  {{-- <script>
