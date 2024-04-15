@@ -49,6 +49,8 @@ class AuthController extends Controller
             return redirect()->intended(route('homeUser'))->with('success','Halo user, Anda berhasil login');
         } else if(Auth::guard('konselor')->attempt($infoLogin)){
             return redirect()->intended(route('homeKonselor'))->with('success','Halo konselor, Anda berhasil login');
+        } else if(Auth::guard('admin')->attempt($infoLogin)){
+            return redirect()->intended(route('homeAdmin'))->with('success','Halo admin, Anda berhasil login');
         } else {
             return redirect()->route('login')->withErrors('Email atau Password salah');
         };
@@ -234,6 +236,12 @@ class AuthController extends Controller
     public function logoutKonselor(Request $request){
         $request->session()->flush();
         auth()->guard('konselor')->logout();
+        return redirect('/');
+    }
+
+    public function logoutAdmin(Request $request){
+        $request->session()->flush();
+        Auth::guard('admin')->logout();
         return redirect('/');
     }
 }

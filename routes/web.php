@@ -8,7 +8,7 @@ use App\Http\Controllers\JadwalKonselingController;
 use App\Models\JadwalKonseling;
 use App\Models\Konseling;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AdminController;
 
 
 /*
@@ -68,7 +68,12 @@ Route::get('/artikel/show/{artikel}', [ArtikelController::class, 'show'])->name(
 //     Route::put('/admin/artikel/edit/{artikel}',[ArtikelController::class, 'update'])->name('artikel.update');
 //     Route::delete('/admin/artikel/{artikel}',[ArtikelController::class, 'destroy'])->name('artikel.destroy');
 // });
-
+Route::middleware(['auth:admin'])->group(function(){ 
+   
+    Route::get('/admin',[AdminController::class,'indexHomeAdmin'])->name('homeAdmin');
+   
+    Route::post("/logoutAdmin",[AuthController::class,'logoutAdmin'])->name('logoutAdmin');
+});
 
 Route::middleware(['auth:web'])->group(function(){ 
    

@@ -44,6 +44,10 @@ return [
             'driver' => 'session',
             'provider' => 'konselors',
         ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
     ],
 
     /*
@@ -71,6 +75,10 @@ return [
         'konselors' => [
             'driver' => 'eloquent',
             'model' => App\Models\Konselor::class,
+        ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
         ],
 
         // 'users' => [
