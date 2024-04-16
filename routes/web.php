@@ -71,6 +71,7 @@ Route::get('/artikel/show/{artikel}', [ArtikelController::class, 'show'])->name(
 Route::middleware(['auth:admin'])->group(function(){ 
    
     Route::get('/admin',[AdminController::class,'indexHomeAdmin'])->name('homeAdmin');
+    Route::post("/admin/aktivasiKonselor/{id}",[AdminController::class,'activateKonselor'])->name('activateKonselor');
    
     Route::post("/logoutAdmin",[AuthController::class,'logoutAdmin'])->name('logoutAdmin');
 });
