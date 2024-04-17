@@ -115,7 +115,12 @@
                 </div>
             </div>              
             <div class="flex flex-col w-full items-center justify-center">  
-                <button type="button" class="w-full text-white py-[12px] bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg ">Booking</button>
+              @if ($jk->isBooked === 1)
+              <button class="w-full text-center text-white py-[12px] bg-slate-300  font-medium rounded-lg" disabled>Booking</button>
+              @else
+              <a href="/home/bookingKonseling/{{ $jk->id }}" class="w-full text-center text-white py-[12px] bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg ">Booking</a>
+              @endif
+            
             </div> 
         </div>
         @endforeach
