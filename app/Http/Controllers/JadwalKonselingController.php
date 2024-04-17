@@ -6,7 +6,7 @@ use App\Models\JadwalKonseling;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\Konselor;
 
 class JadwalKonselingController extends Controller
 {
@@ -20,7 +20,9 @@ class JadwalKonselingController extends Controller
                 'jadwal_konselings.topik_konseling',
                 'jadwal_konselings.tgl_konseling', 
                 'jadwal_konselings.tipe_konseling',
-                'jadwal_konselings.jam_konseling')
+                'jadwal_konselings.jam_konseling',
+                'jadwal_konselings.id')
+        ->where('jadwal_konselings.isBooked', false)
         ->get();
 
         return view('member.allKonselor', compact('jadwal_konseling'));
@@ -33,7 +35,13 @@ class JadwalKonselingController extends Controller
    public function indexEditJK($id){
     $jk = JadwalKonseling::findOrFail($id);
     return view("konselor.editSchedule", compact('jk'));
-}
+    }
+
+    public function indexBookingJK($id){
+        $jk = JadwalKonseling::findOrFail($id);
+        $konselor=Konselor::findorFail($jk->id_konselor);
+        return view("member.bookingKonseling", compact('jk','konselor'));
+    }
 
 //    public function indexAllJK(){
 

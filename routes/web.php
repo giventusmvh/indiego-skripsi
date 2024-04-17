@@ -9,7 +9,8 @@ use App\Models\JadwalKonseling;
 use App\Models\Konseling;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-
+use App\Http\Controllers\BookingKonselingController;
+use App\Models\BookingKonseling;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,7 +72,9 @@ Route::get('/artikel/show/{artikel}', [ArtikelController::class, 'show'])->name(
 Route::middleware(['auth:admin'])->group(function(){ 
    
     Route::get('/admin',[AdminController::class,'indexHomeAdmin'])->name('homeAdmin');
+    Route::get('/admin/allBK',[AdminController::class,'indexAllBK'])->name('indexAllBK');
     Route::post("/admin/aktivasiKonselor/{id}",[AdminController::class,'activateKonselor'])->name('activateKonselor');
+    Route::post("/admin/approvePembayaran/{id}",[AdminController::class,'approvePembayaran'])->name('approvePembayaran');
    
     Route::post("/logoutAdmin",[AuthController::class,'logoutAdmin'])->name('logoutAdmin');
 });
@@ -89,6 +92,9 @@ Route::middleware(['auth:web'])->group(function(){
     Route::get('/home/AllKonselorMap',[UserController::class,'indexAllMap'])->name('indexAllMap');
 
     Route::get('/home/DetailKonselor/{id}',[UserController::class,'indexDetailKonselorByMap'])->name('indexDetailKonselorByMap');
+
+    Route::get('/home/bookingKonseling/{id}',[JadwalKonselingController::class,'IndexBookingJk'])->name('IndexBookingJK');
+    Route::post('/home/addBookingKonseling/{id}',[BookingKonselingController::class,'addBookingKonseling'])->name('addBookingKonseling');
    
     Route::post("/logoutUser",[AuthController::class,'logoutUser'])->name('logoutUser');
 });

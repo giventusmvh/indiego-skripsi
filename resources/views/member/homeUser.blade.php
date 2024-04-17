@@ -67,7 +67,18 @@
   <!-- NavBar End -->
 
   {{-- Hero Section Start --}}
+
         <div id="hero" class="swiper mySwiper md:h-[800px] h-[600px]">
+          @if (session('error'))
+          <div class="absolute top-0 w-full bg-red-500 py-3 text-center text-white">
+              {{ session('error') }}
+          </div>
+        @endif
+        @if (session('success'))
+          <div class="absolute top-0 w-full bg-green-500 py-3 text-center text-white">
+              {{ session('success') }}
+          </div>
+        @endif
             <div class="swiper-wrapper">
             <div class="swiper-slide ">
                 <div class="flex justify-center items-center  h-full" 

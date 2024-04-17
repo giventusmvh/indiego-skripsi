@@ -8,8 +8,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
       <link rel="stylesheet" href="{{ asset("style.css") }}">
     <link rel="stylesheet" href="{{ asset("mobile.css") }}">
-    <link rel="stylesheet" href="{{ mix('css/leaflet.css') }}">
-<script src="{{ mix('js/leaflet.js') }}"></script>
 </head>
 <body>
  
@@ -68,97 +66,42 @@
   
   <!-- NavBar End -->
 
-  <section class="md:max-w-[1200px] mx-auto w-[90%] mt-[120px] mb-[100px] flex flex-col md:flex-row  gap-[20px]">
-    @if (session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
+  <section class="md:max-w-[1200px] mx-auto w-[90%] mt-[120px] mb-[100px] flex flex-col justify-center items-center">
+    
+        <p>Booking Jadwal Konseling</p>
+        <form action="/home/addBookingKonseling/{{ $jk->id }}" method="POST" enctype="multipart/form-data" class="md:w-[80%] w-[90%] mx-auto ">
+          @csrf
+          <div class="mb-5">
+            <label for="namaKonselor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Konselor</label>
+            <input type="text" id="namaKonselor" name="namaKonselor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " value="{{ $konselor->namaKonselor }}" placeholder="Masukkan Tanggal Konseling" required />
         </div>
-    @endif
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
+            <div class="mb-5">
+                <label for="tgl_konseling" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Konseling</label>
+                <input type="date" id="tgl_konseling" name="tgl_konseling" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " value="{{ $jk->tgl_konseling }}" placeholder="Masukkan Tanggal Konseling" required />
+            </div>
+            <div class="mb-5">
+              <label for="jam_konseling" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jam Konseling</label>
+              <input type="time" id="jam_konseling" name="jam_konseling" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " value="{{ $jk->jam_konseling }}" placeholder="Masukkan Jam Konseling" required />
+          </div>
+          <div class="mb-5">
+            <label for="topik_konseling" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Topik Konseling</label>
+            <input type="text" id="topik_konseling" name="topik_konseling" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " value="{{ $jk->topik_konseling }}" placeholder="Masukkan Jam Konseling" required />
         </div>
-    @endif
-        <div class="hidden md:flex flex-col gap-[20px] border border-slate-300 p-[20px] h-max shadow-lg md:w-[20%]">
-            <a href="{{route('indexAllMap')}}" class="bg-white  w-full h-[60px] flex items-center justify-center p-[30px] shadow-md border-slate-300 border-[1px]">
-                <p>Open Map</p>
-            </a>
-            <hr>
-           <form class="flex flex-col gap-[10px]">
-            <input type="search" id="default-search" class=" w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 " placeholder="Cari Disini" required />
-            <p class="text-[20px]">Topic</p>
-            <div class="flex items-center mb-4 gap-[10px]">
-                <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Mental Health</label>
-            </div>
-            <div class="flex items-center mb-4 gap-[10px]">
-                <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Parenting</label>
-            </div>
-            <div class="flex items-center mb-4 gap-[10px]">
-                <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">HRD</label>
-            </div>
-            <div class="flex items-center mb-4 gap-[10px]">
-                <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Property</label>
-            </div>
-
-            <p class="text-[20px]">Tipe</p>
-            <div class="flex items-center mb-4 gap-[10px]">
-                <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Online</label>
-            </div>
-            <div class="flex items-center mb-4 gap-[10px]">
-                <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Offline</label>
-            </div>
-            <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Search</button>
-           </form>
+        <div class="mb-5">
+            <label for="tipe_konseling" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipe Konseling</label>
+            <input type="text" id="tipe_konseling" name="tipe_konseling" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " value="{{ $jk->tipe_konseling }}" placeholder="Masukkan Jam Konseling" required />
         </div>
-
-        <div class="flex flex-col  w-full gap-[15px]  ">
-            @foreach ($jadwal_konseling as $jk)
-            <div class="flex flex-col  gap-[10px]  border border-slate-400 p-[20px] shadow-lg">
-                <div class="flex flex-col  md:flex-row gap-[20px] w-full">
-                    <div class="w-auto">
-                        <img src="{{ asset("picture/fotoKonselor/{$jk->scanFotoKonselor}") }}" alt="">
-                    </div>
-                    
-                    
-                    <div>
-                        <p>{{ $jk->namaKonselor }}</p>
-                        <p>{{ $jk->tgl_konseling }}, {{ $jk->jam_konseling }} WIB</p>
-                        <p>{{ $jk->topik_konseling }} | {{ $jk->tipe_konseling }} | Rp.200.000</p>
-                        <p class="mt-[20px]">Deskripsi Singkat :</p>
-                        <p class="flex text-justify">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem consequuntur veniam ipsum? Dolor possimus sit asperiores, eum natus minus recusandae facere. Itaque eum vel deserunt asperiores officia ea nam doloremque. Quasi tenetur quidem ex quo eum quaerat, obcaecati in debitis earum asperiores praesentium reprehenderit voluptatibus ipsa, fugiat perspiciatis, vel vero.</p>
-                    </div>
-                </div>              
-                <div class="flex flex-col w-full items-center justify-center">  
-                    <a href="/home/bookingKonseling/{{ $jk->id }}" class="w-full text-center text-white py-[12px] bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg ">Booking</a>
-                </div> 
-            </div>
-            @endforeach
-           
-            
-           
+        <div class="mb-5">
+            <label for="harga_konseling" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga Konseling</label>
+            <input type="text" id="harga_konseling" name="hargam_konseling" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " value="Rp.200000" placeholder="Masukkan Jam Konseling" required />
         </div>
-            
+        <div class="mb-5">    
+            <label class="block mb-2 text-sm font-medium text-gray-900 " for="buktiBayar">Upload Bukti Bayar</label>
+            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none " name="buktiBayar" id="buktiBayar" type="file">
+          </div>
+            <button type="submit" class="w-full min-w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+        </form>
   
-         
-    {{-- @foreach ($jadwal_konseling as $jk)
-    <img src="{{ asset("picture/fotoKonselor/{$jk->scanFotoKonselor}") }}" alt="" >
-    <p>{{ $jk->namaKonselor }}</p>
-    <p>{{ $jk->tgl_konseling }}</p>
-    <p>{{ $jk->jam_konseling }}</p>
-    <p>{{ $jk->tipe_konseling }}</p>
-    
-   
-        
-    @endforeach --}}
-    
-   
-        
   </section>
 
   
@@ -172,7 +115,7 @@
       <div class="flex flex-col text-white text-center md:text-justify">
         <p class="text-white font-[600] text-[20px]">Indiego.id</p>
         <p class="text-gray-400 font-[600] text-[20px] mb-[20px] md:mt-[20px]">Alamat Perusahaan</p>
-        <img src="{{ asset('assets/logowhite.png') }}" alt="" class="w-[80%] h-auto mx-auto">
+        <img src="assets/logowhite.png" alt="" class="w-[80%] h-auto mx-auto">
       </div>
       <div class="flex flex-col text-white text-center mb-[30px] md:mb-0 md:text-justify"">
         <p class="text-white font-[600] text-[20px]">Whatsapp Business</p>
