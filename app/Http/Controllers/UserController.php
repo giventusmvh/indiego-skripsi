@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Artikel;
 use App\Models\Konselor;
 use App\Models\JadwalKonseling;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -36,7 +37,22 @@ class UserController extends Controller
     public function profileUser(){
 
         $user = Auth::user();
-        return view("member.profileUser",['user' => $user]);
+        
+        $historyBookings = DB::table('booking_konselings')
+        ->join('users', 'booking_konselings.id_member', '=', 'users.id')
+        ->join('jadwal_konselings', 'booking_konselings.id_jk', '=', 'jadwal_konselings.id')
+        ->join('konselors', 'jadwal_konselings.id_konselor', '=', 'konselors.id')
+        ->select('konselors.namaKonselor', 
+                'jadwal_konselings.topik_konseling',
+                'jadwal_konselings.tgl_konseling', 
+                'jadwal_konselings.tipe_konseling',
+                'jadwal_konselings.jam_konseling',
+                'jadwal_konselings.id',
+                'booking_konselings.isPaid')
+        ->where('booking_konselings.id_member', $user->id)
+        ->get();
+
+        return view("member.profileUser",compact('user','historyBookings'));
     }
 
     public function indexEditProfileUser($id){

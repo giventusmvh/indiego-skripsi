@@ -104,10 +104,36 @@
     </div>
     
     <hr class="w-full h-px my-8 bg-gray-600 border-[1px]">
-    <form method="POST" action="{{ route('logoutKonselor') }}">
-        @csrf
-        <button type="submit">Logout</button>
-    </form>
+    
+    <div class="flex flex-col  w-full gap-[15px]  ">
+      @foreach ($historyBookings as $hb)
+      <div class="flex flex-col  gap-[10px]  border border-slate-400 p-[20px] shadow-lg">
+          <div class="flex flex-col  md:flex-row gap-[20px] w-full">
+              {{-- <div class="w-auto">
+                  <img src="{{ asset("picture/fotoKonselor/{$jk->scanFotoKonselor}") }}" alt="">
+              </div> --}}
+              
+              
+              <div>
+                  <p>{{ $hb->namaKonselor }}</p>
+                  <p>{{ $hb->tgl_konseling }}, {{ $hb->jam_konseling }} WIB</p>
+                  <p>{{ $hb->topik_konseling }} | {{ $hb->tipe_konseling }} | Rp.200.000</p>
+                  <p>Status Pembayaran : @if ($hb->isPaid === 1)
+                      Lunas
+                  @else
+                      Menunggu Konfirmasi Pembayaran oleh Admin
+                  @endif</p>
+                  <p class="mt-[20px]">Deskripsi Singkat :</p>
+                  <p class="flex text-justify">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem consequuntur veniam ipsum? Dolor possimus sit asperiores, eum natus minus recusandae facere. Itaque eum vel deserunt asperiores officia ea nam doloremque. Quasi tenetur quidem ex quo eum quaerat, obcaecati in debitis earum asperiores praesentium reprehenderit voluptatibus ipsa, fugiat perspiciatis, vel vero.</p>
+              </div>
+          </div>              
+        
+      </div>
+      @endforeach
+     
+      
+     
+  </div>
         
   </section>
 

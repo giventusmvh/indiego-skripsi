@@ -56,4 +56,10 @@ class BookingKonselingController extends Controller
         return redirect()->route('homeUser')->with('error','Gagal booking karena jadwal tidak tersedia');
     }
   }
+
+
+//   public function showHistoryKonselingUser(){
+       
+//         return view('member.profileUser', compact('historyBookings'));
+//   }
 }
