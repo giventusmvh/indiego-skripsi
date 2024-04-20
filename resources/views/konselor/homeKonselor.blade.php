@@ -116,7 +116,7 @@
             <p>Jam : {{ $jk->jam_konseling }}</p>
             <p>Topik Konseling : {{ $jk->topik_konseling }}</p>
             <p>Tipe Konseling : {{ $jk->tipe_konseling }}</p>
-            @if ($jk->status)
+            @if ($jk->isBooked)
             <p>Status : Sedang Dibooking</p>
             @else
             <p>Status : Tidak Dibooking</p>

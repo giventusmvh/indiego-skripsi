@@ -79,41 +79,44 @@
             {{ session('success') }}
         </div>
     @endif
-        <div class="hidden md:flex flex-col gap-[20px] border border-slate-300 p-[20px] h-max shadow-lg md:w-[20%]">
+        <div id="menuCourse2" class="sticky top-[100px] hidden md:flex flex-col gap-[20px] border border-slate-300 p-[20px] h-max shadow-lg md:w-[20%]">
             <a href="{{route('indexAllMap')}}" class="bg-white  w-full h-[60px] flex items-center justify-center p-[30px] shadow-md border-slate-300 border-[1px]">
                 <p>Open Map</p>
             </a>
             <hr>
-           <form class="flex flex-col gap-[10px]">
-            <input type="search" id="default-search" class=" w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 " placeholder="Cari Disini" required />
+           <form class="flex flex-col gap-[10px] " action="{{route('indexAllJK')}}" method="GET">
+            @csrf
+            <input name="namaKonselor" type="search" id="default-search" class=" w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 " placeholder="Cari Disini"  />
+            <p class="text-[20px]">Tanggal</p>
+            <input type="date" id="tanggal" name="tanggal" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder="Masukkan Tanggal Konseling" />
             <p class="text-[20px]">Topic</p>
             <div class="flex items-center mb-4 gap-[10px]">
-                <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="default-checkbox" name="topik1" type="checkbox" value="Konseling Mental Health" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                 <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Mental Health</label>
             </div>
             <div class="flex items-center mb-4 gap-[10px]">
-                <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="default-checkbox" name="topik2" type="checkbox" value="Konseling Tumbuh Kembang Anak" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                 <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Parenting</label>
             </div>
             <div class="flex items-center mb-4 gap-[10px]">
-                <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="default-checkbox" name="topik3" type="checkbox" value="Konseling HRD" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                 <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">HRD</label>
             </div>
             <div class="flex items-center mb-4 gap-[10px]">
-                <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="default-checkbox" name="topik4" type="checkbox" value="Konseling Property" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                 <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Property</label>
             </div>
 
             <p class="text-[20px]">Tipe</p>
             <div class="flex items-center mb-4 gap-[10px]">
-                <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="default-checkbox" name="tipe1" type="checkbox" value="Online" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                 <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Online</label>
             </div>
             <div class="flex items-center mb-4 gap-[10px]">
-                <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="default-checkbox" name="tipe2" type="checkbox" value="Offline" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                 <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Offline</label>
             </div>
-            <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Search</button>
+            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Search</button>
            </form>
         </div>
 
@@ -199,6 +202,8 @@
 <script src="./node_modules/flowbite/dist/flowbite.min.js"></script>
  <!-- Swiper JS -->
  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+ 
  
 
  {{-- <script>

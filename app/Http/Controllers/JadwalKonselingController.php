@@ -12,19 +12,55 @@ class JadwalKonselingController extends Controller
 {
 
 
-    public function indexAllJK(){
+    public function indexAllJK(Request $request){
+        $tanggal = $request->input('tanggal');
+        $topik1 = $request->input('topik1');
+        $topik2 = $request->input('topik2');
+        $topik3 = $request->input('topik3');
+        $topik4 = $request->input('topik4');
+        $tipe1 = $request->input('tipe1');
+        $tipe2 = $request->input('tipe2');
+        $namaKonselor=$request->input('namaKonselor');
+    
         $jadwal_konseling = DB::table('jadwal_konselings')
-        ->join('konselors', 'jadwal_konselings.id_konselor', '=', 'konselors.id')
-        ->select('konselors.namaKonselor', 
-                'konselors.scanFotoKonselor', 
-                'jadwal_konselings.topik_konseling',
-                'jadwal_konselings.tgl_konseling', 
-                'jadwal_konselings.tipe_konseling',
-                'jadwal_konselings.jam_konseling',
-                'jadwal_konselings.id')
-        ->where('jadwal_konselings.isBooked', false)
-        ->get();
-
+            ->join('konselors', 'jadwal_konselings.id_konselor', '=', 'konselors.id')
+            ->select('konselors.namaKonselor', 
+                    'konselors.scanFotoKonselor', 
+                    'jadwal_konselings.topik_konseling',
+                    'jadwal_konselings.tgl_konseling', 
+                    'jadwal_konselings.tipe_konseling',
+                    'jadwal_konselings.jam_konseling',
+                    'jadwal_konselings.id')
+            ->where('jadwal_konselings.isBooked', false);
+            
+        if ($namaKonselor) {
+            $jadwal_konseling->where('konselors.namaKonselor','like','%'.$namaKonselor.'%');
+        }
+        if ($tanggal) {
+            $jadwal_konseling->where('jadwal_konselings.tgl_konseling',$tanggal);
+        }
+        if ($topik1) {
+            $jadwal_konseling->where('jadwal_konselings.topik_konseling', $topik1);
+        }
+        if ($topik2) {
+            $jadwal_konseling->where('jadwal_konselings.topik_konseling', $topik2);
+        }
+        if ($topik3) {
+            $jadwal_konseling->where('jadwal_konselings.topik_konseling', $topik3);
+        }
+        if ($topik4) {
+            $jadwal_konseling->where('jadwal_konselings.topik_konseling', $topik4);
+        }
+    
+        if ($tipe1) {
+            $jadwal_konseling->where('jadwal_konselings.tipe_konseling', $tipe1);
+        }
+        if ($tipe2) {
+            $jadwal_konseling->where('jadwal_konselings.tipe_konseling', $tipe2);
+        }
+    
+        $jadwal_konseling = $jadwal_konseling->get();
+    
         return view('member.allKonselor', compact('jadwal_konseling'));
     }
 
