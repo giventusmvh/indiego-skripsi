@@ -39,24 +39,20 @@ class JadwalKonselingController extends Controller
         if ($tanggal) {
             $jadwal_konseling->where('jadwal_konselings.tgl_konseling',$tanggal);
         }
-        if ($topik1) {
-            $jadwal_konseling->where('jadwal_konselings.topik_konseling', $topik1);
-        }
-        if ($topik2) {
-            $jadwal_konseling->where('jadwal_konselings.topik_konseling', $topik2);
-        }
-        if ($topik3) {
-            $jadwal_konseling->where('jadwal_konselings.topik_konseling', $topik3);
-        }
-        if ($topik4) {
-            $jadwal_konseling->where('jadwal_konselings.topik_konseling', $topik4);
+        if ($topik1 || $topik2 || $topik3 || $topik4) {
+            $jadwal_konseling->where(function ($query) use ($topik1, $topik2, $topik3, $topik4) {
+                $query->where('jadwal_konselings.topik_konseling', $topik1)
+                    ->orWhere('jadwal_konselings.topik_konseling', $topik2)
+                    ->orWhere('jadwal_konselings.topik_konseling', $topik3)
+                    ->orWhere('jadwal_konselings.topik_konseling', $topik4);
+            });
         }
     
-        if ($tipe1) {
-            $jadwal_konseling->where('jadwal_konselings.tipe_konseling', $tipe1);
-        }
-        if ($tipe2) {
-            $jadwal_konseling->where('jadwal_konselings.tipe_konseling', $tipe2);
+        if ($tipe1 || $tipe2) {
+            $jadwal_konseling->where(function ($query) use ($tipe1, $tipe2) {
+                $query->where('jadwal_konselings.tipe_konseling', $tipe1)
+                    ->orWhere('jadwal_konselings.tipe_konseling', $tipe2);
+            });
         }
     
         $jadwal_konseling = $jadwal_konseling->get();
