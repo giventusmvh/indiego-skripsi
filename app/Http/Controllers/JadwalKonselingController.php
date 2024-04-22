@@ -24,13 +24,16 @@ class JadwalKonselingController extends Controller
     
         $jadwal_konseling = DB::table('jadwal_konselings')
             ->join('konselors', 'jadwal_konselings.id_konselor', '=', 'konselors.id')
+           
             ->select('konselors.namaKonselor', 
                     'konselors.scanFotoKonselor', 
                     'jadwal_konselings.topik_konseling',
                     'jadwal_konselings.tgl_konseling', 
                     'jadwal_konselings.tipe_konseling',
                     'jadwal_konselings.jam_konseling',
-                    'jadwal_konselings.id')
+                    'jadwal_konselings.id',
+                    
+                    )
             ->where('jadwal_konselings.isBooked', false);
             
         if ($namaKonselor) {

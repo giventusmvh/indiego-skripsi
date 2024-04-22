@@ -10,13 +10,67 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use App\Models\JadwalKonseling;
+use Illuminate\Support\Facades\DB;
 
 class KonselorController extends Controller
 {
-    public function indexHomeKonselor(){
+    public function indexHomeKonselor(Request $request){
+        $tanggal = $request->input('tanggal');
+        $topik1 = $request->input('topik1');
+        $topik2 = $request->input('topik2');
+        $topik3 = $request->input('topik3');
+        $topik4 = $request->input('topik4');
+        $tipe1 = $request->input('tipe1');
+        $tipe2 = $request->input('tipe2');
+        $bookingStatus = $request->input('bookingStatus');
+        $paymentStatus = $request->input('paymentStatus');
+        $completeStatus = $request->input('completeStatus');
         $konselor = Auth::guard('konselor')->user();
         $id_konselor = $konselor->id;
-        $jadwalKonselings = JadwalKonseling::where('id_konselor', $id_konselor)->get();
+        $jadwalKonselings = DB::table('jadwal_konselings')
+            ->leftJoin('booking_konselings', 'jadwal_konselings.id', '=', 'booking_konselings.id_jk')
+            ->select('jadwal_konselings.topik_konseling',
+                    'jadwal_konselings.tgl_konseling', 
+                    'jadwal_konselings.tipe_konseling',
+                    'jadwal_konselings.jam_konseling',
+                    'jadwal_konselings.id',
+                    'jadwal_konselings.isBooked',
+                    'booking_konselings.isPaid',
+                    'booking_konselings.isDone',
+                    'booking_konselings.isCancel',)
+            ->where('jadwal_konselings.id_konselor', $id_konselor);
+           
+            if ($tanggal) {
+                $jadwalKonselings->where('jadwal_konselings.tgl_konseling',$tanggal);
+            }
+            if ($topik1 || $topik2 || $topik3 || $topik4) {
+                $jadwalKonselings->where(function ($query) use ($topik1, $topik2, $topik3, $topik4) {
+                    $query->where('jadwal_konselings.topik_konseling', $topik1)
+                        ->orWhere('jadwal_konselings.topik_konseling', $topik2)
+                        ->orWhere('jadwal_konselings.topik_konseling', $topik3)
+                        ->orWhere('jadwal_konselings.topik_konseling', $topik4);
+                });
+            }
+        
+            if ($tipe1 || $tipe2) {
+                $jadwalKonselings->where(function ($query) use ($tipe1, $tipe2) {
+                    $query->where('jadwal_konselings.tipe_konseling', $tipe1)
+                        ->orWhere('jadwal_konselings.tipe_konseling', $tipe2);
+                });
+            }
+
+            if ($bookingStatus !== null) {
+                $jadwalKonselings = $jadwalKonselings->where('isBooked', $bookingStatus);
+            }
+           
+            if ($paymentStatus !== null) {
+                $jadwalKonselings = $jadwalKonselings->where('isPaid', $paymentStatus);
+            }
+            if ($completeStatus !== null) {
+                $jadwalKonselings = $jadwalKonselings->where('isDone', $completeStatus);
+            }
+        
+            $jadwalKonselings = $jadwalKonselings->get();
         return view('konselor.homeKonselor',compact('jadwalKonselings'));
     }
 

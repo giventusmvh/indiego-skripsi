@@ -93,7 +93,7 @@
                 </a>
                 
                <form class="flex flex-col gap-[10px] mt-[20px]" action="{{route('indexAllJK')}}" method="GET">
-                @csrf
+                
                 <input name="namaKonselor" type="search" id="default-search" class=" w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 " placeholder="Cari Disini"  />
                 <p class="text-[20px]">Tanggal</p>
                 <input type="date" id="tanggal" name="tanggal" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder="Masukkan Tanggal Konseling" />

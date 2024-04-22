@@ -16,68 +16,54 @@
 
 
 <nav id="navbar" class=" border-gray-200 fixed w-full z-50 top-0 left-0 h-max bg-[#242424]">
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 md:max-w-[1200px]">
-      <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-          <img src="{{ asset('assets/logowhite.png') }}" class="h-8 md:h-[60px]" alt="Flowbite Logo" />
-         
-      </a>
-      <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 " aria-controls="navbar-default" aria-expanded="false">
-          <span class="sr-only">Open main menu</span>
-          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-          </svg>
-      </button>
-      <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-        <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border bg-black/70 md:bg-transparent  rounded-lg  md:flex-row md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0  ">
-          <li>
-            <div class="flex">
-                <a href="#hero" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">Beranda<span class="block max-w-0 group-hover:max-w-full transition-all ease-in-out duration-500 h-[3px] bg-white"></span></a>
-            </div>
-          </li>
-          <li>
-            <div class="flex">
-                <a href="#artikel" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">Artikel<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[3px] bg-white"></span></a>
-            </div>
-          </li>
-          <li>
-            <div class="flex">
-                <a href="#testimoni" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">Testimoni<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[3px] bg-white"></span></a>
-            </div>
-          </li>
-          <li>
-            <div class="flex">
-                <a href="#galeri" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">Galeri<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[3px] bg-white"></span></a>
-            </div>
-          </li>
-          <li>
-            <div class="flex">
-                <a href="#paket" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">Paket<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[3px] bg-white"></span></a>
-            </div>
-          </li>
-          <li>
-            <div class="flex">
-                <a href="#footer" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">Hubungi Kami<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[3px] bg-white"></span></a>
-            </div>
-          </li>
-          <li class="md:mb-0 mb-[10px]">
-            <div class="flex">
-                <a href="{{route('profileKonselor')}}" class="text-black text-center  bg-white rounded-[30px] px-[20px] py-[12px] font-[600] w-full">Profile<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[3px] bg-white"></span></a>
-            </div>
-          </li>
-          <li>
-            <div class="flex">
-              <form method="POST" action="{{route('logoutKonselor')}}">
-                @csrf
-                <button type="submit" class="text-black text-center  bg-white rounded-[30px] px-[20px] py-[12px] font-[600] w-full">Logout<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[3px] bg-white"></span></button>
-            </form>
-            </div>
-          </li>
-        </ul>
-      </div>
+  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 md:max-w-[1200px]">
+    <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
+        <img src="{{ asset('assets/logowhite.png') }}" class="h-8 md:h-[60px]" alt="Flowbite Logo" />
+       
+    </a>
+    <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 " aria-controls="navbar-default" aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+        </svg>
+    </button>
+    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+      <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border bg-black/70 md:bg-transparent  rounded-lg  md:flex-row md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0  ">
+        <li>
+          <div class="flex">
+              <a href="{{ route('homeKonselor') }}" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">Beranda<span class="block max-w-0 group-hover:max-w-full transition-all ease-in-out duration-500 h-[3px] bg-white"></span></a>
+          </div>
+        </li>
+        <li>
+          <div class="flex">
+              <a href="{{ route('homeKonselor') }}" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">Cancelation Pending<span class="block max-w-0 group-hover:max-w-full transition-all ease-in-out duration-500 h-[3px] bg-white"></span></a>
+          </div>
+        </li>
+        <li>
+          <div class="flex">
+              <a href="{{ route('homeKonselor') }}" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">Reschedule Pending<span class="block max-w-0 group-hover:max-w-full transition-all ease-in-out duration-500 h-[3px] bg-white"></span></a>
+          </div>
+        </li>
+        <li class="md:mb-0 mb-[10px]">
+          <div class="flex">
+              <a href="{{route('profileKonselor')}}" class="text-black text-center  bg-white rounded-[30px] px-[20px] py-[12px] font-[600] w-full">Profile<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[3px] bg-white"></span></a>
+          </div>
+        </li>
+        <li class="md:mb-0 mb-[10px]"">
+          <div class="flex w-full" >
+              <form class="w-full" method="POST" action="{{route('logoutKonselor')}}">
+                  @csrf
+                  <button type="submit" class="text-black text-center  bg-white rounded-[30px] px-[20px] py-[12px] font-[600] w-full">Logout<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[3px] bg-white"></span></button>
+              </form>
+             
+          </div>
+        </li>
+      </ul>
     </div>
-  </nav>
-  
-  <!-- NavBar End -->
+  </div>
+</nav>
+
+<!-- NavBar End -->
 
   <section class="md:max-w-[1200px] mx-auto w-[90%] mt-[120px] mb-[100px]">
     @if (session('error'))
@@ -90,25 +76,81 @@
             {{ session('success') }}
         </div>
     @endif
-    <div class="flex md:flex-row md:gap-[50px]">
-        <div class="flex flex-col gap-[20px] bg-[#242424] p-[20px]  h-max">
-            <a href="{{ route('indexAddJK') }}" class="bg-white  w-full h-[60px] flex items-center justify-center p-[30px] shadow-md border-slate-400 border-[1px]">
-                <p>Add Schedule</p>
-            </a>
-            <hr>
-            <a href="" class="bg-white  w-full h-[60px] flex items-center justify-center p-[30px] shadow-md border-slate-400 border-[1px]">
-                <p>All</p>
-            </a>
-            <a href="" class="bg-white  w-full h-[60px] flex items-center justify-center p-[30px] shadow-md border-slate-400 border-[1px]">
-                <p>Booked</p>
-            </a>
-            <a href="" class="bg-white  w-full h-[60px] flex items-center justify-center text-center p-[30px] shadow-md border-slate-400 border-[1px]" >
-                <p>Pending Confirmation</p>
-            </a>
-            <a href="" class="bg-white  w-full h-[60px] flex items-center justify-center text-center p-[30px] shadow-md border-slate-400 border-[1px]">
-                <p>Reschedule Confirmation</p>
-            </a>
-        </div>
+    <div class="flex md:flex-row flex-col md:gap-[50px]">
+      <div id="menuCourse2" class="sticky top-[100px] mb-[20px] flex flex-col gap-[20px] bg-white border border-slate-300 p-[20px] h-max shadow-lg md:w-[30%]">
+        <a href="{{route('indexAddJK')}}" class="bg-white  w-full h-[60px] flex items-center justify-center p-[30px] shadow-md border-slate-300 border-[1px]">
+          <p>Add Schedule</p>
+      </a>
+        <div class="flex justify-between items-center" data-collapse-toggle="filter-cta" aria-controls="filter-cta" aria-expanded="false">
+            <h1 class="font-semibold text-[20px] text-[#404040]">Filters</h1>
+            <button type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg lg:hidden">
+              <span class="sr-only">Open main menu</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: black"><path d="M4 6h16v2H4zm4 5h12v2H8zm5 5h7v2h-7z"></path></svg>
+            </button>
+          </div>
+          <div id="filter-cta" class="hidden md:flex md:flex-col">
+           <form class="flex flex-col gap-[10px] mt-[20px]" action="{{route('homeKonselor')}}" method="GET">
+            
+           
+            <p class="text-[20px]">Tanggal</p>
+            <input type="date" id="tanggal" name="tanggal" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder="Masukkan Tanggal Konseling" />
+            <p class="text-[20px]">Topic</p>
+            <div class="flex items-center mb-4 gap-[10px]">
+                <input id="default-checkbox" name="topik1" type="checkbox" value="Konseling Mental Health" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Mental Health</label>
+            </div>
+            <div class="flex items-center mb-4 gap-[10px]">
+                <input id="default-checkbox2" name="topik2" type="checkbox" value="Konseling Tumbuh Kembang Anak" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-checkbox2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Parenting</label>
+            </div>
+            <div class="flex items-center mb-4 gap-[10px]">
+                <input id="default-checkbox3" name="topik3" type="checkbox" value="Konseling HRD" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-checkbox3" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">HRD</label>
+            </div>
+            <div class="flex items-center mb-4 gap-[10px]">
+                <input id="default-checkbox4" name="topik4" type="checkbox" value="Konseling Property" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-checkbox4" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Property</label>
+            </div>
+
+            <p class="text-[20px]">Tipe</p>
+            <div class="flex items-center mb-4 gap-[10px]">
+                <input id="default-checkbox5" name="tipe1" type="checkbox" value="Online" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-checkbox5" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Online</label>
+            </div>
+            <div class="flex items-center mb-4 gap-[10px]">
+                <input id="default-checkbox6" name="tipe2" type="checkbox" value="Offline" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-checkbox6" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Offline</label>
+            </div>
+
+            <p class="text-[20px]">Booking Status</p>
+            <div class="flex items-center mb-4">
+              <input id="bookingStatus" type="radio" value="1" name="bookingStatus" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+              <label for="bookingStatus" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Sedang Dibooking</label>
+          </div>
+          <div class="flex items-center mb-4 ">
+              <input id="bookingStatus2" type="radio" value="0" name="bookingStatus" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+              <label for="bookingStatus2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tidak Sedang Dibookng</label>
+          </div>
+            <p class="text-[20px]">Payment Status</p>
+            <div class="flex items-center mb-4">
+              <input id="paymentStatus" type="radio" value="1" name="paymentStatus" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+              <label for="paymentStatus" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Lunas</label>
+          </div>
+          <div class="flex items-center mb-4 ">
+              <input id="paymentStatus2" type="radio" value="0" name="paymentStatus" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+              <label for="paymentStatus2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Belum Lunas</label>
+          </div>
+      
+          <p class="text-[20px]">Completed Status</p>
+          <div class="flex items-center mb-4 ">
+            <input id="completeStatus" type="radio" value="1" name="completeStatus" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+            <label for="completeStatus" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Selesai</label>
+          </div>
+            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Search</button>
+           </form>
+          </div>
+       
+      </div>
         <div class="flex flex-col w-full gap-[30px]">
           @foreach ($jadwalKonselings as $jk)
           <div class=" bg-slate-300 w-full  flex  p-[30px] shadow-md border-slate-400 border-[1px] flex-col">
@@ -120,6 +162,11 @@
             <p>Status : Sedang Dibooking</p>
             @else
             <p>Status : Tidak Dibooking</p>
+            @endif
+            @if ($jk->isPaid)
+            <p>Status : Lunas</p>
+            @else
+            <p>Status : Belum lunas</p>
             @endif
             
 

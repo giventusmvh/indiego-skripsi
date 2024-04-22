@@ -33,32 +33,17 @@
         <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border bg-black/70 md:bg-transparent  rounded-lg  md:flex-row md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0  ">
           <li>
             <div class="flex">
-                <a href="#hero" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">Beranda<span class="block max-w-0 group-hover:max-w-full transition-all ease-in-out duration-500 h-[3px] bg-white"></span></a>
+                <a href="{{ route('homeKonselor') }}" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">Beranda<span class="block max-w-0 group-hover:max-w-full transition-all ease-in-out duration-500 h-[3px] bg-white"></span></a>
             </div>
           </li>
           <li>
             <div class="flex">
-                <a href="#artikel" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">Artikel<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[3px] bg-white"></span></a>
+                <a href="{{ route('homeKonselor') }}" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">Cancelation Pending<span class="block max-w-0 group-hover:max-w-full transition-all ease-in-out duration-500 h-[3px] bg-white"></span></a>
             </div>
           </li>
           <li>
             <div class="flex">
-                <a href="#testimoni" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">Testimoni<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[3px] bg-white"></span></a>
-            </div>
-          </li>
-          <li>
-            <div class="flex">
-                <a href="#galeri" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">Galeri<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[3px] bg-white"></span></a>
-            </div>
-          </li>
-          <li>
-            <div class="flex">
-                <a href="#paket" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">Paket<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[3px] bg-white"></span></a>
-            </div>
-          </li>
-          <li>
-            <div class="flex">
-                <a href="#footer" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">Hubungi Kami<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[3px] bg-white"></span></a>
+                <a href="{{ route('homeKonselor') }}" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">Reschedule Pending<span class="block max-w-0 group-hover:max-w-full transition-all ease-in-out duration-500 h-[3px] bg-white"></span></a>
             </div>
           </li>
           <li class="md:mb-0 mb-[10px]">
