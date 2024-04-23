@@ -158,15 +158,18 @@
             <p>Jam : {{ $jk->jam_konseling }}</p>
             <p>Topik Konseling : {{ $jk->topik_konseling }}</p>
             <p>Tipe Konseling : {{ $jk->tipe_konseling }}</p>
-            @if ($jk->isBooked)
+            @if ($jk->isBooked && !$jk->isDone)
             <p>Status : Sedang Dibooking</p>
-            @else
-            <p>Status : Tidak Dibooking</p>
+            @elseif ($jk->isBooked && $jk->isDone)
+            <p>Status : Selesai</p>
+            @elseif (!$jk->isBooked && !$jk->isDone)
+            <p>Status : Belum Dibooking</p>
+            
             @endif
             @if ($jk->isPaid)
-            <p>Status : Lunas</p>
+            <p>Status Pembayaran : Lunas</p>
             @else
-            <p>Status : Belum lunas</p>
+            <p>Status Pembayaran : Belum lunas</p>
             @endif
             
 

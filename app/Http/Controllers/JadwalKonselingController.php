@@ -160,7 +160,7 @@ class JadwalKonselingController extends Controller
     ->where('jam_konseling', $request->jam_konseling)
     ->exists();
 
-    if($duplicate){
+    if($duplicate>1){
         return redirect()->route('homeKonselor')->with('error','Gagal Mengganti Data Jadwal Konseling');
     }else{
       

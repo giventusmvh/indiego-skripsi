@@ -79,7 +79,7 @@
             {{ session('success') }}
         </div>
     @endif
-        <div id="menuCourse2" class="sticky top-[100px] flex flex-col gap-[20px] bg-white border border-slate-300 p-[20px] h-max shadow-lg md:w-[20%]">
+        <div id="menuCourse2" class="sticky top-[100px] flex flex-col gap-[20px] bg-white border border-slate-300 p-[20px] h-max shadow-lg md:w-[30%]">
             <div class="flex justify-between items-center" data-collapse-toggle="filter-cta" aria-controls="filter-cta" aria-expanded="false">
                 <h1 class="font-semibold text-[20px] text-[#404040]">Filters</h1>
                 <button type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg lg:hidden">
@@ -134,7 +134,7 @@
             @foreach ($jadwal_konseling as $jk)
             <div class="flex flex-col  gap-[10px]  border border-slate-400 p-[20px] shadow-lg">
                 <div class="flex flex-col  md:flex-row gap-[20px] w-full">
-                    <div class="w-auto">
+                    <div class="max-w-[200px] h-auto">
                         <img src="{{ asset("picture/fotoKonselor/{$jk->scanFotoKonselor}") }}" alt="">
                     </div>
                     

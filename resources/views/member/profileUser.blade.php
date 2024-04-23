@@ -125,9 +125,11 @@
                   @endif</p>
                   <p class="mt-[20px]">Deskripsi Singkat :</p>
                   <p class="flex text-justify">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem consequuntur veniam ipsum? Dolor possimus sit asperiores, eum natus minus recusandae facere. Itaque eum vel deserunt asperiores officia ea nam doloremque. Quasi tenetur quidem ex quo eum quaerat, obcaecati in debitis earum asperiores praesentium reprehenderit voluptatibus ipsa, fugiat perspiciatis, vel vero.</p>
+                  
               </div>
+              
           </div>              
-        
+          <a href="/home/addReschedule/{{ $hb->id }}" class="text-white text-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Ajukan Reschedule</a>
       </div>
       @endforeach
      

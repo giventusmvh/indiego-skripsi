@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_konselor');
             $table->foreign('id_konselor')->references('id')->on('konselors')->onDelete('cascade');
             $table->date('tgl_konseling');
-            $table->time('tgl_konseling');
+            $table->time('jam_konseling');
             $table->string('topik_konseling');
             $table->string('tipe_konseling');
             $table->boolean('isBooked');

@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookingKonselingController;
 use App\Models\BookingKonseling;
+use App\Models\Reschedule;
+use App\Http\Controllers\RescheduleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,6 +97,9 @@ Route::middleware(['auth:web'])->group(function(){
 
     Route::get('/home/bookingKonseling/{id}',[JadwalKonselingController::class,'IndexBookingJk'])->name('IndexBookingJK');
     Route::post('/home/addBookingKonseling/{id}',[BookingKonselingController::class,'addBookingKonseling'])->name('addBookingKonseling');
+
+    Route::get('/home/addReschedule/{id}',[RescheduleController::class,'IndexAddReschedule'])->name('IndexAddReschedule');
+    Route::post('/home/actionAddReschedule/{id}',[RescheduleController::class,'actionAddRes'])->name('actionAddRes');  
    
     Route::post("/logoutUser",[AuthController::class,'logoutUser'])->name('logoutUser');
 });
