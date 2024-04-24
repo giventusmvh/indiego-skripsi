@@ -12,6 +12,58 @@ use Illuminate\Support\Facades\Auth;
 
 class RescheduleController extends Controller
 {
+
+    public function indexKonselorRes(Request $request){
+        $needAction = $request->input('needAction');
+        $actionDone = $request->input('actionDone');
+        $tanggal = $request->input('tanggal');
+        $namaKonselor=$request->input('namaKonselor');
+        $konselor = Auth::guard('konselor')->user();
+        $reschedule = DB::table('reschedules')
+            ->join('users', 'reschedules.id_member', '=', 'users.id')
+            ->join('jadwal_konselings', 'jadwal_konselings.id', '=', 'reschedules.id_jk')
+
+            ->select('reschedules.tgl_ganti', 
+                    'reschedules.jam_ganti', 
+                    'reschedules.isConfirmed', 
+                    'reschedules.isRejected', 
+                    'jadwal_konselings.topik_konseling',
+                    'jadwal_konselings.tgl_konseling', 
+                    'jadwal_konselings.tipe_konseling',
+                    'jadwal_konselings.jam_konseling',
+                    'jadwal_konselings.id as id_jk',
+                    'users.nama',
+                    
+                    )
+            ->where('jadwal_konselings.id_konselor', $konselor->id);
+            if ($namaKonselor) {
+                $reschedule->where('users.nama','like','%'.$namaKonselor.'%');
+            }
+            if ($tanggal) {
+                $reschedule->where('jadwal_konselings.tgl_konseling',$tanggal);
+            }
+            if ($needAction !== null) {
+                $reschedule = $reschedule->where(function($query) {
+                    $query->where('isConfirmed', 0)
+                          ->where('isRejected', 0);
+                });
+            }
+
+            if ($actionDone !== null) {
+                $reschedule = $reschedule->where(function ($query) {
+                    $query->where('isConfirmed', 1)
+                          ->orWhere('isRejected', 1);
+                });
+            }
+           
+            $reschedule = $reschedule->paginate(30);
+
+            
+
+            return view('konselor.konselorResList', compact('reschedule'));
+    }
+
+
     public function indexAddReschedule($id){
         $jk = JadwalKonseling::findOrFail($id);
         return view("member.addReschedule", compact('jk'));

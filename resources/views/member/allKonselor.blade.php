@@ -152,24 +152,55 @@
                 </div> 
             </div>
             @endforeach
-           
+            @if ($jadwal_konseling->hasPages())
+            <div class="flex items-center justify-end">
+                {{-- Previous Page Link --}}
+                @if ($jadwal_konseling->onFirstPage())
+                    <span class="rounded-l rounded-sm border border-brand-light px-3 py-2 cursor-not-allowed no-underline">&laquo;</span>
+                @else
+                    <a
+                        class="rounded-l rounded-sm border-t border-b border-l border-brand-light px-3 py-2 text-brand-dark hover:bg-brand-light no-underline"
+                        href="{{ $jadwal_konseling->previousPageUrl() }}"
+                        rel="prev"
+                    >
+                        &laquo;
+                    </a>
+                @endif
+        
+                {{-- Pagination Elements --}}
+                @foreach ($jadwal_konseling as $jk)
+                    {{-- "Three Dots" Separator --}}
+                    @if (is_string($jk))
+                        <span class="border-t border-b border-l border-brand-light px-3 py-2 cursor-not-allowed no-underline">{{ $jk }}</span>
+                    @endif
+        
+                    {{-- Array Of Links --}}
+                    @if (is_array($jk))
+                        @foreach ($jk as $page => $url)
+                            @if ($page == $jadwal_konseling->currentPage())
+                                <span class="border-t border-b border-l border-brand-light px-3 py-2 bg-brand-light no-underline">{{ $page }}</span>
+                            @else
+                                <a class="border-t border-b border-l border-brand-light px-3 py-2 hover:bg-brand-light text-brand-dark no-underline" href="{{ $url }}">{{ $page }}</a>
+                            @endif
+                        @endforeach
+                    @endif
+                @endforeach
+        
+                {{-- Next Page Link --}}
+                @if ($jadwal_konseling->hasMorePages())
+                    <a class="rounded-r rounded-sm border border-brand-light px-3 py-2 hover:bg-brand-light text-brand-dark no-underline" href="{{ $jadwal_konseling->nextPageUrl() }}" rel="next">&raquo;</a>
+                @else
+                    <span class="rounded-r rounded-sm border border-brand-light px-3 py-2 hover:bg-brand-light text-brand-dark no-underline cursor-not-allowed">&raquo;</span>
+                @endif
+            </div>
+        @endif
             
            
         </div>
-            
+        
   
          
-    {{-- @foreach ($jadwal_konseling as $jk)
-    <img src="{{ asset("picture/fotoKonselor/{$jk->scanFotoKonselor}") }}" alt="" >
-    <p>{{ $jk->namaKonselor }}</p>
-    <p>{{ $jk->tgl_konseling }}</p>
-    <p>{{ $jk->jam_konseling }}</p>
-    <p>{{ $jk->tipe_konseling }}</p>
-    
-   
-        
-    @endforeach --}}
-    
+
    
         
   </section>

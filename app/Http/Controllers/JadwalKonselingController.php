@@ -13,13 +13,14 @@ class JadwalKonselingController extends Controller
 
 
     public function indexAllJK(Request $request){
-        $tanggal = $request->input('tanggal');
+        
         $topik1 = $request->input('topik1');
         $topik2 = $request->input('topik2');
         $topik3 = $request->input('topik3');
         $topik4 = $request->input('topik4');
         $tipe1 = $request->input('tipe1');
         $tipe2 = $request->input('tipe2');
+        $tanggal = $request->input('tanggal');
         $namaKonselor=$request->input('namaKonselor');
     
         $jadwal_konseling = DB::table('jadwal_konselings')
@@ -58,7 +59,7 @@ class JadwalKonselingController extends Controller
             });
         }
     
-        $jadwal_konseling = $jadwal_konseling->get();
+        $jadwal_konseling = $jadwal_konseling->paginate(3);
     
         return view('member.allKonselor', compact('jadwal_konseling'));
     }

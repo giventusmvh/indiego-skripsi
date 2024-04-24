@@ -73,7 +73,7 @@
           @csrf
             <div class="mb-5">
                 <label for="tgl_konseling" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Konseling</label>
-                <input type="date" id="tgl_konseling" name="tgl_konseling" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " value="{{ $jk->tgl_konseling }}" placeholder="Masukkan Tanggal Konseling" required disabled/>
+                <input type="date" min="<?php echo date("Y-m-d"); ?>" id="tgl_konseling" name="tgl_konseling" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " value="{{ $jk->tgl_konseling }}" placeholder="Masukkan Tanggal Konseling" required disabled/>
             </div>
             <div class="mb-5">
               <label for="jam_konseling" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jam Konseling</label>
@@ -149,7 +149,16 @@
 <script src="./node_modules/flowbite/dist/flowbite.min.js"></script>
  <!-- Swiper JS -->
  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
- 
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script>
+  $(function() {
+      $("#tgl_konseling").datepicker({
+          minDate: 0 // Disable past dates
+      });
+  });
+</script>
 
  {{-- <script>
     document.addEventListener("DOMContentLoaded", function () {
