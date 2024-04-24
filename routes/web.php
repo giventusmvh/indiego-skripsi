@@ -121,6 +121,8 @@ Route::middleware(['auth:konselor'])->group(function(){
     Route::post('/konselor/deleteJadwalKonseling/{id}',[JadwalKonselingController::class,'deleteJK'])->name('actionDeleteJK');   
 
     Route::get('/konselor/listReschedule',[RescheduleController::class,'indexKonselorRes'])->name('indexKonselorRes');  
+    Route::post("/konselor/acceptRes/{id}",[RescheduleController::class,'confirmRes'])->name('confirmRes');
+    Route::post("/konselor/rejectRes/{id}",[RescheduleController::class,'rejectRes'])->name('rejectRes');
 
     Route::post("/logoutKonselor",[AuthController::class,'logoutKonselor'])->name('logoutKonselor');
 });

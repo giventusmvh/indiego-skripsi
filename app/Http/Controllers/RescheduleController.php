@@ -24,6 +24,7 @@ class RescheduleController extends Controller
             ->join('jadwal_konselings', 'jadwal_konselings.id', '=', 'reschedules.id_jk')
 
             ->select('reschedules.tgl_ganti', 
+                    'reschedules.id', 
                     'reschedules.jam_ganti', 
                     'reschedules.isConfirmed', 
                     'reschedules.isRejected', 
@@ -96,6 +97,30 @@ class RescheduleController extends Controller
     
         return redirect()->route('profileUser')->with('success','Berhasil Mengajukan Reschedule');
        }
+
+       public function confirmRes($id)
+        {
+            try {
+                $res = Reschedule::findOrFail($id);
+                $res->isConfirmed = 1;
+                $res->save();
+                    return redirect()->route('indexKonselorRes')->with('success','Berhasil Accept Reschedule');
+            } catch (\Exception $e) {
+                return redirect()->route('homeAdmin')->with('error','Aksi Gagal');
+            }
+        }
+
+        public function rejectRes($id)
+        {
+            try {
+                $res = Reschedule::findOrFail($id);
+                $res->isRejected = 1;
+                $res->save();
+                    return redirect()->route('indexKonselorRes')->with('success','Berhasil Accept Reschedule');
+            } catch (\Exception $e) {
+                return redirect()->route('homeAdmin')->with('error','Aksi Gagal');
+            }
+        }
     
        
 }
