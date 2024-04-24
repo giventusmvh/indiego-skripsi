@@ -79,10 +79,10 @@
         {{ session('success') }}
     </div>
 @endif
-    <div class="w-full flex md:flex-row flex-col gap-[20px]">
+    {{-- <div class="w-full flex md:flex-row flex-col gap-[20px]">
         <div class="flex flex-col md:w-[30%] items-center justify-center gap-[20px]">
           <a href="">
-            <img src="{{ asset("picture/fotoUser/{$user->scanFoto}") }}" alt="" >
+            <img src="{{ asset("picture/fotoUser/{$user->scanFoto}") }}" class="max-w-[200px] h-auto" alt="" >
           </a>
             
             <p class="text-[25px] font-bold">{{ $user->nama }}</p>
@@ -101,8 +101,45 @@
             
            
         </div>
-    </div>
-    
+    </div> --}}
+    <section class="mt-[40px] w-[100%] flex flex-col gap-5 p-[12px] rounded-[20px] bg-white" style="box-shadow: 4px 4px 24px 0px rgba(24, 124, 255, 0.12)">
+      <div class="flex lg:flex-row flex-col gap-3">
+        <div class="w-full flex lg:flex-row flex-col gap-[40px] justify-center items-center md:items-start md:justify-start">
+          <div class="md:h-[244px] md:w-[244px] w-[320px] h-[300px] rounded-[20px]" style="background: url('{{ asset("picture/fotoUser/{$user->scanFoto}") }}'); background-size: cover; background-repeat: no-repeat; background-position: center"></div>
+          <div class="flex flex-col md:flex-row">
+            <div class="flex flex-col gap-[20px]">
+              <p class="md:text-[24px] font-[500] text-[24px]">{{ $user->nama }}</p>
+              <div class="flex flex-row gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: scaleX(-1);msFilter:progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1);"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4.7-8 5.334L4 8.7V6.297l8 5.333 8-5.333V8.7z"></path></svg>
+                {{ $user->email }}
+              </div>
+              <div class="flex flex-row gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="m20.487 17.14-4.065-3.696a1.001 1.001 0 0 0-1.391.043l-2.393 2.461c-.576-.11-1.734-.471-2.926-1.66-1.192-1.193-1.553-2.354-1.66-2.926l2.459-2.394a1 1 0 0 0 .043-1.391L6.859 3.513a1 1 0 0 0-1.391-.087l-2.17 1.861a1 1 0 0 0-.29.649c-.015.25-.301 6.172 4.291 10.766C11.305 20.707 16.323 21 17.705 21c.202 0 .326-.006.359-.008a.992.992 0 0 0 .648-.291l1.86-2.171a.997.997 0 0 0-.085-1.39z"></path></svg>
+                {{ $user->telp }}
+              </div>
+              <div class="flex flex-row gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg>
+                {{ $user->tgllahir }}
+              </div>
+              <div class="flex flex-row gap-3 hover:bg-slate-200 rounded-md p-3 border border-slate-500">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: scaleX(-1);msFilter:progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1);"><path d="M12 2C7.589 2 4 5.589 4 9.995 3.971 16.44 11.696 21.784 12 22c0 0 8.029-5.56 8-12 0-4.411-3.589-8-8-8zm0 12c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"></path></svg>
+                <a href="https://maps.google.com/?q={{ $user->latitudeUser }},{{ $user->longitudeUser }}" target="_blank">Check Location on Google Maps</a>
+              </div>
+              
+            </div>
+           
+          </div>
+        </div>
+     
+      </div>
+      <div class="flex flex-col md:flex-row gap-[20px]">
+        <a href="/home/editprofileUser/{{ $user->id }}" class="w-full flex justify-center items-center bg-slate-900 text-white rounded-[16px] p-[12px]">Edit Profile</a>
+        <div class="flex flex-row w-full gap-[10px]">
+          <a href="/home/editpasswordUser/{{ $user->id }}" class="w-full flex justify-center items-center bg-slate-900 text-white rounded-[16px] p-[12px]">Change Password</a>
+        </div>
+      </div>
+     
+    </section>
     <hr class="w-full h-px my-8 bg-gray-600 border-[1px]">
     <section class="md:max-w-[1200px]  flex flex-col md:flex-row  gap-[20px]">
       <div id="menuCourse2" class="sticky top-[100px] flex flex-col gap-[20px] bg-white border border-slate-300 p-[20px] h-max shadow-lg md:w-[30%]">
@@ -149,6 +186,14 @@
                   @else
                       Menunggu Konfirmasi Pembayaran oleh Admin
                   @endif</p>
+
+                  <p>Status Reschedule : @if ($hb->isConfirmed === 1)
+                    Diterima
+                @elseif ($hb->isRejected === 1)
+                    Ditolak
+                    @else
+                    -
+                @endif</p>
                   <p class="mt-[20px]">Deskripsi Singkat :</p>
                   <p class="flex text-justify">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem consequuntur veniam ipsum? Dolor possimus sit asperiores, eum natus minus recusandae facere. Itaque eum vel deserunt asperiores officia ea nam doloremque. Quasi tenetur quidem ex quo eum quaerat, obcaecati in debitis earum asperiores praesentium reprehenderit voluptatibus ipsa, fugiat perspiciatis, vel vero.</p>
                   

@@ -161,7 +161,7 @@ class JadwalKonselingController extends Controller
     ->where('jam_konseling', $request->jam_konseling)
     ->exists();
 
-    if($duplicate>1){
+    if($duplicate>1 || $jk->isBooked === 1){
         return redirect()->route('homeKonselor')->with('error','Gagal Mengganti Data Jadwal Konseling');
     }else{
       
