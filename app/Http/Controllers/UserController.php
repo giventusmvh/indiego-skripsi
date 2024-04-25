@@ -42,7 +42,8 @@ class UserController extends Controller
         ->join('users', 'booking_konselings.id_member', '=', 'users.id')
         ->join('jadwal_konselings', 'booking_konselings.id_jk', '=', 'jadwal_konselings.id')
         ->join('konselors', 'jadwal_konselings.id_konselor', '=', 'konselors.id')
-        ->join('reschedules', 'jadwal_konselings.id', '=', 'reschedules.id_jk')
+        ->leftJoin('reschedules', 'jadwal_konselings.id', '=', 'reschedules.id_jk')
+        ->leftJoin('cancel_bookings', 'booking_konselings.id', '=', 'cancel_bookings.id_bk')
         ->select('konselors.namaKonselor', 
                 'jadwal_konselings.topik_konseling',
                 'jadwal_konselings.tgl_konseling', 
@@ -51,7 +52,11 @@ class UserController extends Controller
                 'jadwal_konselings.id',
                 'reschedules.isConfirmed',
                 'reschedules.isRejected',
-                'booking_konselings.isPaid')
+                'booking_konselings.isPaid',
+                'booking_konselings.id as idBooking',
+                'cancel_bookings.isConfirmed as isCancelConfirmed',
+                'cancel_bookings.isRejected as isCancelRejected')
+                
         ->where('booking_konselings.id_member', $user->id)
         ->get();
 

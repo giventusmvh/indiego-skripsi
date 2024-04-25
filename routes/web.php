@@ -10,6 +10,7 @@ use App\Models\Konseling;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookingKonselingController;
+use App\Http\Controllers\CancelBookingController;
 use App\Models\BookingKonseling;
 use App\Models\Reschedule;
 use App\Http\Controllers\RescheduleController;
@@ -100,6 +101,8 @@ Route::middleware(['auth:web'])->group(function(){
 
     Route::get('/home/addReschedule/{id}',[RescheduleController::class,'IndexAddReschedule'])->name('IndexAddReschedule');
     Route::post('/home/actionAddReschedule/{id}',[RescheduleController::class,'actionAddRes'])->name('actionAddRes');  
+
+    Route::post('/home/actionAddCancel/{id}',[CancelBookingController::class,'addCancellation'])->name('addCancellation');  
    
     Route::post("/logoutUser",[AuthController::class,'logoutUser'])->name('logoutUser');
 });
@@ -123,6 +126,10 @@ Route::middleware(['auth:konselor'])->group(function(){
     Route::get('/konselor/listReschedule',[RescheduleController::class,'indexKonselorRes'])->name('indexKonselorRes');  
     Route::post("/konselor/acceptRes/{id}",[RescheduleController::class,'confirmRes'])->name('confirmRes');
     Route::post("/konselor/rejectRes/{id}",[RescheduleController::class,'rejectRes'])->name('rejectRes');
+
+    Route::get('/konselor/listCancel',[CancelBookingController::class,'indexKonselorCancel'])->name('indexKonselorCancel');  
+    Route::post("/konselor/acceptCancel/{id}",[CancelBookingController::class,'confirmCancel'])->name('confirmCancel');
+    Route::post("/konselor/rejectCancel/{id}",[CancelBookingController::class,'rejectCancel'])->name('rejectCancel');
 
     Route::post("/logoutKonselor",[AuthController::class,'logoutKonselor'])->name('logoutKonselor');
 });

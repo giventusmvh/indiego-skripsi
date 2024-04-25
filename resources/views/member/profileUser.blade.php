@@ -141,7 +141,7 @@
      
     </section>
     <hr class="w-full h-px my-8 bg-gray-600 border-[1px]">
-    <section class="md:max-w-[1200px]  flex flex-col md:flex-row  gap-[20px]">
+    <div class="md:max-w-[1200px]  flex flex-col md:flex-row  gap-[20px]">
       <div id="menuCourse2" class="sticky top-[100px] flex flex-col gap-[20px] bg-white border border-slate-300 p-[20px] h-max shadow-lg md:w-[30%]">
         <div class="flex justify-between items-center" data-collapse-toggle="filter-cta" aria-controls="filter-cta" aria-expanded="false">
             <h1 class="font-semibold text-[20px] text-[#404040]">Filters</h1>
@@ -194,20 +194,35 @@
                     @else
                     -
                 @endif</p>
+                <p>Status Pembatalan : @if ($hb->isCancelConfirmed === 1)
+                  Diterima
+              @elseif ($hb->isCancelRejected === 1)
+                  Ditolak
+                  @elseif ($hb->isCancelConfirmed === 0 && $hb->isCancelRejected === 0)
+                  Ongoing
+                  @else
+                  -
+              @endif</p>
                   <p class="mt-[20px]">Deskripsi Singkat :</p>
                   <p class="flex text-justify">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem consequuntur veniam ipsum? Dolor possimus sit asperiores, eum natus minus recusandae facere. Itaque eum vel deserunt asperiores officia ea nam doloremque. Quasi tenetur quidem ex quo eum quaerat, obcaecati in debitis earum asperiores praesentium reprehenderit voluptatibus ipsa, fugiat perspiciatis, vel vero.</p>
                   
               </div>
               
-          </div>              
-          <a href="/home/addReschedule/{{ $hb->id }}" class="text-white text-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Ajukan Reschedule</a>
+          </div>    
+          <div class="flex flex-col md:flex-row w-full">        
+            <a href="/home/addReschedule/{{ $hb->id }}" class=" w-full text-white text-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Ajukan Reschedule</a>
+            <form class="w-full" id="addCancel{{ $hb->idBooking }}" action="{{ route('addCancellation', $hb->idBooking) }}" method="POST" onsubmit="return addCancel({{ $hb->idBooking }})">
+              @csrf
+              <button type="submit" class="w-full text-white text-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Ajukan Cancel</button>
+          </form>
+          </div>  
       </div>
       @endforeach
      
       
      
     </div>
-    </section>
+    </div>
         
   </section>
 
@@ -250,7 +265,12 @@
  <!-- Swiper JS -->
  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
  
-
+ <script>
+  
+  function addCancel(id) {
+      return confirm('Apakah Anda yakin ingin mengajukan pembatalan?');
+  }
+</script>
  {{-- <script>
     document.addEventListener("DOMContentLoaded", function () {
         var navbar = document.querySelector("nav");
