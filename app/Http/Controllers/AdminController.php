@@ -22,6 +22,7 @@ class AdminController extends Controller
         ->join('users', 'booking_konselings.id_member', '=', 'users.id')
         ->join('jadwal_konselings', 'booking_konselings.id_jk', '=', 'jadwal_konselings.id')
         ->join('konselors', 'jadwal_konselings.id_konselor', '=', 'konselors.id')
+        ->leftJoin('cancel_bookings', 'cancel_bookings.id_bk', '=', 'booking_konselings.id')
         ->select('konselors.namaKonselor', 
                 'users.nama',
                 'jadwal_konselings.tgl_konseling', 

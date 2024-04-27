@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="{{ asset("mobile.css") }}">
     
   </head>
-  <body>
-    <div style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url('/assets/konseling.jpeg'); background-size: cover">
+  <body class="py-[100px] md:py-0" style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url('/assets/konseling.jpeg'); background-size: cover; background-repeat:no-repeat">
+    <div >
       <div class="flex md:max-w-[1200px] md:w-full w-[95%] mx-auto items-center justify-center">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <div class="w-full md:w-[1000px] bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">

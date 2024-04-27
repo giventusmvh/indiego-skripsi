@@ -6,6 +6,7 @@ use App\Models\CancelBooking;
 use App\Http\Requests\StoreCancelBookingRequest;
 use App\Http\Requests\UpdateCancelBookingRequest;
 use App\Models\BookingKonseling;
+use App\Models\JadwalKonseling;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -82,6 +83,18 @@ class CancelBookingController extends Controller
         {
             try {
                 $res = CancelBooking::findOrFail($id);
+
+                $konselor = Auth::guard('konselor')->user();
+                $bookingKonseling = BookingKonseling::findOrFail($res->id_bk);
+                $jadwalKonseling= JadwalKonseling::findOrFail($bookingKonseling->id_jk);
+
+                $bookingKonseling->isCancel = 1;
+                $bookingKonseling->isPaid = 0;
+                $bookingKonseling->save();
+
+                $jadwalKonseling->isBooked = 0;
+                $jadwalKonseling->save();
+                
                 $res->isConfirmed = 1;
                 $res->save();
                     return redirect()->route('indexKonselorCancel')->with('success','Berhasil Accept Pembatalan');
