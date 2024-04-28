@@ -7,6 +7,7 @@ use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
 use App\Models\Konselor;
 use App\Models\BookingKonseling;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
@@ -17,7 +18,14 @@ class AdminController extends Controller
         return view('admin.dashboardAdmin', compact('konselor'));
     }
 
-    public function indexAllBK(){
+    public function indexAllBK(Request $request){
+
+        $paymentStatus = $request->input('paymentStatus');
+        $cancelCheck = $request->input('cancelCheck');
+        $tanggal = $request->input('tanggal');
+        $namaKonselor=$request->input('namaKonselor');
+        $nama=$request->input('nama');
+
         $bookings = DB::table('booking_konselings')
         ->join('users', 'booking_konselings.id_member', '=', 'users.id')
         ->join('jadwal_konselings', 'booking_konselings.id_jk', '=', 'jadwal_konselings.id')
@@ -32,8 +40,24 @@ class AdminController extends Controller
                 'booking_konselings.buktiBayar',
                 'booking_konselings.isPaid',
                 'booking_konselings.isDone',
-                'booking_konselings.isCancel')
-        ->get();
+                'booking_konselings.isCancel');
+                if ($namaKonselor) {
+                    $bookings->where('konselors.namaKonselor','like','%'.$namaKonselor.'%');
+                }
+                if ($nama) {
+                    $bookings->where('users.nama','like','%'.$nama.'%');
+                }
+         if ($cancelCheck !== null) {
+                $bookings = $bookings->where('isCancel', $cancelCheck);
+            }
+           
+            if ($paymentStatus !== null) {
+                $bookings = $bookings->where('isPaid', $paymentStatus)
+                ->where('isCancel', 0);
+            }
+           
+        
+            $bookings = $bookings->get();
         return view('admin.listTransaksiBooking', compact('bookings'));
     }
 

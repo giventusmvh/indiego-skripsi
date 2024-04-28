@@ -102,6 +102,9 @@ class RescheduleController extends Controller
         {
             try {
                 $res = Reschedule::findOrFail($id);
+                $jk = JadwalKonseling::findOrFail($res->id_jk);
+                $jk->tgl_konseling = $res->tgl_ganti;
+                $jk->save();
                 $res->isConfirmed = 1;
                 $res->save();
                     return redirect()->route('indexKonselorRes')->with('success','Berhasil Accept Reschedule');
