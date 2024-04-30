@@ -59,6 +59,8 @@ class UserController extends Controller
                 'jadwal_konselings.id',
                 'reschedules.isConfirmed',
                 'reschedules.isRejected',
+                'reschedules.tgl_ganti',
+                'reschedules.jam_ganti',
                 'booking_konselings.isPaid',
                 'booking_konselings.id as idBooking',
                 'cancel_bookings.isConfirmed as isCancelConfirmed',

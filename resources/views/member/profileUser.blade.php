@@ -188,14 +188,15 @@
                @endif</p>
 
                <p>Status Reschedule : @if ($hb->isConfirmed === 1)
-                 Diterima
+                 Diterima | {{ $hb->tgl_ganti }},{{ $hb->jam_ganti }}
                 @elseif ($hb->isRejected === 1)
-                 Ditolak
+                 Ditolak | {{ $hb->tgl_ganti }},{{ $hb->jam_ganti }}
                  @elseif ($hb->isConfirmed === 0 && $hb->isRejected === 0)
-                 Ongoing
+                 Ongoing | {{ $hb->tgl_ganti }},{{ $hb->jam_ganti }}
                  @else
                  -
-             @endif</p>
+             @endif
+            </p>
              <p>Status Pembatalan : @if ($hb->isCancelConfirmed === 1)
                Diterima
            @elseif ($hb->isCancelRejected === 1)
