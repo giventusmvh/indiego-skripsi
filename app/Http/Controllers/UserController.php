@@ -34,10 +34,17 @@ class UserController extends Controller
         return view('member.detailKonselor',compact('jadwalKonselings','konselor'));
     }
 
-    public function profileUser(){
+    public function profileUser(Request $request){
 
         $user = Auth::user();
-        
+        $resStatus = $request->input('resStatus');
+        $resStatus2 = $request->input('resStatus2');
+        $resStatus3 = $request->input('resStatus3');
+        $cancelStatus = $request->input('cancelStatus1');
+        $cancelStatus2 = $request->input('cancelStatus2');
+        $cancelStatus3 = $request->input('cancelStatus3');
+        $tanggal = $request->input('tanggal');
+        $namaKonselor=$request->input('namaKonselor');
         $historyBookings = DB::table('booking_konselings')
         ->join('users', 'booking_konselings.id_member', '=', 'users.id')
         ->join('jadwal_konselings', 'booking_konselings.id_jk', '=', 'jadwal_konselings.id')
@@ -55,10 +62,17 @@ class UserController extends Controller
                 'booking_konselings.isPaid',
                 'booking_konselings.id as idBooking',
                 'cancel_bookings.isConfirmed as isCancelConfirmed',
-                'cancel_bookings.isRejected as isCancelRejected')
+                'cancel_bookings.isRejected as isCancelRejected');
                 
-        ->where('booking_konselings.id_member', $user->id)
-        ->get();
+                if ($namaKonselor) {
+                    $historyBookings->where('konselors.namaKonselor','like','%'.$namaKonselor.'%');
+                }
+                if ($tanggal) {
+                    $historyBookings->where('historyBookings.tgl_konseling',$tanggal);
+                }
+               
+                $historyBookings =$historyBookings->where('booking_konselings.id_member', $user->id);
+                $historyBookings = $historyBookings->get();
 
         return view("member.profileUser",compact('user','historyBookings'));
     }
