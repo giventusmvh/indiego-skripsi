@@ -60,7 +60,10 @@
     <div id="menuCourse2" class="sticky top-[100px] flex flex-col gap-[20px] bg-white border border-slate-300 p-[20px] h-max shadow-lg md:w-[20%] z-10">
         <div class="flex justify-between items-center" data-collapse-toggle="filter-cta" aria-controls="filter-cta" aria-expanded="false">
             <h1 class="font-semibold text-[20px] text-[#404040]">Filters</h1>
-
+            <button type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg lg:hidden">
+                <span class="sr-only">Open main menu</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: black"><path d="M4 6h16v2H4zm4 5h12v2H8zm5 5h7v2h-7z"></path></svg>
+              </button>
           </div>
           <div id="filter-cta" class="hidden md:flex md:flex-col">
 

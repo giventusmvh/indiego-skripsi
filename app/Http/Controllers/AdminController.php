@@ -13,8 +13,21 @@ use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-    public function indexHomeAdmin(){
-        $konselor = Konselor::all();
+    public function indexHomeAdmin(Request $request){
+        $konselor = Konselor::query();
+        $activeStatus = $request->input('activeStatus');
+        $namaKonselor=$request->input('namaKonselor');
+        // Check if the status filter is provided in the request
+        if ($request->has('activeStatus')) {
+            $konselor->where('statusAktivasi', $activeStatus);
+        }
+
+        if ($request->has('namaKonselor')) {
+            $konselor->where('namaKonselor','like','%'.$namaKonselor.'%');
+        }
+    
+        // Get the final result
+        $konselor = $konselor->get();
         return view('admin.dashboardAdmin', compact('konselor'));
     }
 

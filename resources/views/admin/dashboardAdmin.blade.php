@@ -16,7 +16,7 @@
 
 
 <nav id="navbar" class=" border-gray-200 fixed w-full z-50 top-0 left-0 h-max bg-[#242424]">
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 md:max-w-[1200px]">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 md:max-w-[1400px]">
       <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
           <p class="text-white font-bold text-[20px]">Admin Page</p>
          
@@ -57,7 +57,43 @@
   <!-- NavBar End -->
     
 
- <div class="md:max-w-[1200px] mx-auto w-[90%] mt-[120px] mb-[100px] flex flex-col justify-center items-center"> 
+ <div class="md:max-w-[1400px] mx-auto w-[90%] mt-[120px] mb-[100px] flex flex-col md:flex-row justify-center gap-[30px]"> 
+
+    <div id="menuCourse2" class="sticky top-[100px] flex flex-col gap-[20px] bg-white border border-slate-300 p-[20px] h-max shadow-lg md:w-[20%] z-10">
+        <div class="flex justify-between items-center" data-collapse-toggle="filter-cta" aria-controls="filter-cta" aria-expanded="false">
+            <h1 class="font-semibold text-[20px] text-[#404040]">Filters</h1>
+            <button type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg lg:hidden">
+                <span class="sr-only">Open main menu</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: black"><path d="M4 6h16v2H4zm4 5h12v2H8zm5 5h7v2h-7z"></path></svg>
+              </button>
+          </div>
+          <div id="filter-cta" class="hidden md:flex md:flex-col">
+
+            
+           <form class="flex flex-col gap-[10px] mt-[20px]" action="{{route('homeAdmin')}}" method="GET">
+            
+            <input name="namaKonselor" type="search" id="default-search" class=" w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 " placeholder="Cari Konselor"  />
+          
+            
+            <p class="text-[20px]">Activation Status</p>
+            <div class="flex items-center mb-4">
+              <input id="activeStatus" type="radio" value="1" name="activeStatus" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+              <label for="activeStatus" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Active</label>
+          </div>
+          <div class="flex items-center mb-4 ">
+              <input id="activeStatus2" type="radio" value="0" name="activeStatus" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+              <label for="activeStatus2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Inactive</label>
+          </div>
+
+         
+       
+
+            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Search</button>
+           </form>
+          </div>
+       
+    </div>
+
 <div class="w-full relative overflow-x-auto">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
