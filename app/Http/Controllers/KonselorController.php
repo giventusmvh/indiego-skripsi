@@ -33,6 +33,7 @@ class KonselorController extends Controller
                  ->where('booking_konselings.isCancel', 0);
         })
             ->leftJoin('users', 'users.id', '=', 'booking_konselings.id_member')
+            ->leftJoin('reschedules', 'reschedules.id_bk', '=', 'booking_konselings.id')
             ->select('users.nama',
                     'jadwal_konselings.topik_konseling',
                     'jadwal_konselings.tgl_konseling', 
@@ -43,7 +44,10 @@ class KonselorController extends Controller
                     'jadwal_konselings.harga_konseling',
                     'booking_konselings.isPaid',
                     'booking_konselings.isDone',
-                    'booking_konselings.isCancel',)
+                    'booking_konselings.isCancel',
+                    'reschedules.tgl_ganti',
+                    'reschedules.jam_ganti',
+                    'reschedules.isConfirmed')
             ->where('jadwal_konselings.id_konselor', $id_konselor);
             
            

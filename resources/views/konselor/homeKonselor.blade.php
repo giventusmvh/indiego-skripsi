@@ -179,6 +179,12 @@
             @else
             <p>Status Pembayaran : Belum lunas</p>
             @endif
+
+            @if ($jk->isConfirmed)
+            <p>reschedule : {{ $jk->tgl_ganti , $jk->jam_ganti }}</p>
+            @else
+            <p>reschedule : NaN</p>
+            @endif
             
 
             <div class="mt-[30px] flex items-end justify-end">

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Konselor;
+use App\Models\Reschedule;
 
 class JadwalKonselingController extends Controller
 {
@@ -119,8 +120,30 @@ class JadwalKonselingController extends Controller
         ->where('tgl_konseling', $request->tgl_konseling)
         ->where('jam_konseling', $request->jam_konseling)
         ->exists();
+
+        $duplicate2 = DB::table('jadwal_konselings')
+                    ->join('konselors', 'konselors.id', '=', 'jadwal_konselings.id_konselor')
+                    ->join('reschedules', 'reschedules.id_jk', '=', 'jadwal_konselings.id')
+                    ->select('konselors.namaKonselor', 
+                    'konselors.scanFotoKonselor', 
+                    'konselors.telpKonselor',
+                    'jadwal_konselings.topik_konseling',
+                    'jadwal_konselings.tgl_konseling', 
+                    'jadwal_konselings.tipe_konseling',
+                    'jadwal_konselings.jam_konseling',
+                    'jadwal_konselings.harga_konseling',
+                    'reschedules.jam_ganti',
+                    'reschedules.tgl_ganti',
+                    'reschedules.isConfirmed',
+                    )
+                    ->where('konselors.id', $user->id)
+            ->where('reschedules.isConfirmed', true)
+            ->where('tgl_ganti', $request->tgl_konseling)
+            ->where('jam_ganti', $request->jam_konseling)
+            ->exists();
+
     
-        if($duplicate){
+        if($duplicate || $duplicate2){
             return redirect()->route('homeKonselor')->with('error','Gagal Menambah Data Jadwal Konseling');
         }else{
             $infoAddJK=[
