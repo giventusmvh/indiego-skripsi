@@ -28,8 +28,13 @@ class KonselorController extends Controller
         $konselor = Auth::guard('konselor')->user();
         $id_konselor = $konselor->id;
         $jadwalKonselings = DB::table('jadwal_konselings')
-            ->leftJoin('booking_konselings', 'jadwal_konselings.id', '=', 'booking_konselings.id_jk')
-            ->select('jadwal_konselings.topik_konseling',
+        ->leftJoin('booking_konselings', function($join) {
+            $join->on('jadwal_konselings.id', '=', 'booking_konselings.id_jk')
+                 ->where('booking_konselings.isCancel', 0);
+        })
+            ->leftJoin('users', 'users.id', '=', 'booking_konselings.id_member')
+            ->select('users.nama',
+                    'jadwal_konselings.topik_konseling',
                     'jadwal_konselings.tgl_konseling', 
                     'jadwal_konselings.tipe_konseling',
                     'jadwal_konselings.jam_konseling',
@@ -40,6 +45,8 @@ class KonselorController extends Controller
                     'booking_konselings.isDone',
                     'booking_konselings.isCancel',)
             ->where('jadwal_konselings.id_konselor', $id_konselor);
+            
+           
            
             if ($tanggal) {
                 $jadwalKonselings->where('jadwal_konselings.tgl_konseling',$tanggal);

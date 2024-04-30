@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_jk');
             $table->foreign('id_jk')->references('id')->on('jadwal_konselings')->onDelete('cascade');
+            $table->unsignedBigInteger('id_bk');
+            $table->foreign('id_bk')->references('id')->on('booking_konselings')->onDelete('cascade');
             $table->unsignedBigInteger('id_member');
             $table->foreign('id_member')->references('id')->on('users')->onDelete('cascade');
             $table->date('tgl_ganti');

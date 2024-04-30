@@ -228,7 +228,7 @@
         <button class=" w-full text-white text-center bg-slate-700  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2" disabled>-</button>
         <button class=" w-full text-white text-center bg-slate-700  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2" disabled>-</button>
         @else
-        <a href="/home/addReschedule/{{ $hb->id }}" class=" w-full text-white text-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Ajukan Reschedule</a>
+        <a href="/home/addReschedule/{{ $hb->idBooking }}" class=" w-full text-white text-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Ajukan Reschedule</a>
         <form class="w-full" id="addCancel{{ $hb->idBooking }}" action="{{ route('addCancellation', $hb->idBooking) }}" method="POST" onsubmit="return addCancel({{ $hb->idBooking }})">
           @csrf
           <button type="submit" class="w-full text-white text-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Ajukan Cancel</button>

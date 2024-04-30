@@ -7,6 +7,7 @@ use App\Http\Requests\StoreCancelBookingRequest;
 use App\Http\Requests\UpdateCancelBookingRequest;
 use App\Models\BookingKonseling;
 use App\Models\JadwalKonseling;
+use App\Models\Reschedule;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,16 +17,24 @@ class CancelBookingController extends Controller
 {
     public function addCancellation($id)
     {
-
-        
+      
         try {
             $bk = BookingKonseling::findOrFail($id);
-            $infoAddCancel=[
-                'id_bk'=>$bk->id,
-                'isConfirmed'=>0,
-            ];
-            CancelBooking::create($infoAddCancel);
-            return redirect()->route('profileUser')->with('success','Berhasil Mengajukan Pembatalan');
+            //$jk = JadwalKonseling::findOrFail($bk->id_jk);
+            $res = Reschedule::where('id_bk', $bk->id)->first();
+            if($res){
+                return redirect()->route('profileUser')->with('error','Sudah pernah reschedule, tidak bisa cancel');
+            }else{
+                $infoAddCancel=[
+                    'id_bk'=>$bk->id,
+                    'isConfirmed'=>0,
+                    'isRejected'=>0,
+                ];
+                CancelBooking::create($infoAddCancel);
+                return redirect()->route('profileUser')->with('success','Berhasil Mengajukan Pembatalan');
+            }
+            
+            
         } catch (\Exception $e) {
             return redirect()->route('profileUser')->with('error','Aksi Gagal');
         }

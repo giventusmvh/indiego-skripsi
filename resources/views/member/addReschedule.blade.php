@@ -76,7 +76,7 @@
   <section class="md:max-w-[1200px] mx-auto w-[90%] mt-[120px] mb-[100px] flex flex-col justify-center items-center">
     
         <p>Ajukan Reschedule</p>
-        <form action="/home/actionAddReschedule/{{ $jk->id }}" method="POST" class="md:w-[80%] w-[90%] mx-auto ">
+        <form action="/home/actionAddReschedule/{{ $bk->id }}" method="POST" class="md:w-[80%] w-[90%] mx-auto ">
           @csrf
             <div class="mb-5">
                 <label for="tgl_konseling" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Konseling</label>

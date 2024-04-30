@@ -11,6 +11,7 @@ class Reschedule extends Model
 
     protected $fillable = [
         'id_jk',
+        'id_bk',
         'id_member',
         'tgl_ganti',
         'jam_ganti',

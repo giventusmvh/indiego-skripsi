@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\JadwalKonseling;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\BookingKonseling;
+use App\Models\CancelBooking;
 
 class RescheduleController extends Controller
 {
@@ -66,12 +68,24 @@ class RescheduleController extends Controller
 
 
     public function indexAddReschedule($id){
-        $jk = JadwalKonseling::findOrFail($id);
-        return view("member.addReschedule", compact('jk'));
+        
+        $bk = BookingKonseling::findOrFail($id);
+        $res = Reschedule::where('id_bk', $bk->id)->first();
+        $cancel = CancelBooking::where('id_bk', $bk->id)->first();
+        $jk = JadwalKonseling::findOrFail($bk->id_jk);
+        if($res){
+            return redirect()->route('profileUser')->with('error','Sudah pernah reschedule, tidak bisa reschedule lagi');
+        }else if($cancel){
+            return redirect()->route('profileUser')->with('error','Sedang mengajukan pembatalan, mohon tunggu untuk reschedule');
+        }else{
+            return view("member.addReschedule", compact('jk','bk'));
+        }
+      
     }
 
     public function actionAddRes(Request $request, $id){
-        $jk = JadwalKonseling::findOrFail($id);
+        $bk = BookingKonseling::findOrFail($id);
+        $jk = JadwalKonseling::findOrFail($bk->id_jk);
         $user = Auth::user();
         $request->validate([
             'tgl_ganti'=>'required',
@@ -84,6 +98,7 @@ class RescheduleController extends Controller
        
         $infoAddRes=[
             'id_jk'=>$jk->id,
+            'id_bk'=>$bk->id,
             'id_member'=>$user->id,
             'tgl_ganti'=>$request->tgl_ganti,
             'jam_ganti'=>$request->jam_ganti,
@@ -102,6 +117,9 @@ class RescheduleController extends Controller
         {
             try {
                 $res = Reschedule::findOrFail($id);
+                // $jk = JadwalKonseling::findOrFail($res->id_jk);
+                // $jk->tgl_konseling = $res->tgl_ganti;
+                // $jk->save();
                 $res->isConfirmed = 1;
                 $res->save();
                     return redirect()->route('indexKonselorRes')->with('success','Berhasil Accept Reschedule');

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_bk');
             $table->foreign('id_bk')->references('id')->on('booking_konselings')->onDelete('cascade');
             $table->boolean('isConfirmed');
-            $table->boolean('isConfirmed');
+            $table->boolean('isRejected');
             $table->timestamps();
         });
     }

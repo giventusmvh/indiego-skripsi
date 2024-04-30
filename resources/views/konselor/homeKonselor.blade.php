@@ -167,7 +167,7 @@
             <p>Tipe Konseling : {{ $jk->tipe_konseling }}</p>
             <p>Harga Konseling : {{ $jk->harga_konseling }}</p>
             @if ($jk->isBooked && !$jk->isDone)
-            <p>Status : Sedang Dibooking</p>
+            <p>Status : Sedang Dibooking oleh {{ $jk->nama }}</p>
             @elseif ($jk->isBooked && $jk->isDone)
             <p>Status : Selesai</p>
             @elseif (!$jk->isBooked && !$jk->isDone)
