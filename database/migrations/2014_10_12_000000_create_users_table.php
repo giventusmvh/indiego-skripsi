@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('scanFoto');
             $table->decimal('latitudeUser', 10, 8)->default(-7.8011733719147065)->nullable();
             $table->decimal('longitudeUser', 11, 8)->default(110.36477482416575)->nullable();
+            $table->integer('creditPoint')->default(0)->nullable();
             // $table->string('verify_key');
             $table->rememberToken();
             $table->timestamps();

@@ -35,6 +35,7 @@ class KonselorController extends Controller
                     'jadwal_konselings.jam_konseling',
                     'jadwal_konselings.id',
                     'jadwal_konselings.isBooked',
+                    'jadwal_konselings.harga_konseling',
                     'booking_konselings.isPaid',
                     'booking_konselings.isDone',
                     'booking_konselings.isCancel',)

@@ -14,6 +14,7 @@ class JadwalKonseling extends Model
         'jam_konseling',
         'topik_konseling',
         'tipe_konseling',
+        'harga_konseling',
         'isBooked',
         
         

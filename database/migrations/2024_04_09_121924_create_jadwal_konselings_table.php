@@ -19,6 +19,7 @@ return new class extends Migration
             $table->time('jam_konseling');
             $table->string('topik_konseling');
             $table->string('tipe_konseling');
+            $table->integer('harga_konseling');
             $table->boolean('isBooked');
             $table->timestamps();
         });

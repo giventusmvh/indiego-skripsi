@@ -84,29 +84,38 @@
         </div>
             <div class="mb-5">
                 <label for="tgl_konseling" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Konseling</label>
-                <input type="date" id="tgl_konseling" name="tgl_konseling" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " value="{{ $jk->tgl_konseling }}" placeholder="Masukkan Tanggal Konseling" required />
+                <input type="date" id="tgl_konseling" name="tgl_konseling" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " value="{{ $jk->tgl_konseling }}" placeholder="Masukkan Tanggal Konseling" required readonly/>
             </div>
             <div class="mb-5">
               <label for="jam_konseling" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jam Konseling</label>
-              <input type="time" id="jam_konseling" name="jam_konseling" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " value="{{ $jk->jam_konseling }}" placeholder="Masukkan Jam Konseling" required />
+              <input type="time" id="jam_konseling" name="jam_konseling" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " value="{{ $jk->jam_konseling }}" placeholder="Masukkan Jam Konseling" required readonly/>
           </div>
           <div class="mb-5">
             <label for="topik_konseling" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Topik Konseling</label>
-            <input type="text" id="topik_konseling" name="topik_konseling" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " value="{{ $jk->topik_konseling }}" placeholder="Masukkan Jam Konseling" required />
+            <input type="text" id="topik_konseling" name="topik_konseling" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " value="{{ $jk->topik_konseling }}" placeholder="Masukkan Jam Konseling" required readonly/>
         </div>
         <div class="mb-5">
             <label for="tipe_konseling" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipe Konseling</label>
-            <input type="text" id="tipe_konseling" name="tipe_konseling" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " value="{{ $jk->tipe_konseling }}" placeholder="Masukkan Jam Konseling" required />
+            <input type="text" id="tipe_konseling" name="tipe_konseling" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " value="{{ $jk->tipe_konseling }}" placeholder="Masukkan Jam Konseling" required readonly/>
         </div>
         <div class="mb-5">
             <label for="harga_konseling" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga Konseling</label>
-            <input type="text" id="harga_konseling" name="hargam_konseling" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " value="Rp.200000" placeholder="Masukkan Jam Konseling" required />
+            <input type="text" id="harga_konseling" name="harga_konseling" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " value="{{ $jk->harga_konseling }}" placeholder="Masukkan Jam Konseling" required  readonly/>
         </div>
         <div class="mb-5">    
             <label class="block mb-2 text-sm font-medium text-gray-900 " for="buktiBayar">Upload Bukti Bayar</label>
             <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none " name="buktiBayar" id="buktiBayar" type="file">
           </div>
             <button type="submit" class="w-full min-w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+        </form>
+        <p class="mt-[30px] mb-[20px]">Atau bayar dengan kredit poin</p>
+        <form action="/home/addBookingbyCredit/{{ $jk->id }}" method="POST" enctype="multipart/form-data" class="md:w-[80%] w-[90%] mx-auto ">
+          @csrf
+          <div class="mb-5">
+            <label for="creditPoint" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Poin Kredit</label>
+            <input type="text" id="creditPoint" name="creditPoint" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " value="{{ $user->creditPoint }}" placeholder="Masukkan Jam Konseling" required  readonly/>
+        </div>
+        <button type="submit" class="w-full min-w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Bayar dengan poin kredit</button>
         </form>
   
   </section>

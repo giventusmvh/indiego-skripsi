@@ -76,8 +76,6 @@ class AdminController extends Controller
 
     public function activateKonselor($id)
     {
-
-        
         try {
             $konselor = Konselor::findOrFail($id);
             if($konselor->statusAktivasi === 1){

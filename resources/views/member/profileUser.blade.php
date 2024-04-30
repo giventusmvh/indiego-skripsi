@@ -128,6 +128,10 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg>
                 {{ $user->tgllahir }}
               </div>
+              <div class="flex flex-row gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M12 15c-1.84 0-2-.86-2-1H8c0 .92.66 2.55 3 2.92V18h2v-1.08c2-.34 3-1.63 3-2.92 0-1.12-.52-3-4-3-2 0-2-.63-2-1s.7-1 2-1 1.39.64 1.4 1h2A3 3 0 0 0 13 7.12V6h-2v1.09C9 7.42 8 8.71 8 10c0 1.12.52 3 4 3 2 0 2 .68 2 1s-.62 1-2 1z"></path><path d="M5 2H2v2h2v17a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V4h2V2H5zm13 18H6V4h12z"></path></svg>
+                {{ $user->creditPoint }}
+              </div>
               <div class="flex flex-row gap-3 hover:bg-slate-200 rounded-md p-3 border border-slate-500">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: scaleX(-1);msFilter:progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1);"><path d="M12 2C7.589 2 4 5.589 4 9.995 3.971 16.44 11.696 21.784 12 22c0 0 8.029-5.56 8-12 0-4.411-3.589-8-8-8zm0 12c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"></path></svg>
                 <a href="https://maps.google.com/?q={{ $user->latitudeUser }},{{ $user->longitudeUser }}" target="_blank">Check Location on Google Maps</a>
@@ -219,12 +223,18 @@
            </div>
            
        </div>    
-       <div class="flex flex-col md:flex-row w-full">        
-         <a href="/home/addReschedule/{{ $hb->id }}" class=" w-full text-white text-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Ajukan Reschedule</a>
-         <form class="w-full" id="addCancel{{ $hb->idBooking }}" action="{{ route('addCancellation', $hb->idBooking) }}" method="POST" onsubmit="return addCancel({{ $hb->idBooking }})">
-           @csrf
-           <button type="submit" class="w-full text-white text-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Ajukan Cancel</button>
-       </form>
+       <div class="flex flex-col md:flex-row w-full"> 
+        @if ($hb->isCancelConfirmed === 1)
+        <button class=" w-full text-white text-center bg-slate-700  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2" disabled>-</button>
+        <button class=" w-full text-white text-center bg-slate-700  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2" disabled>-</button>
+        @else
+        <a href="/home/addReschedule/{{ $hb->id }}" class=" w-full text-white text-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Ajukan Reschedule</a>
+        <form class="w-full" id="addCancel{{ $hb->idBooking }}" action="{{ route('addCancellation', $hb->idBooking) }}" method="POST" onsubmit="return addCancel({{ $hb->idBooking }})">
+          @csrf
+          <button type="submit" class="w-full text-white text-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Ajukan Cancel</button>
+      </form>
+        @endif       
+         
        </div>  
    </div>
    @endforeach

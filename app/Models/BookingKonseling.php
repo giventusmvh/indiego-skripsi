@@ -15,6 +15,7 @@ class BookingKonseling extends Model
         'buktiBayar',
         'isPaid',
         'isDone',
+        'byCredit',
         'isCancel',
         
         

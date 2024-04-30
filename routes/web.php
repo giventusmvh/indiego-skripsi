@@ -98,6 +98,7 @@ Route::middleware(['auth:web'])->group(function(){
 
     Route::get('/home/bookingKonseling/{id}',[JadwalKonselingController::class,'IndexBookingJk'])->name('IndexBookingJK');
     Route::post('/home/addBookingKonseling/{id}',[BookingKonselingController::class,'addBookingKonseling'])->name('addBookingKonseling');
+    Route::post('/home/addBookingbyCredit/{id}',[BookingKonselingController::class,'addBookingbyCredit'])->name('addBookingKonselingCredit');
 
     Route::get('/home/addReschedule/{id}',[RescheduleController::class,'IndexAddReschedule'])->name('IndexAddReschedule');
     Route::post('/home/actionAddReschedule/{id}',[RescheduleController::class,'actionAddRes'])->name('actionAddRes');  

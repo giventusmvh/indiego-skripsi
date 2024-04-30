@@ -74,18 +74,23 @@
   </nav>
   
   <!-- NavBar End -->
+  
 
-  <section class="md:max-w-[1200px] mx-auto w-[90%] mt-[120px] mb-[100px] flex flex-col md:flex-row  gap-[20px]">
+  
+<div class="md:w-[1200px] mx-auto w-[90%] mt-[120px] mb-[100px]">
     @if (session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+    <div class=" alert alert-danger">
+        {{ session('error') }}
+    </div>
+  @endif
+  @if (session('success'))
+    <div class=" alert alert-success">
+        {{ session('success') }}
+    </div>
+  @endif
+
+  <div class="md:w-[1200px] mx-auto w-[90%] flex flex-col md:flex-row  gap-[20px]">
+ 
         <div id="menuCourse2" class="sticky top-[100px] flex flex-col gap-[20px] bg-white border border-slate-300 p-[20px] h-max shadow-lg md:w-[30%]">
             <div class="flex justify-between items-center" data-collapse-toggle="filter-cta" aria-controls="filter-cta" aria-expanded="false">
                 <h1 class="font-semibold text-[20px] text-[#404040]">Filters</h1>
@@ -149,7 +154,8 @@
                     <div>
                         <p>{{ $jk->namaKonselor }}</p>
                         <p>{{ $jk->tgl_konseling }}, {{ $jk->jam_konseling }} WIB</p>
-                        <p>{{ $jk->topik_konseling }} | {{ $jk->tipe_konseling }} | Rp.200.000</p>
+                        <p>{{ $jk->topik_konseling }} | {{ $jk->tipe_konseling }} | Rp.{{ $jk->harga_konseling }}</p>
+                        <a href="https://api.whatsapp.com/send?phone={{ $jk->telpKonselor }}" target="_blank">Hubungi Konselor</a>
                         <p class="mt-[20px]">Deskripsi Singkat :</p>
                         <p class="flex text-justify">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem consequuntur veniam ipsum? Dolor possimus sit asperiores, eum natus minus recusandae facere. Itaque eum vel deserunt asperiores officia ea nam doloremque. Quasi tenetur quidem ex quo eum quaerat, obcaecati in debitis earum asperiores praesentium reprehenderit voluptatibus ipsa, fugiat perspiciatis, vel vero.</p>
                     </div>
@@ -210,8 +216,8 @@
 
    
         
-  </section>
-
+  </div>
+</div>
   
 
   {{-- Footer Section Start  --}}

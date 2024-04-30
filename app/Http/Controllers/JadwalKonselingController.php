@@ -28,10 +28,12 @@ class JadwalKonselingController extends Controller
            
             ->select('konselors.namaKonselor', 
                     'konselors.scanFotoKonselor', 
+                    'konselors.telpKonselor',
                     'jadwal_konselings.topik_konseling',
                     'jadwal_konselings.tgl_konseling', 
                     'jadwal_konselings.tipe_konseling',
                     'jadwal_konselings.jam_konseling',
+                    'jadwal_konselings.harga_konseling',
                     'jadwal_konselings.id',
                     
                     )
@@ -74,9 +76,10 @@ class JadwalKonselingController extends Controller
     }
 
     public function indexBookingJK($id){
+        $user = Auth::user();
         $jk = JadwalKonseling::findOrFail($id);
         $konselor=Konselor::findorFail($jk->id_konselor);
-        return view("member.bookingKonseling", compact('jk','konselor'));
+        return view("member.bookingKonseling", compact('jk','konselor','user'));
     }
 
 //    public function indexAllJK(){
@@ -101,11 +104,13 @@ class JadwalKonselingController extends Controller
             'jam_konseling'=>'required',
             'topik_konseling'=>'required',
             'tipe_konseling'=>'required',
+            'harga_konseling'=>'required',
         ],[
             'tgl_konseling.required'=>'Tanggal Konseling wajib diisi',
             'jam_konseling.required'=>'Jam Konseling wajib diisi',
             'topik_konseling.required'=>'Topik Konseling wajib diisi',
             'tipe_konseling.required'=>'Tipe Konseling wajib diisi',
+            'harga_konseling.required'=>'Harga Konseling wajib diisi',
         ]);
     
         $user = Auth::guard('konselor')->user();
@@ -124,6 +129,7 @@ class JadwalKonselingController extends Controller
                 'jam_konseling'=>$request->jam_konseling,
                 'tipe_konseling'=>$request->tipe_konseling,
                 'topik_konseling'=>$request->topik_konseling,
+                'harga_konseling'=>$request->harga_konseling,
                 'isBooked'=>0,
             ];
         
@@ -146,11 +152,13 @@ class JadwalKonselingController extends Controller
         'jam_konseling'=>'required',
         'topik_konseling'=>'required',
         'tipe_konseling'=>'required',
+        'harga_konseling'=>'required',
     ],[
         'tgl_konseling.required'=>'Tanggal Konseling wajib diisi',
         'jam_konseling.required'=>'Jam Konseling wajib diisi',
         'topik_konseling.required'=>'Topik Konseling wajib diisi',
         'tipe_konseling.required'=>'Tipe Konseling wajib diisi',
+        'harga_konseling.required'=>'Harga Konseling wajib diisi',
     ]);
 
     $user = Auth::guard('konselor')->user();
@@ -169,6 +177,7 @@ class JadwalKonselingController extends Controller
         $jk->jam_konseling = $request->input('jam_konseling');
         $jk->tipe_konseling = $request->input('tipe_konseling');
         $jk->topik_konseling = $request->input('topik_konseling');
+        $jk->harga_konseling = $request->input('harga_konseling');
         $jk->save();
     
         return redirect()->route('homeKonselor')->with('success','Berhasil Mengganti Data Jadwal Konseling');

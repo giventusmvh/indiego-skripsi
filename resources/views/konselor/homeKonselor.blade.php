@@ -165,6 +165,7 @@
             <p>Jam : {{ $jk->jam_konseling }}</p>
             <p>Topik Konseling : {{ $jk->topik_konseling }}</p>
             <p>Tipe Konseling : {{ $jk->tipe_konseling }}</p>
+            <p>Harga Konseling : {{ $jk->harga_konseling }}</p>
             @if ($jk->isBooked && !$jk->isDone)
             <p>Status : Sedang Dibooking</p>
             @elseif ($jk->isBooked && $jk->isDone)

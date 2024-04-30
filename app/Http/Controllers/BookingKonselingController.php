@@ -9,13 +9,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\JadwalKonseling;
-
+use App\Models\User;
 
 class BookingKonselingController extends Controller
 {
-
-   
-
 
   public function addBookingKonseling(Request $request, $id){
 
@@ -44,16 +41,50 @@ class BookingKonselingController extends Controller
             'isPaid'=>0,
             'isDone'=>0,
             'isCancel'=>0,
+            'byCredit'=>0
         ];
         $jk->isBooked = 1;
         $jk->save();
 
     
         BookingKonseling::create($infoAddBooking);
-        return redirect()->route('homeUser')->with('success','Berhasil booking, mohon tunggu konfirmasi pembayaran oleh admin');
+        return redirect()->route('indexAllJK')->with('success','Berhasil booking, mohon tunggu konfirmasi pembayaran oleh admin');
         
     }else{
-        return redirect()->route('homeUser')->with('error','Gagal booking karena jadwal tidak tersedia');
+        return redirect()->route('indexAllJK')->with('error','Gagal booking karena jadwal tidak tersedia');
+    }
+  }
+
+  public function addBookingbyCredit($id){
+
+    $user = Auth::user();
+    $creditUser = User::findOrFail($user->id);
+    $jk = JadwalKonseling::findOrFail($id);
+    if($jk->isBooked === 0){
+        if($user->creditPoint >= $jk->harga_konseling){
+            $infoAddBooking=[
+                'id_jk'=>$jk->id,
+                'id_member'=>$user->id,
+                'buktiBayar'=>"Credit Point",
+                'isPaid'=>1,
+                'isDone'=>0,
+                'isCancel'=>0,
+                'byCredit'=>1,
+            ];
+            $creditUser->creditPoint = $creditUser->creditPoint - $jk->harga_konseling;
+            $jk->isBooked = 1;
+            $jk->save();
+            $creditUser->save();
+            BookingKonseling::create($infoAddBooking);
+            return redirect()->route('indexAllJK')->with('success','Berhasil booking menggunakan Credit Point');
+        }else{
+            return redirect()->route('indexAllJK')->with('error','Gagal booking karena Credit Point tidak cukup');
+        }
+
+       
+        
+    }else{
+        return redirect()->route('indexAllJK')->with('error','Gagal booking karena jadwal tidak tersedia');
     }
   }
 

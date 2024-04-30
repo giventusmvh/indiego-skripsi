@@ -7,6 +7,7 @@ use App\Http\Requests\StoreCancelBookingRequest;
 use App\Http\Requests\UpdateCancelBookingRequest;
 use App\Models\BookingKonseling;
 use App\Models\JadwalKonseling;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -93,13 +94,17 @@ class CancelBookingController extends Controller
                 $bookingKonseling->save();
 
                 $jadwalKonseling->isBooked = 0;
-                $jadwalKonseling->save();
                 
+              
+                $user = User::findOrFail($bookingKonseling->id_member);
+                $user->creditPoint = $jadwalKonseling->harga_konseling;
                 $res->isConfirmed = 1;
+                $user->save();
+                $jadwalKonseling->save();
                 $res->save();
                     return redirect()->route('indexKonselorCancel')->with('success','Berhasil Accept Pembatalan');
             } catch (\Exception $e) {
-                return redirect()->route('homeAdmin')->with('error','Aksi Gagal');
+                return redirect()->route('indexKonselorCancel')->with('error','Aksi Gagal');
             }
         }
 
@@ -111,7 +116,7 @@ class CancelBookingController extends Controller
                 $res->save();
                     return redirect()->route('indexKonselorCancel')->with('success','Berhasil Reject Pembatalan');
             } catch (\Exception $e) {
-                return redirect()->route('homeAdmin')->with('error','Aksi Gagal');
+                return redirect()->route('indexKonselorCancel')->with('error','Aksi Gagal');
             }
         }
 }

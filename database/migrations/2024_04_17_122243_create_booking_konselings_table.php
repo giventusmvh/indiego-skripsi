@@ -21,6 +21,7 @@ return new class extends Migration
             $table->boolean('isPaid');
             $table->boolean('isDone');
             $table->boolean('isCancel');
+            $table->boolean('byCredit');
             $table->timestamps();
         });
     }
