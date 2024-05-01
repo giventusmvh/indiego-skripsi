@@ -182,44 +182,79 @@
    @if (count($historyBookings) > 0)
    @foreach ($historyBookings as $hb)
    <div class="flex flex-col  gap-[10px]  border border-slate-400 p-[20px] shadow-lg">
-       <div class="flex flex-col  md:flex-row gap-[20px] w-full">
+       <div class="flex flex-col   md:flex-row gap-[20px] w-full">
            {{-- <div class="w-auto">
                <img src="{{ asset("picture/fotoKonselor/{$jk->scanFotoKonselor}") }}" alt="">
            </div> --}}
-           
-           
-           <div>
-               <p>{{ $hb->namaKonselor }}</p>
-               <p>{{ $hb->tgl_konseling }}, {{ $hb->jam_konseling }} WIB</p>
-               <p>{{ $hb->topik_konseling }} | {{ $hb->tipe_konseling }} | Rp.200.000</p>
-               <p>Status Pembayaran : @if ($hb->isPaid === 1)
-                   Lunas
-               @else
-                   Menunggu Konfirmasi Pembayaran oleh Admin
-               @endif</p>
 
-               <p>Status Reschedule : @if ($hb->isConfirmed === 1)
-                 Diterima | {{ $hb->tgl_ganti }},{{ $hb->jam_ganti }}
-                @elseif ($hb->isRejected === 1)
-                 Ditolak | {{ $hb->tgl_ganti }},{{ $hb->jam_ganti }}
-                 @elseif ($hb->isConfirmed === 0 && $hb->isRejected === 0)
-                 Ongoing | {{ $hb->tgl_ganti }},{{ $hb->jam_ganti }}
+           
+           
+           
+           <div class="w-full flex flex-col justify-center items-center md:justify-start md:items-start">
+           <div class="flex flex-col md:flex-row w-full gap-[20px] md:items-start">
+            <div class="md:h-[220px] md:w-[344px] w-[300px] h-[300px] rounded-[20px]" style="background: url('{{ asset("picture/fotoKonselor/{$hb->scanFotoKonselor}") }}'); background-size: cover; background-repeat: no-repeat; background-position: center"></div>
+            <div class="flex flex-col  w-full mb-[12px] justify-center gap-[12px]">
+              <div class="flex flex-col w-full md:flex-row md:justify-between justify-center">
+              <p class="text-[24px] font-bold text-center md:text-start">{{ $hb->namaKonselor }}</p>
+              <div class="flex justify-center">
+                <p>
+                  @if ($hb->isPaid === 1)
+                  <span class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Pembayaran Lunas</span>
                  @else
-                 -
-             @endif
-            </p>
-             <p>Status Pembatalan : @if ($hb->isCancelConfirmed === 1)
-               Diterima
-           @elseif ($hb->isCancelRejected === 1)
-               Ditolak
-               @elseif ($hb->isCancelConfirmed === 0 && $hb->isCancelRejected === 0)
-               Ongoing
-               @else
-               -
-           @endif</p>
-               <p class="mt-[20px]">Deskripsi Singkat :</p>
-               <p class="flex text-justify">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem consequuntur veniam ipsum? Dolor possimus sit asperiores, eum natus minus recusandae facere. Itaque eum vel deserunt asperiores officia ea nam doloremque. Quasi tenetur quidem ex quo eum quaerat, obcaecati in debitis earum asperiores praesentium reprehenderit voluptatibus ipsa, fugiat perspiciatis, vel vero.</p>
+                 <span class="bg-red-100 text-red-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Dalam Proses Konfirmasi</span> 
+                 @endif
+                </p>
+                
+              </div>
+            </div>
+              <div class="flex flex-col md:flex-row gap-[12px] justify-center md:justify-between items-end">
+                <div class="flex flex-col gap-[12px] w-max justify-center items-center md:justify-start md:items-start">
+                  <span class=" text-slate-800 text-[14px] font-medium inline-flex items-center">
+                    <svg class="w-2.5 h-2.5 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm3.982 13.982a1 1 0 0 1-1.414 0l-3.274-3.274A1.012 1.012 0 0 1 9 10V6a1 1 0 0 1 2 0v3.586l2.982 2.982a1 1 0 0 1 0 1.414Z"/>
+                    </svg>
+                    {{ $hb->tgl_konseling }}, {{ $hb->jam_konseling }} WIB
+                    </span>
+                    <div class="flex flex-col md:flex-row gap-[12px]">
+                      <span class="bg-blue-100 text-blue-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $hb->topik_konseling }} </span>
+                      <span class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">{{ $hb->tipe_konseling }}</span>
+                      <span class="bg-yellow-100 text-yellow-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">{{ $hb->harga_konseling }}</span>
+                    </div>
+                </div>
+  
+                <div>
+                  <p>@if ($hb->isConfirmed === 1)
+                    <span class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Reschedule Diterima | {{ $hb->tgl_ganti }},{{ $hb->jam_ganti }}</span>
+                   @elseif ($hb->isRejected === 1)
+                   <span class="bg-red-100 text-red-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Reschedule Ditolak | {{ $hb->tgl_ganti }},{{ $hb->jam_ganti }}</span>
+                    @elseif ($hb->isConfirmed === 0 && $hb->isRejected === 0)
+                    Reschedule Ongoing | {{ $hb->tgl_ganti }},{{ $hb->jam_ganti }}
+                    @else
+                    
+                @endif
+               </p>
+                <p class="md:mt-[-10px]">@if ($hb->isCancelConfirmed === 1)
+                  <span class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Pembatalan Diterima</span>
+              @elseif ($hb->isCancelRejected === 1)
+              <span class="bg-red-100 text-red-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Pembatalan Ditolak</span>
+                  @elseif ($hb->isCancelConfirmed === 0 && $hb->isCancelRejected === 0)
+                  Pembatalan Ongoing
+                  @else
+                  
+              @endif</p>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+           
                
+            <p class="mt-[20px]">Deskripsi Singkat :</p>
+            <p class="flex text-justify">{{ $hb->deskripsiKonselor }}</p>
+        
+
+               
+              
            </div>
            
        </div>    
@@ -227,12 +262,17 @@
         @if ($hb->isCancelConfirmed === 1)
         <button class=" w-full text-white text-center bg-slate-700  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2" disabled>-</button>
         <button class=" w-full text-white text-center bg-slate-700  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2" disabled>-</button>
+        <a href="https://api.whatsapp.com/send?phone={{ $hb->telpKonselor }}" target="_blank" class=" w-full text-white text-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Hubungi Konselor</a>
+        <a href="/home/DetailKonselor/{{ $hb->idKonselor }}" target="_blank" class=" w-full text-white text-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Cek Konselor</a>
         @else
         <a href="/home/addReschedule/{{ $hb->idBooking }}" class=" w-full text-white text-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Ajukan Reschedule</a>
-        <form class="w-full" id="addCancel{{ $hb->idBooking }}" action="{{ route('addCancellation', $hb->idBooking) }}" method="POST" onsubmit="return addCancel({{ $hb->idBooking }})">
+        <form class="w-full me-2" id="addCancel{{ $hb->idBooking }}" action="{{ route('addCancellation', $hb->idBooking) }}" method="POST" onsubmit="return addCancel({{ $hb->idBooking }})">
           @csrf
           <button type="submit" class="w-full text-white text-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Ajukan Cancel</button>
+          
       </form>
+      <a href="https://api.whatsapp.com/send?phone={{ $hb->telpKonselor }}" target="_blank" class=" w-full text-white text-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Hubungi Konselor</a>
+      <a href="/home/DetailKonselor/{{ $hb->idKonselor }}" target="_blank" class=" w-full text-white text-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Cek Konselor</a>
         @endif       
          
        </div>  

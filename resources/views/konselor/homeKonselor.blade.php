@@ -160,7 +160,7 @@
       </div>
         <div class="flex flex-col w-full gap-[30px]">
           @foreach ($jadwalKonselings as $jk)
-          <div class=" bg-slate-300 w-full  flex  p-[30px] shadow-md border-slate-400 border-[1px] flex-col">
+          <div class=" bg-white w-full  flex  p-[30px] shadow-md border-slate-400 border-[1px] flex-col">
             <p>Tanggal : {{ $jk->tgl_konseling }}</p>
             <p>Jam : {{ $jk->jam_konseling }}</p>
             <p>Topik Konseling : {{ $jk->topik_konseling }}</p>

@@ -144,8 +144,12 @@
                    
                 </td>
                 <td class="px-6 py-4">
-                    
+                    @if ($b->buktiBayar === "Credit Point")
+                        <p>CP</p>
+                    @else
                     <a href="{{ asset("picture/buktiBayar/{$b->buktiBayar}") }}" target="_blank">View Bukti Bayar</a>
+                    @endif
+                    
                 </td>
                 <td class="px-6 py-4">
                    

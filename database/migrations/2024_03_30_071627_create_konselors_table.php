@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('scanKTPKonselor');
             $table->string('scanSertifKonselor');
             $table->string('scanFotoKonselor');
+            $table->longText('deskripsiKonselor');
             $table->boolean('statusAktivasi')->default(0);
             $table->decimal('latitudeKonselor', 10, 8)->default(-7.8011733719147065)->nullable();
             $table->decimal('longitudeKonselor', 11, 8)->default(110.36477482416575)->nullable();

@@ -110,6 +110,7 @@ class KonselorController extends Controller
             'scanFotoKonselor'=>'image|file',
             'latitudeKonselor'=>'required',
             'longitudeKonselor'=>'required',
+            'deskripsiKonselor'=>'required',
         ],[
             'namaKonselor.required'=>'Full Name wajib diisi',
             'namaKonselor.min'=>'Full Name minimal 5 karakter',
@@ -118,6 +119,7 @@ class KonselorController extends Controller
             'telpKonselor.min'=>'Nomor telepon minimal 9 angka',
             'latitudeKonselor.required'=>'Latitude wajib diisi',
             'longitudeKonselor.required'=>'Longitude wajib diisi',
+            'deskripsiKonselor.required'=>'Deskripsi wajib diisi',
         ]);
 
         $konselor = Konselor::findOrFail($id);
@@ -139,6 +141,7 @@ class KonselorController extends Controller
                 $konselor->alamatKonselor = $request->input('alamatKonselor');
                 $konselor->latitudeKonselor = $request->input('latitudeKonselor');
                 $konselor->longitudeKonselor = $request->input('longitudeKonselor');
+                $konselor->deskripsiKonselor = $request->input('deskripsiKonselor');
                 $konselor->save();
 
                 return redirect()->route('profileKonselor')->with('success','Berhasil update profile');
@@ -149,6 +152,7 @@ class KonselorController extends Controller
             $konselor->alamatKonselor = $request->input('alamatKonselor');
             $konselor->latitudeKonselor = $request->input('latitudeKonselor');
             $konselor->longitudeKonselor = $request->input('longitudeKonselor');
+            $konselor->deskripsiKonselor = $request->input('deskripsiKonselor');
             $konselor->save();
     
             return redirect()->route('profileKonselor')->with('success','Berhasil update profile');

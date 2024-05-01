@@ -95,6 +95,7 @@ class AuthController extends Controller
             'scanKTPKonselor'=>'required|image|file',
             'scanSertifKonselor'=>'required|image|file',
             'scanFotoKonselor'=>'required|image|file',
+            'deskripsiKonselor'=>'required',
         ],[
             'namaKonselor.required'=>'Full Name wajib diisi',
             'namaKonselor.min'=>'Full Name minimal 5 karakter',
@@ -105,7 +106,8 @@ class AuthController extends Controller
             'tgllahirKonselor.required'=>'Tanggal wajib diisi',
             'telpKonselor.required'=>'Nomor telepon wajib diisi',
             'telpKonselor.min'=>'Nomor telepon minimal 9 angka',
-        
+            'deskripsiKonselor.required'=>'Deskripsi wajib diisi',
+
             'scanKTPKonselor.required'=>'KTP wajib diisi',
             'scanKTPKonselor.image'=>'KTP wajib berupa image',
             'scanKTPKonselor.file'=>'KTP wajib berupa file',
@@ -140,6 +142,7 @@ class AuthController extends Controller
         $infoRegister=[
             'namaKonselor'=>$request->namaKonselor,
             'email'=>$request->email,
+            'deskripsiKonselor'=>$request->deskripsiKonselor,
             'password'=>Hash::make($request->password),
             'jkKonselor'=>$request->jkKonselor,
             'tgllahirKonselor'=>$request->tgllahirKonselor,

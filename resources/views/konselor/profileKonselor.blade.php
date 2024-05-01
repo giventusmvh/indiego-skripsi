@@ -116,6 +116,8 @@
         </div>
      
       </div>
+      <p class="font-bold text-[20px]">Deskripsi Singkat</p>
+      <p class="mt-[-10px] text-justify">{{ $user->deskripsiKonselor }}</p>
       <div class="flex flex-col md:flex-row gap-[20px]">
         <a href="/konselor/editprofileKonselor/{{ $user->id }}" class="w-full flex justify-center items-center bg-slate-900 text-white rounded-[16px] p-[12px]">Edit Profile</a>
         <div class="flex flex-row w-full gap-[10px]">

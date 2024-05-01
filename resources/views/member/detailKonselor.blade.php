@@ -79,7 +79,7 @@
   <section class="mt-[40px] w-[100%] flex flex-col gap-5 p-[12px] rounded-[20px] bg-white" style="box-shadow: 4px 4px 24px 0px rgba(24, 124, 255, 0.12)">
     <div class="flex lg:flex-row flex-col gap-3">
       <div class="w-full flex lg:flex-row flex-col gap-[40px] justify-center items-center md:items-start md:justify-start">
-        <div class="md:h-[244px] md:w-[244px] w-[320px] h-[300px] rounded-[20px]" style="background: url('{{ asset("picture/fotoKonselor/{$konselor->scanFotoKonselor}") }}'); background-size: cover; background-repeat: no-repeat; background-position: center"></div>
+        <div class="md:h-full md:w-[244px] w-[320px] h-[300px] rounded-[20px]" style="background: url('{{ asset("picture/fotoKonselor/{$konselor->scanFotoKonselor}") }}'); background-size: cover; background-repeat: no-repeat; background-position: center"></div>
         <div class="flex flex-col md:flex-row">
           <div class="flex flex-col gap-[20px]">
             <p class="md:text-[24px] font-[500] text-[24px]">{{ $konselor->namaKonselor }} | Konselor</p>
@@ -123,11 +123,26 @@
                 
                 
                 <div>
-                    <p>{{ $jk->namaKonselor }}</p>
-                    <p>{{ $jk->tgl_konseling }}, {{ $jk->jam_konseling }} WIB</p>
-                    <p>{{ $jk->topik_konseling }} | {{ $jk->tipe_konseling }} | Rp.{{ $jk->harga_konseling }}</p>
+                    <p class="font-bold text-center md:text-start text-[20px]"> {{ $konselor->namaKonselor }}</p>
+                    <div class="flex flex-col md:flex-row gap-[12px] justify-center md:justify-between items-center">
+                      <div class="flex flex-col gap-[12px] w-max justify-center items-center md:justify-start md:items-start">
+                        <span class=" text-slate-800 text-[14px] font-medium inline-flex items-center">
+                          <svg class="w-2.5 h-2.5 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm3.982 13.982a1 1 0 0 1-1.414 0l-3.274-3.274A1.012 1.012 0 0 1 9 10V6a1 1 0 0 1 2 0v3.586l2.982 2.982a1 1 0 0 1 0 1.414Z"/>
+                          </svg>
+                          {{ $jk->tgl_konseling }}, {{ $jk->jam_konseling }} WIB
+                          </span>
+                          <div class="flex flex-col md:flex-row gap-[12px]">
+                            <span class="bg-blue-100 text-blue-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $jk->topik_konseling }} </span>
+                            <span class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">{{ $jk->tipe_konseling }}</span>
+                            <span class="bg-yellow-100 text-yellow-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">{{ $jk->harga_konseling }}</span>
+                          </div>
+                      </div>
+                    </div>
+                    <p></p>
+                    
                     <p class="mt-[20px]">Deskripsi Singkat :</p>
-                    <p class="flex text-justify">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem consequuntur veniam ipsum? Dolor possimus sit asperiores, eum natus minus recusandae facere. Itaque eum vel deserunt asperiores officia ea nam doloremque. Quasi tenetur quidem ex quo eum quaerat, obcaecati in debitis earum asperiores praesentium reprehenderit voluptatibus ipsa, fugiat perspiciatis, vel vero.</p>
+                    <p class="flex text-justify">{{ $konselor->deskripsiKonselor }}</p>
                 </div>
             </div>              
             <div class="flex flex-col w-full items-center justify-center">  

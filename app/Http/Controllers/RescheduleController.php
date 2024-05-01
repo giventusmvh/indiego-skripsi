@@ -73,13 +73,18 @@ class RescheduleController extends Controller
         $res = Reschedule::where('id_bk', $bk->id)->first();
         $cancel = CancelBooking::where('id_bk', $bk->id)->first();
         $jk = JadwalKonseling::findOrFail($bk->id_jk);
-        if($res){
-            return redirect()->route('profileUser')->with('error','Sudah pernah reschedule, tidak bisa reschedule lagi');
-        }else if($cancel){
-            return redirect()->route('profileUser')->with('error','Sedang mengajukan pembatalan, mohon tunggu untuk reschedule');
+        if($bk->isPaid == 0){
+            return redirect()->route('profileUser')->with('error','Mohon menunggu konfirmasi pembayaran oleh admin');
         }else{
-            return view("member.addReschedule", compact('jk','bk'));
+            if($res){
+                return redirect()->route('profileUser')->with('error','Sudah pernah mengajukan reschedule, tidak bisa reschedule lagi');
+            }else if($cancel){
+                return redirect()->route('profileUser')->with('error','Sudah pernah mengajukan pembatalan,Tidak bisa mengajukan reschedule');
+            }else{
+                return view("member.addReschedule", compact('jk','bk'));
+            }
         }
+        
       
     }
 

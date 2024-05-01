@@ -89,7 +89,7 @@
     </div>
   @endif
 
-  <div class="md:w-[1200px] mx-auto w-[90%] flex flex-col md:flex-row  gap-[20px]">
+  <div class="md:w-[1200px] mx-auto w-[97%] flex flex-col md:flex-row  gap-[20px]">
  
         <div id="menuCourse2" class="sticky top-[100px] flex flex-col gap-[20px] bg-white border border-slate-300 p-[20px] h-max shadow-lg md:w-[30%]">
             <div class="flex justify-between items-center" data-collapse-toggle="filter-cta" aria-controls="filter-cta" aria-expanded="false">
@@ -142,26 +142,47 @@
            
         </div>
 
-        <div class="flex flex-col  w-full gap-[15px]  ">
+        <div class="flex flex-col  w-full gap-[15px]">
             @foreach ($jadwal_konseling as $jk)
             <div class="flex flex-col  gap-[10px]  border border-slate-400 p-[20px] shadow-lg">
-                <div class="flex flex-col  md:flex-row gap-[20px] w-full">
-                    <div class="max-w-[200px] h-auto">
-                        <img src="{{ asset("picture/fotoKonselor/{$jk->scanFotoKonselor}") }}" alt="">
+                <div class="flex flex-col   md:flex-row gap-[20px] w-full">
+                  
+                    <div class="w-full flex flex-col justify-center items-center md:justify-start md:items-start">
+                    <div class="flex flex-col md:flex-row w-full gap-[20px] md:items-start items-center">
+                     <div class="md:h-[220px] md:w-[344px] w-[300px] h-[300px] rounded-[20px]" style="background: url('{{ asset("picture/fotoKonselor/{$jk->scanFotoKonselor}") }}'); background-size: cover; background-repeat: no-repeat; background-position: center"></div>
+                     <div class="flex flex-col  w-full mb-[12px] justify-center gap-[12px]">
+                       <div class="flex flex-col w-full md:flex-row md:justify-between justify-center">
+                       <p class="text-[24px] font-bold text-center md:text-start">{{ $jk->namaKonselor }}</p>
+                      
+                     </div>
+                       <div class="flex flex-col md:flex-row gap-[12px] justify-center md:justify-between items-center">
+                         <div class="flex flex-col gap-[12px] w-max justify-center items-center md:justify-start md:items-start">
+                           <span class=" text-slate-800 text-[14px] font-medium inline-flex items-center">
+                             <svg class="w-2.5 h-2.5 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                             <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm3.982 13.982a1 1 0 0 1-1.414 0l-3.274-3.274A1.012 1.012 0 0 1 9 10V6a1 1 0 0 1 2 0v3.586l2.982 2.982a1 1 0 0 1 0 1.414Z"/>
+                             </svg>
+                             {{ $jk->tgl_konseling }}, {{ $jk->jam_konseling }} WIB
+                             </span>
+                             <div class="flex flex-col md:flex-row gap-[12px]">
+                               <span class="bg-blue-100 text-blue-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $jk->topik_konseling }} </span>
+                               <span class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">{{ $jk->tipe_konseling }}</span>
+                               <span class="bg-yellow-100 text-yellow-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">{{ $jk->harga_konseling }}</span>
+                             </div>
+                         </div>
+                       </div>
+                     </div>
+                     
+                   </div>
+
+                     <p class="mt-[20px] font-bold">Deskripsi Singkat :</p>
+                     <p class="flex text-justify">{{ $jk->deskripsiKonselor }}</p>
+
                     </div>
                     
-                    
-                    <div>
-                        <p>{{ $jk->namaKonselor }}</p>
-                        <p>{{ $jk->tgl_konseling }}, {{ $jk->jam_konseling }} WIB</p>
-                        <p>{{ $jk->topik_konseling }} | {{ $jk->tipe_konseling }} | Rp.{{ $jk->harga_konseling }}</p>
-                        <a href="https://api.whatsapp.com/send?phone={{ $jk->telpKonselor }}" target="_blank">Hubungi Konselor</a>
-                        <p class="mt-[20px]">Deskripsi Singkat :</p>
-                        <p class="flex text-justify">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem consequuntur veniam ipsum? Dolor possimus sit asperiores, eum natus minus recusandae facere. Itaque eum vel deserunt asperiores officia ea nam doloremque. Quasi tenetur quidem ex quo eum quaerat, obcaecati in debitis earum asperiores praesentium reprehenderit voluptatibus ipsa, fugiat perspiciatis, vel vero.</p>
-                    </div>
-                </div>              
-                <div class="flex flex-col w-full items-center justify-center">  
+                </div>    
+                <div class="flex flex-col md:flex-row gap-[10px] w-full items-center justify-center">  
                     <a href="/home/bookingKonseling/{{ $jk->id }}" class="w-full text-center text-white py-[12px] bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg ">Booking</a>
+                    <a href="/home/DetailKonselor/{{ $jk->idKonselor }}" target="_blank" class=" w-full text-center text-white py-[12px] bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg ">Cek Konselor</a>
                 </div> 
             </div>
             @endforeach

@@ -22,17 +22,26 @@ class CancelBookingController extends Controller
             $bk = BookingKonseling::findOrFail($id);
             //$jk = JadwalKonseling::findOrFail($bk->id_jk);
             $res = Reschedule::where('id_bk', $bk->id)->first();
-            if($res){
-                return redirect()->route('profileUser')->with('error','Sudah pernah reschedule, tidak bisa cancel');
+            $cancel = CancelBooking::where('id_bk', $bk->id)->first();
+
+            if($bk->isPaid == 0){
+                return redirect()->route('profileUser')->with('error','Mohon menunggu konfirmasi pembayaran oleh admin');
             }else{
-                $infoAddCancel=[
-                    'id_bk'=>$bk->id,
-                    'isConfirmed'=>0,
-                    'isRejected'=>0,
-                ];
-                CancelBooking::create($infoAddCancel);
-                return redirect()->route('profileUser')->with('success','Berhasil Mengajukan Pembatalan');
+                if($res){
+                    return redirect()->route('profileUser')->with('error','Sudah pernah reschedule, tidak bisa cancel');
+                }else if($cancel){
+                    return redirect()->route('profileUser')->with('error','Sudah pernah cancel, tidak bisa cancel');
+                }{
+                    $infoAddCancel=[
+                        'id_bk'=>$bk->id,
+                        'isConfirmed'=>0,
+                        'isRejected'=>0,
+                    ];
+                    CancelBooking::create($infoAddCancel);
+                    return redirect()->route('profileUser')->with('success','Berhasil Mengajukan Pembatalan');
+                }
             }
+           
             
             
         } catch (\Exception $e) {

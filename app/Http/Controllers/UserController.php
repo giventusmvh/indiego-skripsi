@@ -52,11 +52,16 @@ class UserController extends Controller
         ->leftJoin('reschedules', 'jadwal_konselings.id', '=', 'reschedules.id_jk')
         ->leftJoin('cancel_bookings', 'booking_konselings.id', '=', 'cancel_bookings.id_bk')
         ->select('konselors.namaKonselor', 
+                'konselors.telpKonselor', 
+                'konselors.deskripsiKonselor', 
+                'konselors.scanFotoKonselor', 
+                'konselors.id as idKonselor',
                 'jadwal_konselings.topik_konseling',
                 'jadwal_konselings.tgl_konseling', 
                 'jadwal_konselings.tipe_konseling',
                 'jadwal_konselings.jam_konseling',
                 'jadwal_konselings.id',
+                'jadwal_konselings.harga_konseling',
                 'reschedules.isConfirmed',
                 'reschedules.isRejected',
                 'reschedules.tgl_ganti',

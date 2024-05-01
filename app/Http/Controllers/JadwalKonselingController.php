@@ -30,6 +30,8 @@ class JadwalKonselingController extends Controller
             ->select('konselors.namaKonselor', 
                     'konselors.scanFotoKonselor', 
                     'konselors.telpKonselor',
+                    'konselors.deskripsiKonselor',
+                    'konselors.id as idKonselor',
                     'jadwal_konselings.topik_konseling',
                     'jadwal_konselings.tgl_konseling', 
                     'jadwal_konselings.tipe_konseling',
