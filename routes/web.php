@@ -75,9 +75,11 @@ Route::get('/artikel/show/{artikel}', [ArtikelController::class, 'show'])->name(
 Route::middleware(['auth:admin'])->group(function(){ 
    
     Route::get('/admin',[AdminController::class,'indexHomeAdmin'])->name('homeAdmin');
+    Route::get('/admin/allMember',[AdminController::class,'indexAllMember'])->name('indexAllMember');
     Route::get('/admin/allBK',[AdminController::class,'indexAllBK'])->name('indexAllBK');
     Route::post("/admin/aktivasiKonselor/{id}",[AdminController::class,'activateKonselor'])->name('activateKonselor');
     Route::post("/admin/approvePembayaran/{id}",[AdminController::class,'approvePembayaran'])->name('approvePembayaran');
+    Route::post("/admin/resetPW/{id}",[AdminController::class,'resetMemberPassword'])->name('resetMemberPassword');
    
     Route::post("/logoutAdmin",[AuthController::class,'logoutAdmin'])->name('logoutAdmin');
 });

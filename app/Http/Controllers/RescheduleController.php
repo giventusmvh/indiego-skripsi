@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\BookingKonseling;
 use App\Models\CancelBooking;
+use Illuminate\Support\Carbon;
 
 class RescheduleController extends Controller
 {
@@ -73,17 +74,27 @@ class RescheduleController extends Controller
         $res = Reschedule::where('id_bk', $bk->id)->first();
         $cancel = CancelBooking::where('id_bk', $bk->id)->first();
         $jk = JadwalKonseling::findOrFail($bk->id_jk);
-        if($bk->isPaid == 0){
-            return redirect()->route('profileUser')->with('error','Mohon menunggu konfirmasi pembayaran oleh admin');
-        }else{
-            if($res){
-                return redirect()->route('profileUser')->with('error','Sudah pernah mengajukan reschedule, tidak bisa reschedule lagi');
-            }else if($cancel){
-                return redirect()->route('profileUser')->with('error','Sudah pernah mengajukan pembatalan,Tidak bisa mengajukan reschedule');
+        $tanggalKonseling = Carbon::parse($jk->tgl_konseling);
+        $maxResDeadline = $tanggalKonseling->subDays(2);
+        $currentDate = Carbon::now();
+
+        if ($currentDate < $maxResDeadline){
+            if($bk->isPaid == 0){
+                return redirect()->route('profileUser')->with('error','Mohon menunggu konfirmasi pembayaran oleh admin');
             }else{
-                return view("member.addReschedule", compact('jk','bk'));
+                if($res){
+                    return redirect()->route('profileUser')->with('error','Sudah pernah mengajukan reschedule, tidak bisa reschedule lagi');
+                }else if($cancel){
+                    return redirect()->route('profileUser')->with('error','Sudah pernah mengajukan pembatalan,Tidak bisa mengajukan reschedule');
+                }else{
+                    return view("member.addReschedule", compact('jk','bk'));
+                }
             }
+        }else{
+            return redirect()->route('profileUser')->with('error','Tanggal untuk batas mengajukan reschedule sudah terlewati');
         }
+
+       
         
       
     }

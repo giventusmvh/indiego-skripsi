@@ -207,7 +207,7 @@
                 
               </div>
             </div>
-              <div class="flex flex-col md:flex-row gap-[12px] justify-center md:justify-between items-end">
+              <div class="flex flex-col md:flex-row gap-[12px] justify-center md:justify-between md:items-end items-center">
                 <div class="flex flex-col gap-[12px] w-max justify-center items-center md:justify-start md:items-start">
                   <span class=" text-slate-800 text-[14px] font-medium inline-flex items-center">
                     <svg class="w-2.5 h-2.5 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">

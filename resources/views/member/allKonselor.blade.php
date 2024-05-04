@@ -92,7 +92,11 @@
   <div class="md:w-[1200px] mx-auto w-[97%] flex flex-col md:flex-row  gap-[20px]">
  
         <div id="menuCourse2" class="sticky top-[100px] flex flex-col gap-[20px] bg-white border border-slate-300 p-[20px] h-max shadow-lg md:w-[30%]">
+          <a href="{{route('indexAllMap')}}" class="bg-white  w-full h-[60px] flex items-center justify-center p-[30px] shadow-md border-slate-300 border-[1px]">
+            <p>Open Map</p>
+        </a>
             <div class="flex justify-between items-center" data-collapse-toggle="filter-cta" aria-controls="filter-cta" aria-expanded="false">
+              
                 <h1 class="font-semibold text-[20px] text-[#404040]">Filters</h1>
                 <button type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg lg:hidden">
                   <span class="sr-only">Open main menu</span>
@@ -100,9 +104,7 @@
                 </button>
               </div>
               <div id="filter-cta" class="hidden md:flex md:flex-col">
-                <a href="{{route('indexAllMap')}}" class="bg-white  w-full h-[60px] flex items-center justify-center p-[30px] shadow-md border-slate-300 border-[1px]">
-                    <p>Open Map</p>
-                </a>
+              
                 
                <form class="flex flex-col gap-[10px] mt-[20px]" action="{{route('indexAllJK')}}" method="GET">
                 

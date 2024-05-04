@@ -44,6 +44,7 @@
                 <a href="{{route('indexAllMember')}}" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">List Member<span class="block max-w-0 group-hover:max-w-full transition-all ease-in-out duration-500 h-[3px] bg-white"></span></a>
             </div>
           </li>
+          
           <li class="md:mb-0 mb-[10px]"">
             <div class="flex w-full" >
                 <form class="w-full" method="POST" action="{{route('logoutAdmin')}}">
@@ -59,10 +60,20 @@
   </nav>
   
   <!-- NavBar End -->
-    
 
- <div class="md:max-w-[1400px] mx-auto w-[90%] mt-[120px] mb-[100px] flex flex-col md:flex-row justify-center gap-[30px]"> 
 
+ <div class="md:max-w-[1400px] mx-auto w-[90%] mt-[120px] mb-[100px] flex flex-col justify-center gap-[30px]"> 
+    @if (session('error'))
+  <div class="alert alert-danger">
+      {{ session('error') }}
+  </div>
+@endif
+@if (session('success'))
+  <div class="alert alert-success">
+      {{ session('success') }}
+  </div>
+@endif
+<div class="flex flex-col md:flex-row mx-auto md:w-[1400px] gap-[30px]">
     <div id="menuCourse2" class="sticky top-[100px] flex flex-col gap-[20px] bg-white border border-slate-300 p-[20px] h-max shadow-lg md:w-[20%] z-10">
         <div class="flex justify-between items-center" data-collapse-toggle="filter-cta" aria-controls="filter-cta" aria-expanded="false">
             <h1 class="font-semibold text-[20px] text-[#404040]">Filters</h1>
@@ -74,102 +85,64 @@
           <div id="filter-cta" class="hidden md:flex md:flex-col">
 
             
-           <form class="flex flex-col gap-[10px] mt-[20px]" action="{{route('homeAdmin')}}" method="GET">
+           <form class="flex flex-col gap-[10px] mt-[20px]" action="{{route('indexAllMember')}}" method="GET">
             
-            <input name="namaKonselor" type="search" id="default-search" class=" w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 " placeholder="Cari Konselor"  />
-          
-            
-            <p class="text-[20px]">Activation Status</p>
-            <div class="flex items-center mb-4">
-              <input id="activeStatus" type="radio" value="1" name="activeStatus" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-              <label for="activeStatus" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Active</label>
-          </div>
-          <div class="flex items-center mb-4 ">
-              <input id="activeStatus2" type="radio" value="0" name="activeStatus" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-              <label for="activeStatus2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Inactive</label>
-          </div>
-
-         
-       
-
+            <input name="nama" type="search" id="default-search" class=" w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 " placeholder="Cari Member"  />
             <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Search</button>
            </form>
           </div>
        
     </div>
-
-<div class="w-full relative overflow-x-auto">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="px-6 py-3">
-                    Nama Konselor
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    KTP
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Sertifikasi
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Foto
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Status
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Aksi
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($konselor as $k)
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {{ $k->namaKonselor }}
-                </th>
-                <td class="px-6 py-4">
-                   
-                    <a href="{{ asset("picture/ktpKonselor/{$k->scanKTPKonselor}") }}" target="_blank">View KTP</a>
-                    
-                </td>
-                <td class="px-6 py-4">
-                    
-                    <a href="{{ asset("picture/sertifKonselor/{$k->scanSertifKonselor}") }}" target="_blank">View Sertifikasi</a>
-                </td>
-                <td class="px-6 py-4">
-                   
-                    <a href="{{ asset("picture/fotoKonselor/{$k->scanFotoKonselor}") }}" target="_blank">View Foto</a>
-                </td>
-                <td class="px-6 py-4">
-                   
-                    @if ($k->statusAktivasi == 0)
-                    <p>Tidak Aktif</p>
-                    @else
-                    <p>Aktif</p>
-                    @endif
-                </td>
-                <td class="px-6 py-4">
-                    @if ($k->statusAktivasi == 0)
-                    <form id="activateForm{{ $k->id }}" action="{{ route('activateKonselor', $k->id) }}" method="POST" onsubmit="return confirmActivate({{ $k->id }})">
-                        @csrf
-                        <button type="submit" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Aktivasi</button>
-                    </form>
-                    @else
-                    <form id="deactivateForm{{ $k->id }}" action="{{ route('activateKonselor', $k->id) }}" method="POST" onsubmit="return confirmDeactivate({{ $k->id }})">
-                        @csrf
-                        <button type="submit" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Deaktivasi</button>
-                    </form>
-                    @endif
-                   
-                </td>
-            </tr>
-            @endforeach
-            
-            
-        </tbody>
-    </table>
+    <div class="w-full relative overflow-x-auto">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Nama
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Telp
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Email
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                       Aksi
+                    </th>
+                  
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($member as $k)
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ $k->nama }}
+                    </th>
+                    <td class="px-6 py-4">
+                       
+                        {{ $k->telp }}
+                    </td>
+                    <td class="px-6 py-4">
+                       
+                        {{ $k->email}}
+                    </td>
+                    <td class="px-6 py-4">
+                        <form id="resetForm{{ $k->id }}" action="{{ route('resetMemberPassword', $k->id) }}" method="POST" onsubmit="return confirmReset({{ $k->id }})">
+                            @csrf
+                            <button type="submit" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Reset Password</button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+                
+                
+            </tbody>
+        </table>
+    </div>
+    
 </div>
+    
+
 
  </div>
  
@@ -182,12 +155,10 @@
   <!-- Swiper JS -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-    function confirmActivate(id) {
-        return confirm('Apakah Anda yakin ingin aktivasi konselor ini?');
+    function confirmReset(id) {
+        return confirm('Apakah Anda yakin ingin reset Password Member ini?');
     }
-    function confirmDeactivate(id) {
-        return confirm('Apakah Anda yakin ingin deaktivasi konselor ini?');
-    }
+   
   </script>
 </body>
 </html>

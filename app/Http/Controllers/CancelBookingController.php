@@ -12,6 +12,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
 
 class CancelBookingController extends Controller
 {
@@ -24,26 +25,33 @@ class CancelBookingController extends Controller
             $res = Reschedule::where('id_bk', $bk->id)->first();
             $cancel = CancelBooking::where('id_bk', $bk->id)->first();
 
-            if($bk->isPaid == 0){
-                return redirect()->route('profileUser')->with('error','Mohon menunggu konfirmasi pembayaran oleh admin');
-            }else{
-                if($res){
-                    return redirect()->route('profileUser')->with('error','Sudah pernah reschedule, tidak bisa cancel');
-                }else if($cancel){
-                    return redirect()->route('profileUser')->with('error','Sudah pernah cancel, tidak bisa cancel');
-                }{
-                    $infoAddCancel=[
-                        'id_bk'=>$bk->id,
-                        'isConfirmed'=>0,
-                        'isRejected'=>0,
-                    ];
-                    CancelBooking::create($infoAddCancel);
-                    return redirect()->route('profileUser')->with('success','Berhasil Mengajukan Pembatalan');
+            $jk = JadwalKonseling::findorFail($bk->id_jk);
+            $tanggalKonseling = Carbon::parse($jk->tgl_konseling);
+            $maxcancellationDeadline = $tanggalKonseling->subDays(2);
+            $currentDate = Carbon::now();
+
+            if ($currentDate < $maxcancellationDeadline) {
+                if($bk->isPaid == 0){
+                    return redirect()->route('profileUser')->with('error','Mohon menunggu konfirmasi pembayaran oleh admin');
+                }else{
+                    if($res){
+                        return redirect()->route('profileUser')->with('error','Sudah pernah reschedule, tidak bisa cancel');
+                    }else if($cancel){
+                        return redirect()->route('profileUser')->with('error','Sudah pernah cancel, tidak bisa cancel');
+                    }{
+                        $infoAddCancel=[
+                            'id_bk'=>$bk->id,
+                            'isConfirmed'=>0,
+                            'isRejected'=>0,
+                        ];
+                        CancelBooking::create($infoAddCancel);
+                        return redirect()->route('profileUser')->with('success','Berhasil Mengajukan Pembatalan');
+                    }
                 }
+            } else {
+               
+                return redirect()->route('profileUser')->with('error','Tidak bisa membatalkan karena Tanggal maksimal pembatalan adalah H-2');
             }
-           
-            
-            
         } catch (\Exception $e) {
             return redirect()->route('profileUser')->with('error','Aksi Gagal');
         }

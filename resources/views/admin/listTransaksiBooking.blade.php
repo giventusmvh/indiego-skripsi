@@ -40,7 +40,11 @@
                 <a href="{{route('indexAllBK')}}" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">List Transaksi<span class="block max-w-0 group-hover:max-w-full transition-all ease-in-out duration-500 h-[3px] bg-white"></span></a>
             </div>
           </li>
-          
+          <li>
+            <div class="flex">
+                <a href="{{route('indexAllMember')}}" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">List Member<span class="block max-w-0 group-hover:max-w-full transition-all ease-in-out duration-500 h-[3px] bg-white"></span></a>
+            </div>
+          </li>
           <li class="md:mb-0 mb-[10px]"">
             <div class="flex w-full" >
                 <form class="w-full" method="POST" action="{{route('logoutAdmin')}}">

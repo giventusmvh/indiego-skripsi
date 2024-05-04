@@ -7,8 +7,10 @@ use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
 use App\Models\Konselor;
 use App\Models\BookingKonseling;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 
 class AdminController extends Controller
@@ -29,6 +31,20 @@ class AdminController extends Controller
         // Get the final result
         $konselor = $konselor->get();
         return view('admin.dashboardAdmin', compact('konselor'));
+    }
+
+    public function indexAllMember(Request $request){
+        $member = User::query();
+        $nama=$request->input('nama');
+        // Check if the status filter is provided in the request
+
+        if ($request->has('nama')) {
+            $member->where('nama','like','%'.$nama.'%');
+        }
+    
+        // Get the final result
+        $member = $member->get();
+        return view('admin.listMember', compact('member'));
     }
 
     public function indexAllBK(Request $request){
@@ -89,6 +105,18 @@ class AdminController extends Controller
             }
         } catch (\Exception $e) {
             return redirect()->route('homeAdmin')->with('error','Aksi Gagal');
+        }
+    }
+
+    public function resetMemberPassword($id)
+    {
+        try {
+            $member= User::findOrFail($id);
+            $member->password = Hash::make('indiegomember');
+            $member->save();
+            return redirect()->route('indexAllMember')->with('success','Berhasil reset password member');
+        } catch (\Exception $e) {
+            return redirect()->route('indexAllMember')->with('error','Aksi Gagal');
         }
     }
 
