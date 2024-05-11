@@ -49,9 +49,7 @@ class KonselorController extends Controller
                     'reschedules.jam_ganti',
                     'reschedules.isConfirmed')
             ->where('jadwal_konselings.id_konselor', $id_konselor);
-            
-           
-           
+
             if ($tanggal) {
                 $jadwalKonselings->where('jadwal_konselings.tgl_konseling',$tanggal);
             }

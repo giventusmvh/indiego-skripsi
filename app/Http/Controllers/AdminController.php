@@ -120,6 +120,18 @@ class AdminController extends Controller
         }
     }
 
+    public function resetKonselorPassword($id)
+    {
+        try {
+            $konselor= Konselor::findOrFail($id);
+            $konselor->password = Hash::make('indiegokonselor');
+            $konselor->save();
+            return redirect()->route('homeAdmin')->with('success','Berhasil reset password konselor');
+        } catch (\Exception $e) {
+            return redirect()->route('homeAdmin')->with('error','Aksi Gagal');
+        }
+    }
+
     public function approvePembayaran($id)
     {
         try {

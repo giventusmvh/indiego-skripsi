@@ -22,11 +22,9 @@ class JadwalKonselingController extends Controller
         $tipe1 = $request->input('tipe1');
         $tipe2 = $request->input('tipe2');
         $tanggal = $request->input('tanggal');
-        $namaKonselor=$request->input('namaKonselor');
-    
+        $namaKonselor=$request->input('namaKonselor');   
         $jadwal_konseling = DB::table('jadwal_konselings')
             ->join('konselors', 'jadwal_konselings.id_konselor', '=', 'konselors.id')
-           
             ->select('konselors.namaKonselor', 
                     'konselors.scanFotoKonselor', 
                     'konselors.telpKonselor',
@@ -37,8 +35,7 @@ class JadwalKonselingController extends Controller
                     'jadwal_konselings.tipe_konseling',
                     'jadwal_konselings.jam_konseling',
                     'jadwal_konselings.harga_konseling',
-                    'jadwal_konselings.id',
-                    
+                    'jadwal_konselings.id', 
                     )
             ->where('jadwal_konselings.isBooked', false);
             
@@ -62,10 +59,8 @@ class JadwalKonselingController extends Controller
                 $query->where('jadwal_konselings.tipe_konseling', $tipe1)
                     ->orWhere('jadwal_konselings.tipe_konseling', $tipe2);
             });
-        }
-    
+        }   
         $jadwal_konseling = $jadwal_konseling->paginate(3);
-    
         return view('member.allKonselor', compact('jadwal_konseling'));
     }
 
@@ -117,12 +112,10 @@ class JadwalKonselingController extends Controller
         ]);
     
         $user = Auth::guard('konselor')->user();
-    
         $duplicate = JadwalKonseling::where('id_konselor', $user->id)
         ->where('tgl_konseling', $request->tgl_konseling)
         ->where('jam_konseling', $request->jam_konseling)
         ->exists();
-
         $duplicate2 = DB::table('jadwal_konselings')
                     ->join('konselors', 'konselors.id', '=', 'jadwal_konselings.id_konselor')
                     ->join('reschedules', 'reschedules.id_jk', '=', 'jadwal_konselings.id')
@@ -142,10 +135,8 @@ class JadwalKonselingController extends Controller
             ->where('reschedules.isConfirmed', true)
             ->where('tgl_ganti', $request->tgl_konseling)
             ->where('jam_ganti', $request->jam_konseling)
-            ->exists();
-
-    
-        if($duplicate || $duplicate2){
+            ->exists(); 
+        if($duplicate || $duplicate2 ){
             return redirect()->route('homeKonselor')->with('error','Gagal Menambah Data Jadwal Konseling');
         }else{
             $infoAddJK=[
@@ -156,11 +147,8 @@ class JadwalKonselingController extends Controller
                 'topik_konseling'=>$request->topik_konseling,
                 'harga_konseling'=>$request->harga_konseling,
                 'isBooked'=>0,
-            ];
-        
-        
+            ];    
             JadwalKonseling::create($infoAddJK);
-        
             return redirect()->route('homeKonselor')->with('success','Berhasil Menambah Data Jadwal Konseling');
         }
     }else{
@@ -194,7 +182,28 @@ class JadwalKonselingController extends Controller
     ->where('jam_konseling', $request->jam_konseling)
     ->exists();
 
-    if($duplicate>1 || $jk->isBooked === 1){
+    $duplicate2 = DB::table('jadwal_konselings')
+                    ->join('konselors', 'konselors.id', '=', 'jadwal_konselings.id_konselor')
+                    ->join('reschedules', 'reschedules.id_jk', '=', 'jadwal_konselings.id')
+                    ->select('konselors.namaKonselor', 
+                    'konselors.scanFotoKonselor', 
+                    'konselors.telpKonselor',
+                    'jadwal_konselings.topik_konseling',
+                    'jadwal_konselings.tgl_konseling', 
+                    'jadwal_konselings.tipe_konseling',
+                    'jadwal_konselings.jam_konseling',
+                    'jadwal_konselings.harga_konseling',
+                    'reschedules.jam_ganti',
+                    'reschedules.tgl_ganti',
+                    'reschedules.isConfirmed',
+                    )
+                    ->where('konselors.id', $user->id)
+            ->where('reschedules.isConfirmed', true)
+            ->where('tgl_ganti', $request->tgl_konseling)
+            ->where('jam_ganti', $request->jam_konseling)
+            ->exists();  
+
+    if($duplicate || $jk->isBooked === 1 || $duplicate2){
         return redirect()->route('homeKonselor')->with('error','Gagal Mengganti Data Jadwal Konseling');
     }else{
       
@@ -212,7 +221,11 @@ class JadwalKonselingController extends Controller
    public function deleteJK($id)
     {
         try {
+
             $jadwalKonseling = JadwalKonseling::findOrFail($id);
+            if($jadwalKonseling->isBooked == 1){
+                return redirect()->route('homeKonselor')->with('error','Gagal Menghapus Data Jadwal Konseling');
+            }
             $jadwalKonseling->delete();
             return redirect()->route('homeKonselor')->with('success','Berhasil Menghapus Data Jadwal Konseling');
         } catch (\Exception $e) {

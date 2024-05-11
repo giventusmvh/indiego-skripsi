@@ -117,6 +117,7 @@
                 <th scope="col" class="px-6 py-3">
                     Status
                 </th>
+                
                 <th scope="col" class="px-6 py-3">
                     Aksi
                 </th>
@@ -149,16 +150,25 @@
                     <p>Aktif</p>
                     @endif
                 </td>
-                <td class="px-6 py-4">
+                <td class="px-6 py-4 flex ">
                     @if ($k->statusAktivasi == 0)
                     <form id="activateForm{{ $k->id }}" action="{{ route('activateKonselor', $k->id) }}" method="POST" onsubmit="return confirmActivate({{ $k->id }})">
                         @csrf
                         <button type="submit" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Aktivasi</button>
                     </form>
+                    <form id="resetForm{{ $k->id }}" action="{{ route('resetKonselorPassword', $k->id) }}" method="POST" onsubmit="return confirmReset({{ $k->id }})">
+                        @csrf
+                        <button type="submit" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Reset Password</button>
+                    </form>
                     @else
                     <form id="deactivateForm{{ $k->id }}" action="{{ route('activateKonselor', $k->id) }}" method="POST" onsubmit="return confirmDeactivate({{ $k->id }})">
                         @csrf
                         <button type="submit" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Deaktivasi</button>
+                    </form>
+
+                    <form id="resetForm{{ $k->id }}" action="{{ route('resetKonselorPassword', $k->id) }}" method="POST" onsubmit="return confirmReset({{ $k->id }})">
+                        @csrf
+                        <button type="submit" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Reset Password</button>
                     </form>
                     @endif
                    
@@ -187,6 +197,9 @@
     }
     function confirmDeactivate(id) {
         return confirm('Apakah Anda yakin ingin deaktivasi konselor ini?');
+    }
+    function confirmReset(id) {
+        return confirm('Apakah Anda yakin ingin reset Password Konselor ini?');
     }
   </script>
 </body>

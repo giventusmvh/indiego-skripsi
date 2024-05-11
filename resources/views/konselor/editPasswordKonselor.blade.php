@@ -73,7 +73,7 @@
    
 
     
-        <p>Change Password Konselor</p>
+        <p class="font-bold mb-[20px]">Change Password Konselor</p>
         <form action="/konselor/updatepasswordKonselor/{{ $konselor->id }}" method="POST" enctype="multipart/form-data"  class="md:w-[80%] w-[90%] mx-auto ">
           @csrf
                   @if ($errors->any())

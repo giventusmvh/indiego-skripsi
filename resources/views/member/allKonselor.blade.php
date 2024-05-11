@@ -138,7 +138,7 @@
                     <input id="default-checkbox6" name="tipe2" type="checkbox" value="Offline" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <label for="default-checkbox6" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Offline</label>
                 </div>
-                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Search</button>
+                <button type="submit" class="text-white bg-slate-900 hover:bg-slate-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Search</button>
                </form>
               </div>
            
@@ -183,8 +183,8 @@
                     
                 </div>    
                 <div class="flex flex-col md:flex-row gap-[10px] w-full items-center justify-center">  
-                    <a href="/home/bookingKonseling/{{ $jk->id }}" class="w-full text-center text-white py-[12px] bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg ">Booking</a>
-                    <a href="/home/DetailKonselor/{{ $jk->idKonselor }}" target="_blank" class=" w-full text-center text-white py-[12px] bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg ">Cek Konselor</a>
+                    <a href="/home/bookingKonseling/{{ $jk->id }}" class="w-full text-center text-white py-[12px] bg-slate-900 hover:bg-slate-700  font-medium rounded-lg ">Booking</a>
+                    <a href="/home/DetailKonselor/{{ $jk->idKonselor }}" target="_blank" class=" w-full text-center text-white py-[12px] bg-slate-900 hover:bg-slate-700  font-medium rounded-lg ">Cek Konselor</a>
                 </div> 
             </div>
             @endforeach

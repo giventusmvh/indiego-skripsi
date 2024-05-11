@@ -114,7 +114,6 @@ class UserController extends Controller
         ]);
 
         $user = User::findOrFail($id);
-
         if ($request->file('scanFoto')) {
            
                
@@ -123,8 +122,8 @@ class UserController extends Controller
                 Storage::delete($file);
                 $foto_file = $request->file('scanFoto');
                 $foto_ekstensi=$foto_file->extension();
-                $nama_foto="foto".date('ymdhis').".".$foto_ekstensi;
-                $foto_file->move(public_path('picture/foto'),$nama_foto);
+                $nama_foto="fotoUser".date('ymdhis').".".$foto_ekstensi;
+                $foto_file->move(public_path('picture/fotoUser'),$nama_foto);
 
                 $user->scanFoto = $nama_foto;
                 $user->nama = $request->input('nama');
@@ -133,9 +132,7 @@ class UserController extends Controller
                 $user->latitudeUser = $request->input('latitudeUser');
                 $user->longitudeUser = $request->input('longitudeUser');
                 $user->save();
-
-                return redirect()->route('profile')->with('success','Berhasil update profile');
-            
+                return redirect()->route('profileUser')->with('success','Berhasil update profile'); 
         }else{
             $user->nama = $request->input('nama');
             $user->telp = $request->input('telp');
@@ -143,10 +140,8 @@ class UserController extends Controller
             $user->latitudeUser = $request->input('latitudeUser');
             $user->longitudeUser = $request->input('longitudeUser');
             $user->save();
-    
             return redirect()->route('profileUser')->with('success','Berhasil update profile');
         }
-       
     }
 
     public function updatePasswordUser(Request $request, $id)

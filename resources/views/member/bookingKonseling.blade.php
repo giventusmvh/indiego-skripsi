@@ -75,7 +75,7 @@
 
   <section class="md:max-w-[1200px] mx-auto w-[90%] mt-[120px] mb-[100px] flex flex-col justify-center items-center">
     
-        <p>Booking Jadwal Konseling</p>
+        <p class="font-bold mb-[20px]">Booking Jadwal Konseling</p>
         <form action="/home/addBookingKonseling/{{ $jk->id }}" method="POST" enctype="multipart/form-data" class="md:w-[80%] w-[90%] mx-auto ">
           @csrf
           <div class="mb-5">

@@ -79,12 +79,6 @@ class AuthController extends Controller
     // }
 
     public function actionRegisterKonselor(Request $request){
-        
-        // $str=Str::random(100);
-
-        //ngecek unik email bisa pake var email biasa dulu, tar klo udh pass validate nya bisa dioper ke var emailKonselor
-        //teori gini dulu, praktek tar nggu niat
-        
         $request->validate([
             'namaKonselor'=>'required|min:5',
             'email'=>'required|unique:konselors|unique:users|email',
@@ -170,12 +164,7 @@ class AuthController extends Controller
     }
 
     public function actionRegisterUser(Request $request){
-        
-        // $str=Str::random(100);
-
-        //ngecek unik email bisa pake var email biasa dulu, tar klo udh pass validate nya bisa dioper ke var emailKonselor
-        //teori gini dulu, praktek tar nggu niat
-        
+           
         $request->validate([
             'nama'=>'required|min:5',
             'email'=>'required|unique:users|unique:konselors|email',
@@ -183,7 +172,6 @@ class AuthController extends Controller
             'jkUser'=>'required',
             'tgllahir'=>'required',
             'telp'=>'required|min:9',  
-            
             'scanFoto'=>'required|image|file',
         ],[
             'nama.required'=>'Full Name wajib diisi',
@@ -196,37 +184,25 @@ class AuthController extends Controller
             'tgllahir.required'=>'Tanggal wajib diisi',
             'telp.required'=>'Nomor telepon wajib diisi',
             'telp.min'=>'Nomor telepon minimal 9 angka',
-        
-           
-
             'scanFoto.required'=>'Foto wajib diisi',
             'scanFoto.image'=>'Foto wajib berupa image',
             'scanFoto.file'=>'Foto wajib berupa file',
         ]);
-
-        
-
         //simpan scan KTP
         $fotoUser_file = $request->file('scanFoto');
         $fotoUser_ekstensi=$fotoUser_file->extension();
-        $nama_fotoUser="fotoKonselor".date('ymdhis').".".$fotoUser_ekstensi;
+        $nama_fotoUser="fotoUser".date('ymdhis').".".$fotoUser_ekstensi;
         $fotoUser_file->move(public_path('picture/fotoUser'),$nama_fotoUser);
-
         $infoRegister=[
             'nama'=>$request->nama,
             'email'=>$request->email,
             'password'=>Hash::make($request->password),
             'jkUser'=>$request->jkUser,
             'tgllahir'=>$request->tgllahir,
-            'telp'=>$request->telp,
-            
+            'telp'=>$request->telp,         
             'scanFoto'=>$nama_fotoUser,
-           
-
         ];
-
         User::create($infoRegister);
-
         return redirect()->route('login')->with('success','Silahkan login sebagai User');
     }
 

@@ -123,10 +123,8 @@
     var markerUser = L.marker([{{ $user->latitudeUser }}, {{ $user->longitudeUser  }}]).addTo(map);
     markerUser._icon.classList.add("huechange");
     markerUser.bindPopup(`
-            Halo {{ $user->nama }}, lokasi anda disini sekarang!
-                       
+            Halo {{ $user->nama }}, lokasi anda disini sekarang!                 
         `);
-
     @foreach($konselor as $k)
         var marker = L.marker([{{ $k->latitudeKonselor }}, {{ $k->longitudeKonselor }}]).addTo(map);
         marker.bindPopup(`
@@ -134,14 +132,9 @@
             Alamat Konselor: {{ $k->alamatKonselor }}<br>
             Latitude: {{ $k->latitudeKonselor }}<br>
             Longitude: {{ $k->longitudeKonselor }}<br>
-            <a href="/home/DetailKonselor/{{ $k->id }}" class="btn btn-sm btn-primary">Cek Jadwal Konselor</a>
-                       
+            <a href="/home/DetailKonselor/{{ $k->id }}" class="btn btn-sm btn-primary">Cek Jadwal Konselor</a>               
         `);
-
-        
-    @endforeach
-
-    
+    @endforeach 
 </script>
 
 

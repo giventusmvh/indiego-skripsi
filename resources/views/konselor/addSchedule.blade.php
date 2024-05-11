@@ -67,7 +67,7 @@
 
   <section class="md:max-w-[1200px] mx-auto w-[90%] mt-[120px] mb-[100px] flex flex-col justify-center items-center">
     
-        <p>Tambah Jadwal Konseling</p>
+        <p class="font-bold mb-[20px]">Tambah Jadwal Konseling</p>
         <form action="{{ route('actionAddJK') }}" method="POST" class="md:w-[80%] w-[90%] mx-auto ">
           @csrf
             <div class="mb-5">

@@ -81,7 +81,7 @@
    
 
     
-        <p>Edit Profile Konselor</p>
+        <p class="font-bold mb-[20px]">Edit Profile Konselor</p>
         <form action="/konselor/updateprofileKonselor/{{ $konselor->id }}" method="POST" enctype="multipart/form-data"  class="md:w-[80%] w-[90%] mx-auto ">
           @csrf
                   @if ($errors->any())

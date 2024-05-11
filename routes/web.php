@@ -80,6 +80,7 @@ Route::middleware(['auth:admin'])->group(function(){
     Route::post("/admin/aktivasiKonselor/{id}",[AdminController::class,'activateKonselor'])->name('activateKonselor');
     Route::post("/admin/approvePembayaran/{id}",[AdminController::class,'approvePembayaran'])->name('approvePembayaran');
     Route::post("/admin/resetPW/{id}",[AdminController::class,'resetMemberPassword'])->name('resetMemberPassword');
+    Route::post("/admin/resetPWKonselor/{id}",[AdminController::class,'resetKonselorPassword'])->name('resetKonselorPassword');
    
     Route::post("/logoutAdmin",[AuthController::class,'logoutAdmin'])->name('logoutAdmin');
 });

@@ -82,7 +82,7 @@
    
 
     
-        <p>Change Password User</p>
+        <p class="font-bold mb-[20px]">Change Password User</p>
         <form action="/home/updatepasswordUser/{{ $user->id }}" method="POST" enctype="multipart/form-data"  class="md:w-[80%] w-[90%] mx-auto ">
           @csrf
                   @if ($errors->any())

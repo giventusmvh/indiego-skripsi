@@ -77,7 +77,6 @@ class RescheduleController extends Controller
         $tanggalKonseling = Carbon::parse($jk->tgl_konseling);
         $maxResDeadline = $tanggalKonseling->subDays(2);
         $currentDate = Carbon::now();
-
         if ($currentDate < $maxResDeadline){
             if($bk->isPaid == 0){
                 return redirect()->route('profileUser')->with('error','Mohon menunggu konfirmasi pembayaran oleh admin');
@@ -93,10 +92,6 @@ class RescheduleController extends Controller
         }else{
             return redirect()->route('profileUser')->with('error','Tanggal untuk batas mengajukan reschedule sudah terlewati');
         }
-
-       
-        
-      
     }
 
     public function actionAddRes(Request $request, $id){
@@ -110,8 +105,7 @@ class RescheduleController extends Controller
         ],[
             'tgl_ganti.required'=>'Tanggal Konseling wajib diisi',
             'jam_ganti.required'=>'Jam Konseling wajib diisi',
-        ]);
-       
+        ]);      
         $infoAddRes=[
             'id_jk'=>$jk->id,
             'id_bk'=>$bk->id,
@@ -120,12 +114,8 @@ class RescheduleController extends Controller
             'jam_ganti'=>$request->jam_ganti,
             'isConfirmed'=>0,
             'isRejected'=>0,
-        
-        ];
-    
-    
+        ];   
         Reschedule::create($infoAddRes);
-    
         return redirect()->route('profileUser')->with('success','Berhasil Mengajukan Reschedule');
        }
 
