@@ -48,6 +48,7 @@ class KonselorController extends Controller
                     'reschedules.tgl_ganti',
                     'reschedules.jam_ganti',
                     'reschedules.isConfirmed')
+            ->orderBy('jadwal_konselings.tgl_konseling', 'desc')
             ->where('jadwal_konselings.id_konselor', $id_konselor);
 
             if ($tanggal) {
@@ -80,7 +81,7 @@ class KonselorController extends Controller
                 $jadwalKonselings = $jadwalKonselings->where('isDone', $completeStatus);
             }
         
-            $jadwalKonselings = $jadwalKonselings->get();
+            $jadwalKonselings = $jadwalKonselings->paginate(4);
         return view('konselor.homeKonselor',compact('jadwalKonselings'));
     }
 

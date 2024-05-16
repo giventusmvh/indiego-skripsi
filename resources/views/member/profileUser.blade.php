@@ -77,15 +77,27 @@
 
   <section class="md:max-w-[1200px] mx-auto w-[90%] mt-[120px] mb-[100px] flex flex-col justify-center items-center">
     @if (session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
+    <div class="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+      <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+      </svg>
+      <span class="sr-only">Info</span>
+      <div>
+        <span class="font-medium">{{ session('error') }}</span>
+      </div>
     </div>
-@endif
-@if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
+    @endif
+    @if (session('success'))
+    <div class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+      <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+      </svg>
+      <span class="sr-only">Info</span>
+      <div>
+        <span class="font-medium"> {{ session('success') }}</span>
+      </div>
     </div>
-@endif
+    @endif
     {{-- <div class="w-full flex md:flex-row flex-col gap-[20px]">
         <div class="flex flex-col md:w-[30%] items-center justify-center gap-[20px]">
           <a href="">
@@ -200,8 +212,10 @@
                 <p>
                   @if ($hb->isPaid === 1)
                   <span class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Pembayaran Lunas</span>
+                 @elseif ($hb->isCancelConfirmed == 1 && $hb->isPaid == 0)
+                 <span class="bg-red-100 text-red-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Batal</span>
                  @else
-                 <span class="bg-red-100 text-red-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Dalam Proses Konfirmasi</span> 
+                 <span class="bg-red-100 text-red-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Dalam Proses Konfirmasi</span>  
                  @endif
                 </p>
                 
@@ -259,7 +273,9 @@
            
        </div>    
        <div class="flex flex-col md:flex-row w-full"> 
-        @if ($hb->isCancelConfirmed === 1)
+      
+
+        @if ($hb->isCancelConfirmed === 1 || $hb->isDone==1)
         <button class=" w-full text-white text-center bg-slate-700  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2" disabled>-</button>
         <button class=" w-full text-white text-center bg-slate-700  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2" disabled>-</button>
         <a href="https://api.whatsapp.com/send?phone={{ $hb->telpKonselor }}" target="_blank" class=" w-full text-white text-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Hubungi Konselor</a>
@@ -275,7 +291,20 @@
       <a href="/home/DetailKonselor/{{ $hb->idKonselor }}" target="_blank" class=" w-full text-white text-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Cek Konselor</a>
         @endif       
          
-       </div>  
+       </div> 
+       @if ($hb->isCancelConfirmed === 1)
+       <button type="submit" class=" w-full text-white text-center bg-slate-700  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2" disabled>Batal</button>
+       @else
+        @if (strtotime($hb->tgl_konseling) < strtotime('today') && $hb->isDone==0)
+        <form class="w-full me-2" id="addDone{{ $hb->idBooking }}" action="{{ route('konselingDone', $hb->idBooking) }}" method="POST" onsubmit="return addDone({{ $hb->idBooking }})">
+          @csrf
+          <button type="submit" class=" w-full text-white text-center bg-blue-700  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Selesaikan Konseling</button>
+          
+      </form>
+      @elseif (strtotime($hb->tgl_konseling) < strtotime('today') && $hb->isDone==1)
+      <button type="submit" class=" w-full text-white text-center bg-slate-700  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2" disabled>Selesai</button>
+        @endif
+       @endif
    </div>
    @endforeach
   
@@ -342,6 +371,9 @@
   
   function addCancel(id) {
       return confirm('Apakah Anda yakin ingin mengajukan pembatalan?');
+  }
+  function addDone(id) {
+      return confirm('Apakah Anda yakin ingin menyelesaikan konseling?');
   }
 </script>
  {{-- <script>

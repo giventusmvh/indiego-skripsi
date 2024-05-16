@@ -49,7 +49,7 @@ class UserController extends Controller
         ->join('users', 'booking_konselings.id_member', '=', 'users.id')
         ->join('jadwal_konselings', 'booking_konselings.id_jk', '=', 'jadwal_konselings.id')
         ->join('konselors', 'jadwal_konselings.id_konselor', '=', 'konselors.id')
-        ->leftJoin('reschedules', 'jadwal_konselings.id', '=', 'reschedules.id_jk')
+        ->leftJoin('reschedules', 'users.id', '=', 'reschedules.id_jk')
         ->leftJoin('cancel_bookings', 'booking_konselings.id', '=', 'cancel_bookings.id_bk')
         ->select('konselors.namaKonselor', 
                 'konselors.telpKonselor', 
@@ -67,6 +67,7 @@ class UserController extends Controller
                 'reschedules.tgl_ganti',
                 'reschedules.jam_ganti',
                 'booking_konselings.isPaid',
+                'booking_konselings.isDone',
                 'booking_konselings.id as idBooking',
                 'cancel_bookings.isConfirmed as isCancelConfirmed',
                 'cancel_bookings.isRejected as isCancelRejected');

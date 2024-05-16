@@ -74,14 +74,26 @@
 
   <section class="md:max-w-[1200px] mx-auto w-[90%] mt-[120px] mb-[100px]">
     @if (session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
+    <div class="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+      <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+      </svg>
+      <span class="sr-only">Info</span>
+      <div>
+        <span class="font-medium">{{ session('error') }}</span>
+      </div>
+    </div>
     @endif
     @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
+    <div class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+      <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+      </svg>
+      <span class="sr-only">Info</span>
+      <div>
+        <span class="font-medium"> {{ session('success') }}</span>
+      </div>
+    </div>
     @endif
     <div class="flex md:flex-row flex-col md:gap-[50px]">
       <div id="menuCourse2" class="sticky top-[100px] mb-[20px] flex flex-col gap-[20px] bg-white border border-slate-300 p-[20px] h-max shadow-lg md:w-[30%]">
@@ -196,6 +208,49 @@
             </div>
         </div>
           @endforeach
+
+          @if ($jadwalKonselings->hasPages())
+            <div class="flex items-center justify-end">
+                {{-- Previous Page Link --}}
+                @if ($jadwalKonselings->onFirstPage())
+                    <span class="rounded-l rounded-sm border border-brand-light px-3 py-2 cursor-not-allowed no-underline">&laquo;</span>
+                @else
+                    <a
+                        class="rounded-l rounded-sm border-t border-b border-l border-brand-light px-3 py-2 text-brand-dark hover:bg-brand-light no-underline"
+                        href="{{ $jadwalKonselings->previousPageUrl() }}"
+                        rel="prev"
+                    >
+                        &laquo;
+                    </a>
+                @endif
+        
+                {{-- Pagination Elements --}}
+                @foreach ($jadwalKonselings as $jk)
+                    {{-- "Three Dots" Separator --}}
+                    @if (is_string($jk))
+                        <span class="border-t border-b border-l border-brand-light px-3 py-2 cursor-not-allowed no-underline">{{ $jk }}</span>
+                    @endif
+        
+                    {{-- Array Of Links --}}
+                    @if (is_array($jk))
+                        @foreach ($jk as $page => $url)
+                            @if ($page == $jadwalKonselings->currentPage())
+                                <span class="border-t border-b border-l border-brand-light px-3 py-2 bg-brand-light no-underline">{{ $page }}</span>
+                            @else
+                                <a class="border-t border-b border-l border-brand-light px-3 py-2 hover:bg-brand-light text-brand-dark no-underline" href="{{ $url }}">{{ $page }}</a>
+                            @endif
+                        @endforeach
+                    @endif
+                @endforeach
+        
+                {{-- Next Page Link --}}
+                @if ($jadwalKonselings->hasMorePages())
+                    <a class="rounded-r rounded-sm border border-brand-light px-3 py-2 hover:bg-brand-light text-brand-dark no-underline" href="{{ $jadwalKonselings->nextPageUrl() }}" rel="next">&raquo;</a>
+                @else
+                    <span class="rounded-r rounded-sm border border-brand-light px-3 py-2 hover:bg-brand-light text-brand-dark no-underline cursor-not-allowed">&raquo;</span>
+                @endif
+            </div>
+        @endif
 
         </div>
     </div>

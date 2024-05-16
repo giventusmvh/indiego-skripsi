@@ -88,6 +88,18 @@ class BookingKonselingController extends Controller
     }
   }
 
+  public function konselingDone($id)
+        {
+            try {
+                $bk = BookingKonseling::findOrFail($id)->where('isCancel', 0)->first();
+                $bk->isDone = 1;
+                $bk->save();
+                    return redirect()->route('profileUser')->with('success','Terimakasih, Anda berhasil menyelesaikan Konseling');
+            } catch (\Exception $e) {
+                return redirect()->route('profileUser')->with('error','Aksi Gagal');
+            }
+        }
+
 
 //   public function showHistoryKonselingUser(){
        

@@ -107,6 +107,7 @@ Route::middleware(['auth:web'])->group(function(){
     Route::post('/home/actionAddReschedule/{id}',[RescheduleController::class,'actionAddRes'])->name('actionAddRes');  
 
     Route::post('/home/actionAddCancel/{id}',[CancelBookingController::class,'addCancellation'])->name('addCancellation');  
+    Route::post('/home/actionDone/{id}',[BookingKonselingController::class,'konselingDone'])->name('konselingDone');  
    
     Route::post("/logoutUser",[AuthController::class,'logoutUser'])->name('logoutUser');
 });
