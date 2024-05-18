@@ -8,13 +8,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Konselor;
 use App\Models\Reschedule;
+use Illuminate\Support\Carbon;
 
 class JadwalKonselingController extends Controller
 {
 
 
     public function indexAllJK(Request $request){
-        
+        $today = Carbon::today();
         $topik1 = $request->input('topik1');
         $topik2 = $request->input('topik2');
         $topik3 = $request->input('topik3');
@@ -37,7 +38,8 @@ class JadwalKonselingController extends Controller
                     'jadwal_konselings.harga_konseling',
                     'jadwal_konselings.id', 
                     )
-            ->where('jadwal_konselings.isBooked', false);
+            ->where('jadwal_konselings.isBooked', false)
+            ->where('jadwal_konselings.tgl_konseling', '>=', $today);
             
         if ($namaKonselor) {
             $jadwal_konseling->where('konselors.namaKonselor','like','%'.$namaKonselor.'%');
