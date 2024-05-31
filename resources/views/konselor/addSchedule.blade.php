@@ -18,7 +18,7 @@
 
 <nav id="navbar" class=" border-gray-200 fixed w-full z-50 top-0 left-0 h-max bg-[#242424]">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 md:max-w-[1200px]">
-    <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
+    <a href="/konselor" class="flex items-center space-x-3 rtl:space-x-reverse">
         <img src="{{ asset('assets/logowhite.png') }}" class="h-8 md:h-[60px]" alt="Flowbite Logo" />
        
     </a>
