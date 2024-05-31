@@ -34,7 +34,7 @@ class KonselorController extends Controller
         })
             ->leftJoin('users', 'users.id', '=', 'booking_konselings.id_member')
             ->leftJoin('reschedules', 'reschedules.id_bk', '=', 'booking_konselings.id')
-            ->select('users.nama',
+            ->select('users.nama','users.telp',
                     'jadwal_konselings.topik_konseling',
                     'jadwal_konselings.tgl_konseling', 
                     'jadwal_konselings.tipe_konseling',
@@ -42,13 +42,14 @@ class KonselorController extends Controller
                     'jadwal_konselings.id',
                     'jadwal_konselings.isBooked',
                     'jadwal_konselings.harga_konseling',
+                    'jadwal_konselings.updated_at',
                     'booking_konselings.isPaid',
                     'booking_konselings.isDone',
                     'booking_konselings.isCancel',
                     'reschedules.tgl_ganti',
                     'reschedules.jam_ganti',
                     'reschedules.isConfirmed')
-            ->orderBy('jadwal_konselings.tgl_konseling', 'desc')
+            ->orderBy('jadwal_konselings.updated_at', 'desc')
             ->where('jadwal_konselings.id_konselor', $id_konselor);
 
             if ($tanggal) {

@@ -65,11 +65,13 @@ class AdminController extends Controller
                 'jadwal_konselings.tgl_konseling', 
                 'jadwal_konselings.tipe_konseling',
                 'jadwal_konselings.jam_konseling',
+                'jadwal_konselings.harga_konseling',
                 'booking_konselings.id',
                 'booking_konselings.buktiBayar',
                 'booking_konselings.isPaid',
                 'booking_konselings.isDone',
-                'booking_konselings.isCancel');
+                'booking_konselings.isCancel','booking_konselings.created_at')
+        ->orderBy('booking_konselings.created_at', 'desc');
                 if ($namaKonselor) {
                     $bookings->where('konselors.namaKonselor','like','%'.$namaKonselor.'%');
                 }

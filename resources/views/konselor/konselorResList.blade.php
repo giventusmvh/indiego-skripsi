@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset("mobile.css") }}">
     <link rel="stylesheet" href="{{ mix('css/leaflet.css') }}">
 <script src="{{ mix('js/leaflet.js') }}"></script>
+<title>List Reschedule</title>
 </head>
 <body>
  
@@ -45,12 +46,12 @@
           </li>
           <li>
             <div class="flex">
-                <a href="{{ route('homeKonselor') }}" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">Cancelation Pending<span class="block max-w-0 group-hover:max-w-full transition-all ease-in-out duration-500 h-[3px] bg-white"></span></a>
+                <a href="{{ route('indexKonselorCancel') }}" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">Cancelation Pending<span class="block max-w-0 group-hover:max-w-full transition-all ease-in-out duration-500 h-[3px] bg-white"></span></a>
             </div>
           </li>
           <li>
             <div class="flex">
-                <a href="{{ route('homeKonselor') }}" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">Reschedule Pending<span class="block max-w-0 group-hover:max-w-full transition-all ease-in-out duration-500 h-[3px] bg-white"></span></a>
+                <a href="{{ route('indexKonselorRes') }}" class="block py-2 pl-3 pr-4 group transition duration-300 text-white font-[600]">Reschedule Pending<span class="block max-w-0 group-hover:max-w-full transition-all ease-in-out duration-500 h-[3px] bg-white"></span></a>
             </div>
           </li>
           <li class="md:mb-0 mb-[10px]">

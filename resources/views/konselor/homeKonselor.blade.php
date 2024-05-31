@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
       <link rel="stylesheet" href="{{ asset("style.css") }}">
     <link rel="stylesheet" href="{{ asset("mobile.css") }}">
+    <title>Home Konselor</title>
 </head>
 <body>
  
@@ -179,9 +180,9 @@
             <p>Tipe Konseling : {{ $jk->tipe_konseling }}</p>
             <p>Harga Konseling : {{ $jk->harga_konseling }}</p>
             @if ($jk->isBooked && !$jk->isDone)
-            <p>Status : Sedang Dibooking oleh {{ $jk->nama }}</p>
+            <p>Status : Sedang Dibooking oleh {{ $jk->nama }} | <a href="https://api.whatsapp.com/send?phone={{ $jk->telp }}" target="_blank" class="underline underline-offset-4 text-emerald-700">Hubungi</a></p>
             @elseif ($jk->isBooked && $jk->isDone)
-            <p>Status : Selesai</p>
+            <p>Status : Telah diselesaikan oleh {{ $jk->nama }}</p>
             @elseif (!$jk->isBooked && !$jk->isDone)
             <p>Status : Belum Dibooking</p>
             

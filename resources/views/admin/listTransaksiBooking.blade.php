@@ -115,7 +115,7 @@
                     Tanggal Konseling
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Tipe Konseling
+                    Harga Konseling
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Bukti Bayar
@@ -144,7 +144,7 @@
                    
                 </td>
                 <td class="px-6 py-4">
-                    {{ $b->tipe_konseling }}
+                    {{ $b->harga_konseling }}
                    
                 </td>
                 <td class="px-6 py-4">
