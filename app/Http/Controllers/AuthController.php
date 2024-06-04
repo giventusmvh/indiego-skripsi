@@ -160,7 +160,7 @@ class AuthController extends Controller
 
         // Mail::to($infoRegister['email'])->send(new AuthMail($details));
 
-        return redirect()->route('loginKonselor')->with('success','Silahkan login sebagai Konselor');
+        return redirect()->route('login')->with('success','Silahkan login sebagai Konselor');
     }
 
     public function actionRegisterUser(Request $request){

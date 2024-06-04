@@ -133,7 +133,7 @@
                   >
                     Create an account
                   </button>
-                  <p class="text-sm font-light text-gray-500 dark:text-gray-400 mt-[30px] mb-[15px]">Already have a Counselor account? <a href="{{route('loginKonselor')}}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</a></p>
+                  <p class="text-sm font-light text-gray-500 dark:text-gray-400 mt-[30px] mb-[15px]">Already have a Counselor account? <a href="{{route('login')}}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</a></p>
                   <p class="text-sm font-light text-gray-500 dark:text-gray-400">Register as <a href="{{route('register')}}" class="font-medium text-primary-600 hover:underline dark:text-primary-500"> Member? </a></p>
                 </form>
               </div>

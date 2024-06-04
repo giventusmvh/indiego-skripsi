@@ -25,6 +25,6 @@ class Konselor extends Authenticatable
         'statusAktivasi',
         'latitudeKonselor',
         'longitudeKonselor',
-        
+        'deskripsiKonselor'
     ];
 }

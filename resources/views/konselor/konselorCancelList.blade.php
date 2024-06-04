@@ -86,7 +86,7 @@
         </div>
         <div id="filter-cta" class="hidden md:flex md:flex-col">
           
-         <form class="flex flex-col gap-[10px] mt-[20px]" action="{{route('indexKonselorRes')}}" method="GET">
+         <form class="flex flex-col gap-[10px] mt-[20px]" action="{{route('indexKonselorCancel')}}" method="GET">
           
           <input name="namaKonselor" type="search" id="default-search" class=" w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 " placeholder="Cari Disini"  />
           <p class="text-[20px]">Tanggal Awal</p>

@@ -68,7 +68,7 @@
                 >
                   Sign in
                 </button>
-                <p class="text-sm font-light text-gray-500 dark:text-gray-400">Don’t have an account yet? <a href="{{route('register')}}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a></p>
+                <p class="text-sm font-light text-gray-500 dark:text-gray-400">Don’t have an account yet? Sign up as a <a href="{{route('register')}}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">member</a> or <a href="{{route('registerKonselor')}}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">counselor</a></p>
                {{-- \\<p class="text-sm font-light text-gray-500 dark:text-gray-400">Are you a <a href="{{route('loginKonselor')}}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Counselor?</a></p> --}}
               </form>
             </div>
