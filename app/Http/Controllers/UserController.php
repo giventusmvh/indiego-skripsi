@@ -49,7 +49,7 @@ class UserController extends Controller
         ->join('users', 'booking_konselings.id_member', '=', 'users.id')
         ->join('jadwal_konselings', 'booking_konselings.id_jk', '=', 'jadwal_konselings.id')
         ->join('konselors', 'jadwal_konselings.id_konselor', '=', 'konselors.id')
-        ->leftJoin('reschedules', 'users.id', '=', 'reschedules.id_jk')
+        ->leftJoin('reschedules', 'booking_konselings.id', '=', 'reschedules.id_bk')
         ->leftJoin('cancel_bookings', 'booking_konselings.id', '=', 'cancel_bookings.id_bk')
         ->select('konselors.namaKonselor', 
                 'konselors.telpKonselor', 
