@@ -110,7 +110,7 @@ class BookingKonselingController extends Controller
   public function konselingDone($id)
         {
             try {
-                $bk = BookingKonseling::findOrFail($id)->where('isCancel', 0)->first();
+                $bk = BookingKonseling::findOrFail($id);
                 $bk->isDone = 1;
                 $bk->save();
                     return redirect()->route('profileUser')->with('success','Terimakasih, Anda berhasil menyelesaikan Konseling');

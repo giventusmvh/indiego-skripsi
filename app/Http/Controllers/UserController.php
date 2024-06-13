@@ -72,6 +72,7 @@ class UserController extends Controller
                 'booking_konselings.created_at',
                 'cancel_bookings.isConfirmed as isCancelConfirmed',
                 'cancel_bookings.isRejected as isCancelRejected')
+                ->orderBy(DB::raw('isDone = 0'), 'desc')
         ->orderBy('booking_konselings.updated_at', 'desc');
                 if ($namaKonselor) {
                     $historyBookings->where('konselors.namaKonselor','like','%'.$namaKonselor.'%');
